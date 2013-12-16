@@ -1,0 +1,8 @@
+<ol class="breadcrumb" style="float: left">
+    <% if params['controller'] == 'items' and params['action'] == 'index' %>
+        <li class="active">Overview</li>
+    <% else %>
+        <li><%= link_to 'Overview', items_path %></li>
+    <% end %>
+    <%= yield :breadcrumb -%> <!-- hurrah for this pattern -->
+</ol>

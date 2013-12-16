@@ -1,0 +1,85 @@
+
+<%- content_for(:head) do -%>
+    <%= javascript_include_tag "jquery.cookie", "data-turbolinks-track" => TURBO %>
+    <!-- the following requires the preceeding - use dependency graph? -->
+    <%= javascript_include_tag "jquery.simple.tree.menu", "data-turbolinks-track" => TURBO %>
+    <%= javascript_include_tag "jquery.bxslider", "data-turbolinks-track" => TURBO %>
+
+    <%= stylesheet_link_tag "jquery.simple.tree.menu", media: "all", "data-turbolinks-track" => TURBO %>
+    <%= stylesheet_link_tag "jquery.bxslider", media: "all", "data-turbolinks-track" => TURBO %>
+<%- end -%>
+
+<%= render '/per_view_javascript' %>
+
+<%= render 'breadcrumb' %>
+
+<fieldset>
+    <legend>
+        ordered by how they appear in the descriptive list
+    </legend>
+    <ul class="items_tree">
+
+    <!-- 3.V, 1.E.III, 1.E.II, 1.A.IV.ii is tragic ... show # of items? ... white border? ... -->
+
+<%
+    @struct_count = @all_items.group(:fa_structure).count
+
+    def display_nodes level, struct
+        level.each do |section|
+            sub = section["sub"].to_s
+            label = section["label"].to_s
+            handle = sub+": "+label
+            next_level = section["part"]
+            id = struct+sub
+            fill_id = "fill-#{id}"
+%>
+        <li id="tree-<%=id%>">
+<%
+            if next_level.nil? # i am a leaf (item_group)
+%>
+            <span id='' style="display: inline;" class='desc_leaf'>
+                <b>
+                    <%
+                        # count = Item.where(fa_structure: id).count # cache this to not hit db? or use index?
+                        # see above
+                        count = @struct_count[id]
+                        link_name = "#{handle} ……… #{pluralize(count, 'item')}"
+                    %>
+                    <%= link_to( link_name, items_path(fa_structure: id, selector_id: fill_id, aspect: params['aspect']), remote: true, id: id, class: "ajax_trigger", style: "display: inline", onclick: "wasClicked()") %>
+                </b>
+            </span>
+            <div id="<%= fill_id %>" style="display: inline; cursor: default" data-trigger="<%= id %>"></div>
+            
+<%
+            else # i am a node (contains leaves or nodes)
+%>
+            <span id='' style="display: inline;" class='desc_node expand_collapse'><i><%= handle %></i></span>
+            <ul>
+                <% display_nodes next_level, id+"." %>
+            </ul>
+<%
+            end
+%>
+        </li>
+<%
+        end
+    end
+%>
+
+<%
+    display_nodes @top_level, ""
+%>
+
+    </ul>
+</fieldset>
+
+<%
+    if params['item_group']
+%>
+<script type="text/javascript">
+    $(document).on('ready', pretendWasClicked('<%= params["item_group"] %>'));
+    $(document).on('page:load', pretendWasClicked('<%= params["item_group"] %>'));
+</script>
+<%
+    end
+%>

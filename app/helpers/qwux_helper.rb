@@ -1,0 +1,2 @@
+module QwuxHelper
+end

@@ -1,0 +1,13 @@
+<% if params["controller"] == "scans" %>
+    <% if Scan::VIRGIN == scan.state %>
+        <a href="<%= new_transcription_path(scan_id: scan.id, aspect: params['aspect']) %>" rel="tooltip" data-original-title="<%= scan.stringified %>">
+    <% elsif Scan::COMPLETED == scan.state %>
+        <a href="<%= transcriptions_path(id: scan.id, aspect: params['aspect']) %>" rel="tooltip" data-original-title="<%= scan.stringified %>">
+    <% else %>
+        <a href="<%= edit_transcription_path(id: scan.id, aspect: params['aspect']) %>" rel="tooltip" data-original-title="<%= scan.stringified %>">
+    <% end %>
+        <%= image_tag("thumbs/"+scan.file_name) %>
+        </a>
+<% elsif %>
+    <img class="lazy" data-original="<%= '/images/thumbs/'+scan.file_name %>" width="100px" height="100px">
+<% end %>

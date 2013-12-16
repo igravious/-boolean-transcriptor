@@ -1,0 +1,39 @@
+<!--
+  display items grouped by date
+
+  each item needs an extra field for the year i think
+
+  if you are using group by you need some aggregate function 
+  (like sum, or count)
+-->
+
+<%- content_for(:head) do -%>
+    <%# javascript_include_tag "lazyload.min", "data-turbolinks-track" => false # doesn't load all images in a long scrollable div %>
+    <%= javascript_include_tag "jquery.lazyload", "data-turbolinks-track" => TURBO %>
+<%- end -%>
+
+<%= render '/per_view_javascript' %>
+
+<%= render 'breadcrumb' %>
+
+<fieldset>
+    <legend>
+        <!-- translate these -->
+        # of items per year ascending
+    </legend>
+    <ol class="list-group">
+    <%
+        @all_items.group(:year).count.each do |year, count|
+        year_label = year ? year.to_s : "undated"
+        year_param = year ? year.to_s : ''
+        id = year_label
+        fill_id = "fill-#{id}"
+        link_name = "#{year_label} ……… #{pluralize(count, 'item')}"
+        @items = @all_items.where("year #{(year ? '=' : 'is')} ?", year)
+    %>
+        <li class="list-group-item"><span class="badge"><%= link_name %></span>
+        <%= render "item_container" %> 
+        </li>
+    <% end %>
+    </ol>
+</fieldset>

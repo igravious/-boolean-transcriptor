@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+
+# why no workee!?
+# !/usr/bin/env /home/groobiest/Code/petulant-octo-lana/bin/rails runner 
+ 
+class Scans < ActiveRecord::Base
+end
+
+class Themes < ActiveRecord::Base
+end
+
+thing = YAML.load_file('db/bp_control.yml')
+
+# slice = thing["boole_papers_descriptive_list"]["part"][0]["part"][0]["part"][1]["part"][0]["items"][0]["desc"]
+
+def go_into_level level, struct
+    level.each do |section|
+        # p section 
+
+        # print "__section__\n"
+        # p section
+
+        sub = section["sub"]
+        label = section["label"]
+
+        # print "__sub__\n"
+        # p sub
+        # print "__label__\n"
+        # p label
+
+        next_level = section["part"]
+        if next_level.nil?
+            items = section["items"]
+            if items.nil?
+                p "Error in control file"
+                exit
+            else
+                items.each do |item|
+                    # check if the item is already in the database!
+                    p item["name"]
+                    i = Item.new
+                    i.description = item["desc"]
+                    i.pp = item["pp"]
+                    # date validation !!
+                    i.item_date = item["date"]
+                    i.fa_seq = item["name"]
+                    i.fa_structure = struct+"#{sub}"
+                    i.save
+                end
+            end
+        else
+            go_into_level(next_level, struct+"#{sub}.")
+        end
+    end
+end
+
+top_level = thing["boole_papers_descriptive_list"]["part"]
+
+go_into_level(top_level, "")

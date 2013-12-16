@@ -1,0 +1,39 @@
+<!--
+    display items in a completely unordered way (raw)
+    very much a proof of concept
+-->
+
+<h1>These are your awesome items</h1>
+
+<table>
+      <tr>
+        <th>Sequence</th>
+        <th>Structure</th>
+        <th>PP</th>
+        <th>Date</th>
+        <th># of Scans</th>
+        <th style="float: right">First Scan</th>
+        <th></th>
+      </tr>
+     
+      <% @all_items.each do |item| %>
+        <tr>
+          <td class="well"><%= link_to item.fa_seq, item %></td>
+          <td class="well"><%= item.fa_structure %></td>
+          <td class="well"><%= item.pp %></td>
+          <td class="well"><%= item.item_date %></td>
+          <% s = @all_scans.where(item_id: item.id).to_a %>
+          <td class="well"><%= s.length %></td>
+          <td style="float: right">
+          <!-- replace with partial -->
+          <% if s.first.nil? %>
+              <!-- we have an item but no scan: BP/1/368, BP/1/311, BP/1/312 -->
+              <!-- Verify with Special Collections -->
+              <span>No scans for item: <%= item.id %></span>
+          <% else %>
+              <%= image_tag("thumbs/"+s.first.file_name) %>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+</table>

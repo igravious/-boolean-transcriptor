@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stringified: MyString
+  file_name: MyString
+  institution: 1
+  prefix: MyString
+  major_seq: 1
+  seq: 1
+  minor_seq: 1
+  item_id: 
+  state: 1
+  transcription: MyText
+
+two:
+  stringified: MyString
+  file_name: MyString
+  institution: 1
+  prefix: MyString
+  major_seq: 1
+  seq: 1
+  minor_seq: 1
+  item_id: 
+  state: 1
+  transcription: MyText

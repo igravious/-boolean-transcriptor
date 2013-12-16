@@ -1,0 +1,2768 @@
+<ead
+	xmlns="urn:isbn:1-931666-22-9"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd"
+	>
+
+<eadheader
+	audience="internal" 
+	countryencoding="iso3166-1" 
+	dateencoding="iso8601" 
+	langencoding="iso639-2b" 
+	relatedencoding="DC" 
+	repositoryencoding="iso15511" 
+	scriptencoding="iso15924"
+	>
+<!-- 
+	iso3166-1		Codes for the representation of names of countries and their subdivisions – Part 1: Country codes
+	iso8601			Time and date format, YYYY-MM-DD
+	iso639-2b		Short three-letter codes for language names
+	DC				The eadheader and its child elements can be mapped to other standards for easy interchange of information.
+					They are often mapped to Dublin Core elements such as Creator, Author, Language.
+					For example, in the excerpt below the relatedencoding="DC" attribute of the eadheader element
+					specifies that child elements will be mapped to Dublin Core; the child element <author encodinganalog="Creator">
+					indicates that the EAD element <author> maps to the Dublin Core element <creator>.
+	iso15511		International Standard identifier for libraries and related organizations (ISIL)
+	iso15924		Codes for the representation of names of scripts
+-->
+
+<!-- FIRST DRAFT -->
+
+   <eadid countrycode="IE" identifier="ie_bp_1" mainagencycode="UCC-Li">ie_bp_1</eadid>
+   <filedesc>
+      <titlestmt>
+         <titleproper encodinganalog="Title">PAPERS OF GEORGE BOOLE – CONTENT AND STRUCTURE</titleproper>
+         <subtitle></subtitle>
+         <author encodinganalog="Creator">Carol Quinn, Archivist</author>
+      </titlestmt>
+      <publicationstmt>
+         <publisher encodinganalog="Publisher">UCC Library, University College Cork</publisher>
+         <date encodinganalog="Date" normal="2006">2006</date>
+      </publicationstmt>
+   </filedesc>
+   <profiledesc>
+      <creation>Anthony Durity, PhD Researcher
+         <date normal="2006-09-13">14 Dec 2013</date>
+      </creation>
+      <langusage>
+         <language encodinganalog="Language" langcode="eng">English</language>
+      </langusage>
+   </profiledesc>
+</eadheader>
+
+<archdesc level="collection" type="inventory" relatedencoding="MARC21">
+   <did>
+      <head>Overview of this fine collection</head>
+      <repository encodinganalog="852$a" label="Repository: ">UCC</repository>
+      <origination label="Creator: ">
+         <persname encodinganalog="100">Boole &amp; Co., 1832-1964</persname>
+      </origination>
+      <unittitle encodinganalog="245$a" label="Title: ">George Boole Collection</unittitle>
+      <unitdate encodinganalog="245$f" normal="1932/1992" type="inclusive" label="Inclusive Dates: ">1832-1964</unitdate>
+      <physdesc encodinganalog="300$a" label="Quantity: ">
+         <extent>3 hefty boxes</extent>
+      </physdesc>
+      <abstract encodinganalog="520$a" label="Abstract: ">
+The collection consists mainly of personal letters to and from Boole, the original order having been lost an artificial order was imposed by the Archivist during processing. Very few of Boole’s academic works are preserved here, however drafts of unpublished lectures dealing with such topics as astronomy, ancient mythology, education and one entitled "Are the Planets Inhabited?" are extant.
+Boole’s letters home to his sister after his arrival in Ireland contain valuable social information on the Cork of the mid nineteenth century, where lavish banquets were given to the elite while crowds of beggars thronged the streets. In October 1849 he describes one encounter with Cork’s poor which "far exceeded in horror anything not only that I had ever before witnessed but that I had even read of." He was present in Cork for the great flood of 1850, and was trapped upstairs in his lodgings by the flood waters, while friends of his were forced to traverse the streets in a boat.
+The insights Boole’s letters give into the world of 19th century academia can be amusing as well as informative, as when in a letter to his friend, Dr. John Bury, he inquires whether or not his wife should continue to wear stays (corsets) while ‘confined’. The constant financial worries evidenced throughout his letters reflect a system by which professors were paid according to the number of students who had enrolled in their classes.
+A large section of the collection contains material relating to Boole’s wife, Mary Everest,(after whose uncle the world’s highest peak was named), and their five daughters. One daughter, Mary Ellen Hinton spent some years in Japan as a teacher at the close of the century. Her diary, which contains wonderful descriptions of the sights she saw and people she met, is preserved here. Another daughter, Ethel Lilian Voynich, was the author of the novel ‘The Gadfly’ which she wrote after an affair with the renowned secret agent, Sydney Reilly.
+Boole had been appointed to the chair of mathematics at Queens College, Cork in 1849 and was to remain teaching there for the rest of his life, gaining a reputation as an outstanding and dedicated thinker.
+
+In 1854 he published An investigation into the Laws of Thought, on Which are founded the Mathematical Theories of Logic and Probabilities. Boole approached logic in a new way reducing it to a simple algebra, incorporating logic into mathematics. He pointed out the analogy between algebraic symbols and those that represent logical forms. It began the algebra of logic called Boolean algebra which now finds application in computer construction, switching circuits etc.
+
+Boole also worked on differential equations, the influential Treatise on Differential Equations appeared in 1859, the calculus of finite differences, Treatise on the Calculus of Finite Differences (1860), and general methods in probability. He published around 50 papers and was one of the first to investigate the basic properties of numbers, such as the distributive property, that underlie the subject of algebra.
+
+Many honours were given to Boole as the genius in his work was recognised. He received honorary degrees from the universities of Dublin and Oxford and was elected a Fellow of the Royal Society (1857). 
+Today Boole is best remembered as the originator of Boolean Logic - a fundamental step in today's computer revolution, and the basis for all modern computer software.
+
+Boole’s achievements are all the more impressive when you consider he was entirely self taught. He received only the most basic schooling, but was imbued from his childhood  by his father with a love of mathematics. He never attended a University not gained a formal qualification in his chosen subject.
+      </abstract>
+      <unitid encodinganalog="099" label="Identification: " countrycode="IE" repositorycode="IE-BL/1">???</unitid>
+      <langmaterial label="Language: " encodinganalog="546">
+         <language langcode="eng">English</language>
+      </langmaterial>
+   </did>
+
+<dsc type='combined'><head>Inventory</head>
+  <c01>
+    <did>
+      <unittitle>1: CORRESPONDENCE, POETRY, BIOGRAPHICAL AND ACADEMIC MATERIAL</unittitle>
+    </did>
+    <c02>
+      <did>
+        <unittitle>A: Letters of George Boole</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>I: Letters to/ from Maryann</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>i: from George Boole to his sister Maryann (1847-1857)</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/1</unittitle>
+              <unitdate>12 Apr 1847</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/2</unittitle>
+              <unitdate>1848</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/3</unittitle>
+              <unitdate>2 May 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/4</unittitle>
+              <unitdate>21 June 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/5</unittitle>
+              <unitdate>5 July 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/6</unittitle>
+              <unitdate>25 October 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/7</unittitle>
+              <unitdate>29 October 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/8</unittitle>
+              <unitdate>3 Nov 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/9</unittitle>
+              <unitdate>9 Nov 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/10</unittitle>
+              <unitdate>16 Nov 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/11</unittitle>
+              <unitdate>25 Nov 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/12</unittitle>
+              <unitdate>26 Nov 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/13</unittitle>
+              <unitdate>3 Dec 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/14</unittitle>
+              <unitdate>7 Dec 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/15</unittitle>
+              <unitdate>11 December 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/16</unittitle>
+              <unitdate>12/13 Dec 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/17</unittitle>
+              <unitdate>10 Jan 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/18</unittitle>
+              <unitdate>18 Jan 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/19</unittitle>
+              <unitdate>25 Jan 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/20</unittitle>
+              <unitdate>30 Jan 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/21</unittitle>
+              <unitdate>1 Feb 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/22</unittitle>
+              <unitdate>18 Feb 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/23</unittitle>
+              <unitdate>19 Feb 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/24</unittitle>
+              <unitdate>26 Feb 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/25</unittitle>
+              <unitdate>8 Mar 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/26</unittitle>
+              <unitdate>16 Mar 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/27</unittitle>
+              <unitdate>28 Mar 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/28</unittitle>
+              <unitdate>30 Mar 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/29</unittitle>
+              <unitdate>4 Apr 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/30</unittitle>
+              <unitdate>14 Apr 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/31</unittitle>
+              <unitdate>23 Apr 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/32</unittitle>
+              <unitdate>3 May 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/33</unittitle>
+              <unitdate>18/19 May 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/34</unittitle>
+              <unitdate>29 May 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/35</unittitle>
+              <unitdate>11 June 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/36</unittitle>
+              <unitdate>1 July 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/37</unittitle>
+              <unitdate>15 July 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/38</unittitle>
+              <unitdate>6 August 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/39</unittitle>
+              <unitdate>14 August 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/40</unittitle>
+              <unitdate>25 August 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/41</unittitle>
+              <unitdate>15 October 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/42</unittitle>
+              <unitdate>18 October 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/43</unittitle>
+              <unitdate>26 October 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/44</unittitle>
+              <unitdate>3 November 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/45</unittitle>
+              <unitdate>9 November 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/46</unittitle>
+              <unitdate>18 November 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/47</unittitle>
+              <unitdate>November 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/48</unittitle>
+              <unitdate>21 Nov 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/49</unittitle>
+              <unitdate>2 Dec 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/50</unittitle>
+              <unitdate>5 Dec 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/51</unittitle>
+              <unitdate>18 Dec 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/52</unittitle>
+              <unitdate>31 Dec 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/53</unittitle>
+              <unitdate>6 Jan 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/54</unittitle>
+              <unitdate>8 Jan 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/55</unittitle>
+              <unitdate>13 Jan 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/56</unittitle>
+              <unitdate>23 Jan 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/57</unittitle>
+              <unitdate>23 Jan 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/58</unittitle>
+              <unitdate>6 Feb 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/59</unittitle>
+              <unitdate>9 Feb 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/60</unittitle>
+              <unitdate>Mar 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/61</unittitle>
+              <unitdate>17 Mar 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/62</unittitle>
+              <unitdate>27 March 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/63</unittitle>
+              <unitdate>Apr 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/64</unittitle>
+              <unitdate>6 Apr 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/65</unittitle>
+              <unitdate>9 Apr 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/66</unittitle>
+              <unitdate>3 May 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/67</unittitle>
+              <unitdate>9 May 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/68</unittitle>
+              <unitdate>9 June 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/69</unittitle>
+              <unitdate>11 June 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/70</unittitle>
+              <unitdate>28 June 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/71</unittitle>
+              <unitdate>15 Sept 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/72</unittitle>
+              <unitdate>23 Jan 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/73</unittitle>
+              <unitdate>1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/74</unittitle>
+              <unitdate>25 Feb 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/75</unittitle>
+              <unitdate>27 Feb 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/76</unittitle>
+              <unitdate>Mar 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/77</unittitle>
+              <unitdate>12 May 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/78</unittitle>
+              <unitdate>14 May 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/79</unittitle>
+              <unitdate>25 May 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/80</unittitle>
+              <unitdate>30 May 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/81</unittitle>
+              <unitdate>9 June 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/82</unittitle>
+              <unitdate>14 June 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/83</unittitle>
+              <unitdate>31 July 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/84</unittitle>
+              <unitdate>15 Sept 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/85</unittitle>
+              <unitdate>29 Sept 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/86</unittitle>
+              <unitdate>14 Oct 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/87</unittitle>
+              <unitdate>7 Jan 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/88</unittitle>
+              <unitdate>9 Jan 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/89</unittitle>
+              <unitdate>11 Jan 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/90</unittitle>
+              <unitdate>2 Feb 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/91</unittitle>
+              <unitdate>10 Feb 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/92</unittitle>
+              <unitdate>20 Feb 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/93</unittitle>
+              <unitdate>22 Feb 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/94</unittitle>
+              <unitdate>6 Mar 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/95</unittitle>
+              <unitdate>10 Mar 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/96</unittitle>
+              <unitdate>20 Mar 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/97</unittitle>
+              <unitdate>Apr 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/98</unittitle>
+              <unitdate>19 Apr 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/99</unittitle>
+              <unitdate>4 May 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/100</unittitle>
+              <unitdate>19 May 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/101</unittitle>
+              <unitdate>31 May 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/102</unittitle>
+              <unitdate>5 June 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/103</unittitle>
+              <unitdate>9 June 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/104</unittitle>
+              <unitdate>19 Oct 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/105</unittitle>
+              <unitdate>27 Oct 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/106</unittitle>
+              <unitdate>5 Nov 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/107</unittitle>
+              <unitdate>20 Nov 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/108</unittitle>
+              <unitdate>26 Nov 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/109</unittitle>
+              <unitdate>11 Dec 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/110</unittitle>
+              <unitdate>2 Jan 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/111</unittitle>
+              <unitdate>3 Jan 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/112</unittitle>
+              <unitdate>29 Jan 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/113</unittitle>
+              <unitdate>29 Jan 1854 - 30 May 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/114</unittitle>
+              <unitdate>10 Feb 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/115</unittitle>
+              <unitdate>16 Feb 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/116</unittitle>
+              <unitdate>4 Mar 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/117</unittitle>
+              <unitdate>20 Mar 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/118</unittitle>
+              <unitdate>2 Apr 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/119</unittitle>
+              <unitdate>14 Apr 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/120</unittitle>
+              <unitdate>Apr 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/121</unittitle>
+              <unitdate>18 May 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/122</unittitle>
+              <unitdate>30 May 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/123</unittitle>
+              <unitdate>6 June 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/124</unittitle>
+              <unitdate>29 Feb - 5 Mar [1856]</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/125</unittitle>
+              <unitdate>25 May 1857</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/126</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/127</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/128</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/129</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/130</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/131</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/132</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/133</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/134</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>ii: Typescript extracts from letters by Boole to Maryann</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/135</unittitle>
+              <unitdate>1849-1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/136</unittitle>
+              <unitdate>1853-1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/137</unittitle>
+              <unitdate></unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>iii: Letter from Maryann to George Boole [1854]</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/138</unittitle>
+              <unitdate>1854</unitdate>
+            </did>
+          </c05>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>II: Letters from George Boole to his mother and brothers</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>i: To his mother</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/139</unittitle>
+              <unitdate>25 June 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/140</unittitle>
+              <unitdate>23 Oct 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/141</unittitle>
+              <unitdate>30 Oct 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/142</unittitle>
+              <unitdate>1 Nov 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/143</unittitle>
+              <unitdate>21 Nov 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/144</unittitle>
+              <unitdate>29 Nov 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/145</unittitle>
+              <unitdate>Nov 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/146</unittitle>
+              <unitdate>9 Dec 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/147</unittitle>
+              <unitdate>9 Jan 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/148</unittitle>
+              <unitdate>9 Feb 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/149</unittitle>
+              <unitdate>7 Mar 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/150</unittitle>
+              <unitdate>20-25 Mar 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/151</unittitle>
+              <unitdate>7 Oct 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/152</unittitle>
+              <unitdate>27 Feb 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/153</unittitle>
+              <unitdate>20 July 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/154</unittitle>
+              <unitdate>Nov 1853</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>ii: To his Brother; (1) Charles and (2) William</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/155</unittitle>
+              <unitdate>25 Nov 1849</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/156</unittitle>
+              <unitdate>14 June 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/157</unittitle>
+              <unitdate>30 Nov 1849</unitdate>
+            </did>
+          </c05>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>III: Letters from George Boole to Friends and Associates</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>i: letters from George Boole to Francis Albani, Registrar, QCC</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/158</unittitle>
+              <unitdate>6 Aug 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/159</unittitle>
+              <unitdate>2 Nov 1852</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>ii: letters to and from George Boole to William Brooke</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/160</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/161</unittitle>
+              <unitdate>1855</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>iii: letters from George Boole to Dr. J Bury</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/162</unittitle>
+              <unitdate>11 Feb 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/163</unittitle>
+              <unitdate>6 Mar 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/164</unittitle>
+              <unitdate>5 June 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/165</unittitle>
+              <unitdate>9 June 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/166</unittitle>
+              <unitdate>26 Aug 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/167</unittitle>
+              <unitdate>19 Dec 1850</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/168</unittitle>
+              <unitdate>1850-1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/169</unittitle>
+              <unitdate>24 Mar 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/170</unittitle>
+              <unitdate>9 June 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/171</unittitle>
+              <unitdate>10 Oct 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/172</unittitle>
+              <unitdate>Oct 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/173</unittitle>
+              <unitdate>6 Nov 1851</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/174</unittitle>
+              <unitdate>23 Mar 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/175</unittitle>
+              <unitdate>9 Oct 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/176</unittitle>
+              <unitdate>4 Jan 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/177</unittitle>
+              <unitdate>7 Jan 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/178</unittitle>
+              <unitdate>30 May 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/179</unittitle>
+              <unitdate>10 June 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/180</unittitle>
+              <unitdate>June 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/181</unittitle>
+              <unitdate>11 July 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/182</unittitle>
+              <unitdate>29 July 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/183</unittitle>
+              <unitdate>4 Sept 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/184</unittitle>
+              <unitdate>29 Sept 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/185</unittitle>
+              <unitdate>13 Oct 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/186</unittitle>
+              <unitdate>14 Oct 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/187</unittitle>
+              <unitdate>24 Oct 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/188</unittitle>
+              <unitdate>2 Apr 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/189</unittitle>
+              <unitdate>7 Apr 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/190</unittitle>
+              <unitdate>9 June 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/191</unittitle>
+              <unitdate>20 June 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/192</unittitle>
+              <unitdate>21 Aug 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/193</unittitle>
+              <unitdate>11 Oct 1854</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/194</unittitle>
+              <unitdate>18 Mar 1856</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/195</unittitle>
+              <unitdate>21 Sept 1856</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/196</unittitle>
+              <unitdate>2 Dec 1856</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/197</unittitle>
+              <unitdate>21 Jan 1860</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/198</unittitle>
+              <unitdate>12 Sept 1860</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/199</unittitle>
+              <unitdate>21 Sept 1860</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/200</unittitle>
+              <unitdate>9 Oct 1860</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/201</unittitle>
+              <unitdate>15 Oct 1860</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/202</unittitle>
+              <unitdate>21 June 1861</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/203</unittitle>
+              <unitdate>18 Sept 1861</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/204</unittitle>
+              <unitdate>9 Dec 1861</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/205</unittitle>
+              <unitdate>17 Dec 1861</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/206</unittitle>
+              <unitdate>19 Dec 1861</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/207</unittitle>
+              <unitdate>7 May 1862</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/208</unittitle>
+              <unitdate>26 May 1862</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/209</unittitle>
+              <unitdate>26 May 1862</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/210</unittitle>
+              <unitdate>26 May 1862</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/211</unittitle>
+              <unitdate>6 Aug 1862</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/212</unittitle>
+              <unitdate>11 Dec 1862</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/213</unittitle>
+              <unitdate>18 Aug 1863</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/214</unittitle>
+              <unitdate>13 Oct 1863</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/215</unittitle>
+              <unitdate>28 Mar 1864</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/216</unittitle>
+              <unitdate>28 Mar 1864</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>iv: letters from George Boole to Miss Davis</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/217</unittitle>
+              <unitdate>28 Mar 1864</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/218</unittitle>
+              <unitdate>28 Mar 1864</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/219</unittitle>
+              <unitdate>28 Mar 1864</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>v: letter from George Boole to Sir William Hamilton</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/220</unittitle>
+              <unitdate>1852</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>vi: letterbook from George Boole to Joseph Hill</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/221</unittitle>
+              <unitdate>1830-1852</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>vii: letterbook from George Boole to Charles Kirk</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/222</unittitle>
+              <unitdate>1845-1849</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>viii: letters from George Boole to the Larken family</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/223</unittitle>
+              <unitdate>1845-1862</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>ix: letter from George Boole to his pupils</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/224</unittitle>
+              <unitdate>6 Nov 1849</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>x: letters from George Boole to M.C. Taylor</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/225</unittitle>
+              <unitdate>27 May 1840</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/226</unittitle>
+              <unitdate>Apr 1840</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/227</unittitle>
+              <unitdate>8 June 1840</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/228</unittitle>
+              <unitdate>22 Sept 1840</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/229</unittitle>
+              <unitdate>17 July 1844</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/230</unittitle>
+              <unitdate>28 Feb 1845</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/231</unittitle>
+              <unitdate>20 June 1846</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>xi: letters from George Boole to A. T. Turner</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/232</unittitle>
+              <unitdate>26 Jan 1860</unitdate>
+            </did>
+          </c05>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>IV: Letters to George Boole</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>i: from Mrs. Mary Everest to George Boole</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/233</unittitle>
+              <unitdate>2 Sept 1852</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/234</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>ii: from Isaac Todhunter to George Boole</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/235</unittitle>
+              <unitdate>23 May 1863</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/236</unittitle>
+              <unitdate>10 June 1863</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>iii: letters from others to George Boole</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/237</unittitle>
+              <unitdate>2 Sept [1853 - 54]</unitdate>
+            </did>
+          </c05>
+        </c04>
+      </c03>
+    </c02>
+    <c02>
+      <did>
+        <unittitle>B: Letters of Maryann Boole</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>I: Letters to Maryann Boole</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>i: from W. Atkin of Lincoln</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/238</unittitle>
+              <unitdate>1 Apr 1865</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/239</unittitle>
+              <unitdate>16 Jan 1866</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/240</unittitle>
+              <unitdate>28 Jan 1866</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>ii: letters from Thomas Bainbridge of Bainbridge’s Commercial Academy</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/241</unittitle>
+              <unitdate>2 Dec 1852</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>iii: letters from her brother William Boole</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/242</unittitle>
+              <unitdate>2 Mar 1865</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>iv: letters from William Brooke of Lincoln</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/243</unittitle>
+              <unitdate>1864-1865</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/244</unittitle>
+              <unitdate>2 Jan 1864</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/245</unittitle>
+              <unitdate>2 Mar 1865</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/246</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/247</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/248</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/249</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/250</unittitle>
+              <unitdate>28 July</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/251</unittitle>
+              <unitdate>5 Sept</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>v: letters from Dr. J. Bury to Maryann Boole</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/252</unittitle>
+              <unitdate>27 Nov 1865</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/253</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>vi: letters from Charles Clarke to Maryann Boole</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/254</unittitle>
+              <unitdate>17 Dec. 1865</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>vii: letters from Miss M. Davis to Maryann Boole</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/255</unittitle>
+              <unitdate>29 Mar 1865</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>viii: letters from J. Dyson to Maryann Boole</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/256</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>ix: letters from Mrs. Anne Gisbon to Maryann Boole</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/257</unittitle>
+              <unitdate>22 Jan 1865</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>x: letters to Maryann from Joseph Hill</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/258</unittitle>
+              <unitdate>4 Dec 1865</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/259</unittitle>
+              <unitdate>20 Mar 1866</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/260</unittitle>
+              <unitdate>24 May 1866</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/261</unittitle>
+              <unitdate>12 July 1866</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/262</unittitle>
+              <unitdate>23 May 1867</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/263</unittitle>
+              <unitdate>25 June 1868</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>xi: letters to Maryann Boole from M.A. Hill</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/264</unittitle>
+              <unitdate>29 Dec 1865</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>xii: letters to Maryann Boole from Miss/Mrs. [T]</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/265</unittitle>
+              <unitdate>2 Jan 1864</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/266</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>xiii: Unidentified letters to Maryann Boole</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/267</unittitle>
+              <unitdate>18 Mar 1853</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/268</unittitle>
+              <unitdate>15 Jan 1865</unitdate>
+            </did>
+          </c05>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>II: Letters from Maryann Boole</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>i: to Miss Davis</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/269</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+        </c04>
+      </c03>
+    </c02>
+    <c02>
+      <did>
+        <unittitle>C: Academic Material</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>I: Unpublished lectures by George Boole</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>BP/1/270</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/271</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/272</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/273</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/274</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/275</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>II: Copies of published works by George Boole</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>BP/1/276</unittitle>
+            <unitdate>1835</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/277</unittitle>
+            <unitdate>1844</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/278</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/279</unittitle>
+            <unitdate>1847</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/280</unittitle>
+            <unitdate>1849</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/281</unittitle>
+            <unitdate>1851</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/282</unittitle>
+            <unitdate>1854</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/283</unittitle>
+            <unitdate>1858</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/284</unittitle>
+            <unitdate>1862</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/285</unittitle>
+            <unitdate>1862</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/286</unittitle>
+            <unitdate>1862</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/287</unittitle>
+            <unitdate>1864</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/288</unittitle>
+            <unitdate>1864</unitdate>
+          </did>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>III: Mathematical Exercises</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>BP/1/289</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/290</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>IV: Testimonials</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>BP/1/291</unittitle>
+            <unitdate>1849</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/292</unittitle>
+            <unitdate>1849</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/293</unittitle>
+            <unitdate>22 Aug 1849</unitdate>
+          </did>
+        </c04>
+      </c03>
+    </c02>
+    <c02>
+      <did>
+        <unittitle>D: Poetry</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>I: Poems and Translations by George Boole</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>BP/1/294</unittitle>
+            <unitdate>1848</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/295</unittitle>
+            <unitdate>1849</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/296</unittitle>
+            <unitdate>1849</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/297</unittitle>
+            <unitdate>1849</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/298</unittitle>
+            <unitdate>1849</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/299</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/300</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/301</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/302</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/303</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/304</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/305</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+      </c03>
+    </c02>
+    <c02>
+      <did>
+        <unittitle>E: Biographical material</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>I: Unpublished Material compiled by members of the Boole Family</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>BP/1/306</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/307</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/308</unittitle>
+            <unitdate></unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/309</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/310</unittitle>
+            <unitdate>1878</unitdate>
+          </did>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>II: Published works on Boole's life and work</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>BP/1/311</unittitle>
+            <unitdate>1962</unitdate>
+          </did>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>III: Obituaries of George Boole</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>BP/1/312</unittitle>
+            <unitdate>21 Jan 1865</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/313</unittitle>
+            <unitdate>1865</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/314</unittitle>
+            <unitdate>1865</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/315</unittitle>
+            <unitdate>1866</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/316</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/317</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/318</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/319</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>IV: Memorabilia</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>BP/1/320</unittitle>
+            <unitdate>1855</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/321</unittitle>
+            <unitdate>1855</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/322</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/323</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/324</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/325</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/326</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/327</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+      </c03>
+    </c02>
+  </c01>
+  <c01>
+    <did>
+      <unittitle>2: MATERIAL RELATING TO BOOLE’S FAMILY</unittitle>
+    </did>
+    <c02>
+      <did>
+        <unittitle>A: Material Relating his family</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>I: Letters to his children from George Boole</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>BP/1/328</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/329</unittitle>
+            <unitdate>11 June 1864</unitdate>
+          </did>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>II: Letters of Mary Boole</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>i: from her children</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/330</unittitle>
+              <unitdate>13 Dec 1863</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>ii: to and from Maryann Boole</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/331</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/332</unittitle>
+              <unitdate>1864</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>iii: to Mary Boole from Various</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/333</unittitle>
+              <unitdate>1864</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/334</unittitle>
+              <unitdate>3 Feb 1865</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/335</unittitle>
+              <unitdate>3 Feb 1865</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/336</unittitle>
+              <unitdate>18 May 1878</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/337</unittitle>
+              <unitdate>25 Apr. 1885</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/338</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>III: Letters of Mary Ellen Hinton</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>i: to her sister Lucy Everest Boole, a diary of her stay in Japan</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/339</unittitle>
+              <unitdate>1888-1891</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>ii: to her son George Hinton</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/340</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>IV: Letters from Ethel Lilian Boole Voynich to Sir Geoffrey Taylor</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>BP/1/341</unittitle>
+            <unitdate>23 Mar 1954</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/342</unittitle>
+            <unitdate>30 Apr 1954</unitdate>
+          </did>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>V: Printed works by Boole's Children and their Descendants</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>i: by Alicia Boole Stott</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/343</unittitle>
+              <unitdate>1900</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/344</unittitle>
+              <unitdate>1910</unitdate>
+            </did>
+          </c05>
+          <c05>
+            <did>
+              <unittitle>BP/1/345</unittitle>
+              <unitdate>1910</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>ii: by Lucy Everest Boole</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/346</unittitle>
+              <unitdate>1896</unitdate>
+            </did>
+          </c05>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>iii: by Sir Geoffrey Ingram Taylor</unittitle>
+          </did>
+          <c05>
+            <did>
+              <unittitle>BP/1/347</unittitle>
+              <unitdate>_</unitdate>
+            </did>
+          </c05>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>VI: Printed works about Boole's family</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>BP/1/348</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>VII: Will of Mary Everest Boole</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>BP/1/349</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>VIII: Family trees compiled by Boole's descendants</unittitle>
+        </did>
+        <c04>
+          <did>
+            <unittitle>BP/1/350</unittitle>
+            <unitdate>_</unitdate>
+          </did>
+        </c04>
+        <c04>
+          <did>
+            <unittitle>BP/1/351</unittitle>
+            <unitdate>1954</unitdate>
+          </did>
+        </c04>
+      </c03>
+    </c02>
+  </c01>
+  <c01>
+    <did>
+      <unittitle>3: PHOTOGRAPHS</unittitle>
+    </did>
+    <c02>
+      <did>
+        <unittitle>I: of George Boole</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>BP/1/352</unittitle>
+          <unitdate>1865</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/353</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/354</unittitle>
+          <unitdate>1832</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/355</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/356</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/357</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/358</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+    </c02>
+    <c02>
+      <did>
+        <unittitle>II: of Mary Everest and her children</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>BP/1/359</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/360</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/361</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/362</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/363</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+    </c02>
+    <c02>
+      <did>
+        <unittitle>III: of Alicia Boole's polytopes</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>BP/1/364</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/365</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/366</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+    </c02>
+    <c02>
+      <did>
+        <unittitle>IV: George Boole's Lincoln School</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>BP/1/367</unittitle>
+          <unitdate>1964</unitdate>
+        </did>
+      </c03>
+    </c02>
+    <c02>
+      <did>
+        <unittitle>V: Boole Memorial Window in Lincoln</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>BP/1/368</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+    </c02>
+  </c01>
+  <c01>
+    <did>
+      <unittitle>4: ASSOCIATED DOCUMENTS</unittitle>
+    </did>
+    <c02>
+      <did>
+        <unittitle>I: Letters to Dr. John Ryall, Registrar, Q.C.C</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>BP/1/369</unittitle>
+          <unitdate>27 Sep 1852</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/370</unittitle>
+          <unitdate>1 Oct 1852</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/371</unittitle>
+          <unitdate>1 Oct 1852</unitdate>
+        </did>
+      </c03>
+    </c02>
+    <c02>
+      <did>
+        <unittitle>II: Letter to Rev Robert Everest</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>BP/1/372</unittitle>
+          <unitdate>31 Aug 1864</unitdate>
+        </did>
+      </c03>
+    </c02>
+    <c02>
+      <did>
+        <unittitle>III: Drawing of Sligo Abbey</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>BP/1/373</unittitle>
+          <unitdate>1868</unitdate>
+        </did>
+      </c03>
+    </c02>
+    <c02>
+      <did>
+        <unittitle>IV: Miscellaneous Items</unittitle>
+      </did>
+      <c03>
+        <did>
+          <unittitle>BP/1/374</unittitle>
+          <unitdate>1868</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/375</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/376</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+      <c03>
+        <did>
+          <unittitle>BP/1/377</unittitle>
+          <unitdate>_</unitdate>
+        </did>
+      </c03>
+    </c02>
+  </c01>
+</dsc>
+</archdesc>
+</ead>

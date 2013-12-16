@@ -1,0 +1,8 @@
+<%- content_for(:breadcrumb) do -%>
+    <% if params['controller'] == 'items' %>
+        <li class="active"><%= Item.aspect params['aspect'] %></li>
+    <% else %>
+        <!-- works but not generic enough -->
+        <li><a href="<%= slice_items_path(aspect: params['aspect'], item_group: @item.fa_structure) %>"><%= Item.aspect params['aspect'] %></a></li>
+    <% end %>
+<%- end -%>

@@ -1,0 +1,27 @@
+<p>
+<strong>Finding Aid Sequence Number:</strong>
+<%= @item.fa_seq %>
+</p>
+
+<p>
+<strong>Finding Aid Hierarchy:</strong>
+<%= @item.fa_structure %>
+</p>
+
+<p>
+<strong>Number of Scans:</strong>
+<%= @item.scan.length %>
+</p>
+<%
+    if @item.scan.length
+%>
+    <p>
+    <strong>First Scan:</strong>
+    <ul>
+        <%= render @item %>
+    </ul>
+    </p>
+<%
+    end
+%>
+

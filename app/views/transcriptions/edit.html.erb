@@ -1,0 +1,42 @@
+
+<%- content_for(:head) do -%>
+    <%= javascript_include_tag "jquery.elevatezoom", "data-turbolinks-track" => TURBO %>
+<%- end -%>
+
+<script type="text/javascript">
+    var original_transcription = '<%= j @scan.transcription %>'
+</script>
+
+<%= render '/per_view_javascript' %>
+
+<%= render 'breadcrumb' %>
+
+<p>
+<%# html_escape @scan.pretty_inspect %>
+<%# @scan.prefix.to_s+"/"+@scan.major_seq.to_s+"/"+@scan.seq.to_s+" scan #"+@scan.minor_seq.to_s %>
+</p>
+<img id="zoom_it" src="/images/pint-size/<%= @scan.file_name %>" data-zoom-image="/serve_up_image/<%= @scan.id %>"/>
+<p/>
+<!-- for my convenience
+1-------10--------20--------30--------40--------50--------60--------70--------80--------90-------100-------110-------120-------130-------140-------150-------160--------
+-->
+
+<%= form_for @scan, url: {action: "update"} do |f| %>
+    <input type="hidden" id="params_aspect" name="aspect" value="<%= params['aspect'] %>" />
+    <%# f.hidden_field(:params, 'aspect') %>
+    <div>
+        <%= f.submit "Update the transcription", :onclick => "need_to_confirm=false;" %>
+        <pre>
+            <%= f.text_area :transcription, size: "100x33", :autofocus=>true %>
+        </pre>
+    </div>
+    <div>
+        <%= f.submit "Select a version", disabled: true  %>
+        <ol>
+        <% @scan.versions.each do |v| %>
+            <li> <%= v.pretty_inspect %></li>
+        <% end %>
+        </ol>
+    </div>
+
+<% end %>

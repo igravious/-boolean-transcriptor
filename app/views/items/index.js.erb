@@ -1,0 +1,36 @@
+try {
+    // index.js path
+    // render the chosen items and scans into a string
+    
+    var output = '<!-- index.js.erb path --><%= j render(:partial => "bx_slider", :locals => {:items => @items}) %>';
+    // proof
+    // console.log("0: ");
+    // console.log(output);
+    
+    // safe selector
+    var selector_id = 'div[id="<%= @selector_id %>"]'
+    // proof
+    console.log("1: selector_id");
+    console.log(selector_id);
+
+    // select it so
+    var gotcha = $(selector_id);
+    // proof
+    console.log("2: gotcha = $(selector_id)");
+    console.log(gotcha);
+
+    // clear the old one, without mercy
+    console.log("3: about to clear old one: $('div.bx-wrapper').parent().empty();");
+    $('div.bx-wrapper').parent().empty();
+
+    // update portion of screen
+    console.log("4: about to fill new one: gotcha.empty().append(output);");
+    gotcha.empty().append(output);
+
+    // there needs to be an auld bx-wrapper in output
+    console.log("5: about to doSlider()");
+    doSlider();
+} catch(oops) {
+    console.log("caught exception in index.js");
+    console.log(oops+oops.message);
+}
