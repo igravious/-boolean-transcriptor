@@ -1,3 +1,4 @@
 <%- content_for(:head) do -%>
-    <%= javascript_include_tag "#{params['controller']}/#{params['action']}", "data-turbolinks-track" => TURBO %>
+    <%# javascript_include_tag "#{params['controller']}/#{params['action']}", "data-turbolinks-track" => TURBO %>
+    <%= javascript_include_tag "#{params['controller']}", "data-turbolinks-track" => TURBO %>
 <%- end -%>

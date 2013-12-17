@@ -41,6 +41,9 @@ gem 'pry'
 # For user
 gem 'devise'
 
+# For Rails moronic assets breakage
+gem "non-stupid-digest-assets"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
