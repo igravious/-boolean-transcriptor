@@ -10,12 +10,13 @@
 
 boole_papers_descriptive_list:
     file:
-        finding_aid_code: IE BL/1 # says BL/1 on the PDF but :q
+        finding_aid_code: IE BP/1 # ref code IE BP/1 on website
 
         title:
             titleproper: PAPERS OF GEORGE BOOLE – CONTENT AND STRUCTURE
             author: Carol Quinn, Archivist
         publication:
+            repositorycode: IE-BL/1 # from desc list
             publisher: UCC Library, University College Cork
     profile:
         creation: Anthony Durity, PhD Researcher
@@ -915,7 +916,6 @@ boole_papers_descriptive_list:
                                 and three hours of serious writing. I did not feel fatigued'. He requests
                                 her to get an assessment of the house from Mr. Hill so that Boole will not
                                 be liable for rent. He sends best wishes to his neighbours.
-                          desc:
                           pp:   4
                         - item:
                           name: BP/1/66
