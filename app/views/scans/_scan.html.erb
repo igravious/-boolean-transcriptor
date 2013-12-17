@@ -9,5 +9,10 @@
         <%= image_tag("thumbs/"+scan.file_name) %>
         </a>
 <% elsif %>
-    <img class="lazy" data-original="<%= '/images/thumbs/'+scan.file_name %>" width="100px" height="100px">
+    <!-- bit of a hack -->
+    <% if params["aspect"] == "group_chronologically" %>
+        <img class="lazy" data-original="<%= '/images/thumbs/'+scan.file_name %>" width="100px" height="100px">
+    <% else %>
+        <%= image_tag("thumbs/"+scan.file_name) %>
+    <% end %>
 <% end %>

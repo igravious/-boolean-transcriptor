@@ -4,7 +4,7 @@
     <!-- Verify with Special Collections -->
 
     <!-- CONSTs for height, width, and margin, where? -->
-    <span style="height: 100px; width 120px">No scans for: <%= item.fa_seq %></span>
+    <span style="height: 100px; width 133px">No scans for: <%= item.fa_seq %></span>
 <% else %>
     <% count = item.scan.length %>
     <a href="<%= item_scans_path(item.id, aspect: params['aspect']) %>" data-counter="<%= (defined? item_counter) ? item_counter : ''%>" title="<%= item.fa_seq %>" style="display: inline"><%= render :partial => item.scan.first, :locals => {:item => item} %></a>
