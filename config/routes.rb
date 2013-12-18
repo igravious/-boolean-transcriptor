@@ -32,7 +32,9 @@ PetulantOctoLana::Application.routes.draw do
 
   get '/serve_up_image/:id' => 'images#serve'
 
-  get '/archival_finding_aid' => 'finding_aids#type' 
+  get '/archival_finding_aid' => 'finding_aids#type'
+
+  get '/search' => 'search#index'
 
   # Example resource route with options:
   #   resources :products do

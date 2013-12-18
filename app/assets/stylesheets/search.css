@@ -1,0 +1,11 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+
+  No they won't. Not if you disable require_tree . in application.css
+*/
+
+span.search {
+    font-weight: bold;
+    font-style: normal;
+}

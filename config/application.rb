@@ -19,17 +19,18 @@ module PetulantOctoLana
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-  
-    # for each controller that has a dir in app/assets/javascripts
-    config.assets.precompile += ['items.js', 'scans.js', 'transcriptions.js']
+ 
+    ### only applies to produciton
+     #
+    # for each controller that has a js in app/assets/javascripts
+    config.assets.precompile += ['items.js', 'scans.js', 'transcriptions.js', 'search.js']
+    # for each controller that has a css in app/assets/stylesheets
+    config.assets.precompile += ['search.css']
     # for each vendor javascript used
     config.assets.precompile += ['jquery.bxslider.js', 'jquery.lazyload.js', 'jquery.elevatezoom.js', 'jquery.cookie.js', 'jquery.simple.tree.menu.js']
     # for each vendor stylesheet used
     config.assets.precompile += ['jquery.bxslider.css', 'jquery.simple.tree.menu.css']
     # and their images, a bit shotgun
     config.assets.precompile += %w[*.png *.jpg *.jpeg *.gif]
-    
-    # uh
-    # config.assets.paths << Rails.root.join('vendor/assets/stylesheets/images')
   end
 end

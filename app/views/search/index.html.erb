@@ -1,0 +1,18 @@
+<%= render '/per_view_stylesheet' %>
+
+<% q = params['q'] %>
+<h3>
+    <div>(<%= @elapsed_time_in_secs.round(4) %> seconds)</div>
+    <i>In item description</i> <%= "#{pluralize(@items.length, 'match')}" %>
+</h3>
+<ul>
+<% @items.each do |item| %>
+    <li>
+          <div class="well" style="margin-bottom: 0px"><%= link_to item.fa_seq, item %></div>
+          <div class="well">
+              <%=raw item.description.gsub(Regexp.new(Regexp.escape(q), "i")) {|match_q| "<span class='search'>#{match_q}</span>"} %>
+              <span class="label label-primary"><%= item.year %></span>
+          </div>
+    </li>
+<% end %>
+</ul>
