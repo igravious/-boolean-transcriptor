@@ -7,6 +7,7 @@
     <% if params['controller'] == 'scans' %>
         <li class="active"><%= crumb %></li>
     <% else %>
-        <li><a href="<%= item_scans_path(@item.id, aspect: params['aspect']) %>"><%= crumb %></a></li>
+        <!-- prolly you can just pass params to _path ? -->
+        <li><a href="<%= item_scans_path(@item.id, aspect: params['aspect'], q: params['q']) %>"><%= crumb %></a></li>
     <% end %>
 <%- end -%>

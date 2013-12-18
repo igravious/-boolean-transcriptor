@@ -2,11 +2,11 @@
 
 <% if params["controller"] == "scans" or params["controller"] == "search" %>
     <% if Scan::VIRGIN == scan.state %>
-        <a href="<%= new_transcription_path(scan_id: scan.id, aspect: params['aspect']) %>" rel="tooltip" data-original-title="<%= scan.stringified %>">
+        <a href="<%= new_transcription_path(scan_id: scan.id, aspect: params['aspect'], q: params['q']) %>" rel="tooltip" data-original-title="<%= scan.stringified %>">
     <% elsif Scan::COMPLETED == scan.state %>
-        <a href="<%= transcriptions_path(id: scan.id, aspect: params['aspect']) %>" rel="tooltip" data-original-title="<%= scan.stringified %>">
+        <a href="<%= transcriptions_path(id: scan.id, aspect: params['aspect'], q: params['q']) %>" rel="tooltip" data-original-title="<%= scan.stringified %>">
     <% else %>
-        <a href="<%= edit_transcription_path(id: scan.id, aspect: params['aspect']) %>" rel="tooltip" data-original-title="<%= scan.stringified %>">
+        <a href="<%= edit_transcription_path(id: scan.id, aspect: params['aspect'], q: params['q']) %>" rel="tooltip" data-original-title="<%= scan.stringified %>">
     <% end %>
         <%= image_tag("thumbs/"+scan.file_name) %>
         </a>
