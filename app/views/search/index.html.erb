@@ -1,17 +1,38 @@
 <%= render '/per_view_stylesheet' %>
 
+<%= render 'breadcrumb' %>
+
 <% q = params['q'] %>
+<h3>(<%= @elapsed_time_in_secs.round(4) %> seconds)</h3>
+<hr>
 <h3>
-    <div>(<%= @elapsed_time_in_secs.round(4) %> seconds)</div>
     <i>In item description</i> <%= "#{pluralize(@items.length, 'match')}" %>
 </h3>
+<hr>
 <ul>
 <% @items.each do |item| %>
     <li>
-          <div class="well" style="margin-bottom: 0px"><%= link_to item.fa_seq, item %></div>
+          <div class="well" style="margin-bottom: 0px"><%= link_to item.fa_seq, item_scans_path(item.id, aspect: params['aspect']) %></div>
           <div class="well">
               <%=raw item.description.gsub(Regexp.new(Regexp.escape(q), "i")) {|match_q| "<span class='search'>#{match_q}</span>"} %>
               <span class="label label-primary"><%= item.year %></span>
+          </div>
+    </li>
+<% end %>
+</ul>
+<hr>
+<h3>
+    <i>In scan transcription</i> <%= "#{pluralize(@scans.length, 'match')}" %>
+</h3>
+<hr>
+<ul>
+<% @scans.each do |scan| %>
+    <li>
+          <div class="well" style="margin-bottom: 0px"><%= render scan %></div>
+          <div class="well">
+              <%=raw scan.transcription.gsub(Regexp.new(Regexp.escape(q), "i")) {|match_q| "<span class='search'>#{match_q}</span>"} %>
+              <!-- warning, total hack -->
+              <span class="label label-primary"><%= "Being Edited" %></span>
           </div>
     </li>
 <% end %>

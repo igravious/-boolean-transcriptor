@@ -1,4 +1,6 @@
-<% if params["controller"] == "scans" %>
+<%# the logic in this needs sorting badly %>
+
+<% if params["controller"] == "scans" or params["controller"] == "search" %>
     <% if Scan::VIRGIN == scan.state %>
         <a href="<%= new_transcription_path(scan_id: scan.id, aspect: params['aspect']) %>" rel="tooltip" data-original-title="<%= scan.stringified %>">
     <% elsif Scan::COMPLETED == scan.state %>
