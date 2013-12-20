@@ -13,18 +13,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a  class="navbar-brand hot-cinnamon"
-                style="font-family: 'Cedarville Cursive', cursive; font-size: 250%" 
-                href="http://books.google.ie/books?id=SWgLVT0otY8C">x²=x
+            <a  class="navbar-brand hot-cinnamon <%= switch_on "brand" %>"
+                style="font-family: 'Cedarville Cursive', cursive; font-size: 333%" 
+                href="/welcome" alt="Welcome">x²=x
             </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#">Leaderboard</a></li>
-                <li class="active"><a href="#">Transcribe</a></li>
-                <li><a href="#">FAQs &amp; HOWTO</a></li>
+                <li class="<%= switch_on "intro" %>"><a href="/intro">Introduction</a></li>
+                <li class="<%= switch_on "leader" %>"><a href="/leader">Leaderboard</a></li>
+                <li class="<%= switch_on "transcribe" %>"><a href="/transcribe">Transcribe</a></li>
+                <li class="<%= switch_on "guide" %>"><a href="/guide">FAQs &amp; Guide</a></li>
                 <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Propaganda<b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -63,6 +64,7 @@
                     <li class="divider"></li>
                     <li><a href="https://en.wikipedia.org/wiki/Boolean_algebra">Boolean Algebra @ Wikipedia</a></li>
                     <li><a href="http://library.ucc.ie/search/X?SEARCH=boolean+algebra&SORT=D">… by keyword @ UCC Library</a></li>
+                    <li><a href="http://books.google.ie/books?id=SWgLVT0otY8C">The Laws of Thought</a></li>
                 </ul>
                 </li>
             </ul>
@@ -96,5 +98,6 @@
           </span>
         </span>
     </div>
+    <%# debug params %>
 </div>
 

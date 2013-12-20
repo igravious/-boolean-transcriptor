@@ -50,7 +50,7 @@ class ItemsController < ApplicationController
     private
 
     def finding_aid
-        control_file = YAML.load_file('db/bp_control.yml')
+        control_file = YAML.load_file('db/Boole_Finding_Aid.yml')
         @top_level = control_file["boole_papers_descriptive_list"]["part"]
         render "order_by_finding_aid"
     end

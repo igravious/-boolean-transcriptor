@@ -102,3 +102,15 @@ div.darken {
 
 .inner_container {
 }
+
+a.brand-active {
+    background-color: #e7e7e7;
+}
+
+/*
+a {
+    color: #1D2951 !important;
+    text-decoration: none; border-bottom:1px dotted;
+}
+*/
+

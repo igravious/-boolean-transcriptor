@@ -14,7 +14,7 @@ class FindingAidsController < ApplicationController
         when "yaml"
             # https://en.wikipedia.org/wiki/YAML
             # http://stackoverflow.com/questions/332129/yaml-mime-type
-            path = Rails.root.to_s+"/db/bp_control.yml"
+            path = Rails.root.to_s+"/db/Boole_Finding_Aid.yml"
             send_file(  path, :disposition => 'inline', :type => 'application/x-yaml', :x_sendfile => true)
         when "ead"
             # https://en.wikipedia.org/wiki/Encoded_Archival_Description

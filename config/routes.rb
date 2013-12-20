@@ -1,7 +1,7 @@
 PetulantOctoLana::Application.routes.draw do
 
   devise_for :users
-  root 'items#index'
+  root 'pages#welcome'
 
   Rails.env.development? and get 'qwux' => 'qwux#new'
 
@@ -35,6 +35,14 @@ PetulantOctoLana::Application.routes.draw do
   get '/archival_finding_aid' => 'finding_aids#type'
 
   get '/search' => 'search#index'
+
+  # pages grouped together
+  get '/welcome' => 'pages#welcome'
+  get '/transcribe' => 'pages#transcribe'
+  get '/guide' => 'pages#guide'
+  get '/intro' => 'pages#intro'
+  get '/leader' => 'pages#leader'
+  # need to be able to dynamically add pages based on entries in the control file
 
   # Example resource route with options:
   #   resources :products do

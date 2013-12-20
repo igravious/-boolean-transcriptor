@@ -1,8 +1,16 @@
 <ol class="breadcrumb" style="float: left">
-    <% if params['controller'] == 'items' and params['action'] == 'index' %>
-        <li class="active">Overview</li>
+    <% 
+        logger.debug ">>> " + params.pretty_inspect
+        top = params['action'].capitalize
+        if top == "Slice"
+            top = "Transcribe"
+            path = transcribe_path
+        end
+    %>
+    <% if params['controller'] == 'pages' %>
+        <li class="active"><%= top %></li>
     <% else %>
-        <li><%= link_to 'Overview', items_path %></li>
+        <li><%= link_to top, path %></li>
     <% end %>
     <%= yield :breadcrumb -%> <!-- hurrah for this pattern -->
 </ol>
