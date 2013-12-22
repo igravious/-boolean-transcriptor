@@ -4,7 +4,7 @@ class TranscriptionsController < ApplicationController
         scan.state = Scan::BEING_EDITED
         scan.save
         not
-        redirect_to edit_transcription_path(id: scan.id, aspect: params['aspect'])
+        redirect_to edit_transcription_path(id: scan.id, aspect: params['aspect'], q: params['q'])
     end
 
     def edit
