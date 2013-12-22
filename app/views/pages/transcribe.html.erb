@@ -1,10 +1,67 @@
-<h1>These are the different windows onto the items.</h1>
+<div id="ministry_of_the_interior">
+    <h2>These are the <span class="hot-cinnamon">different windows</span> onto the items in the collection. You can <span class="hot-cinnamon">slice 'n dice</span> them in many different ways.</h2>
 
-<ul>
-    <li> <%= link_to 'Display in Finding Aid Order (work in progress…)', slice_items_path(aspect: "display_in_finding_aid_order") %> </li>
-    <li> <%= link_to 'Display Chronologically (work in progress…)', slice_items_path(aspect: "group_chronologically") %> </li>
-    <li> <%= link_to 'Show Thematically (to be done)', slice_items_path(aspect: "group_by_theme") %> </li>
-    <li> <%= link_to 'Show in Order of Difficulty (to be done)', slice_items_path(aspect: "group_by_difficulty") %> </li>
-    <li> <%= link_to '!! Developer Option (unvarnished database order)', slice_items_path %> </li>
-</ul>
+    <div class="btn-group btn-group-justified" style="padding-top: 10px; margin-bottom: 20px;">
+        <a href="<%= slice_items_path(aspect: "display_in_finding_aid_order") %>" class="btn btn-default">
+            <span>Display in finding aid order (work in progress…)</span>
+            <span class="glyphicon glyphicon-sort-by-attributes"></span>
+        </a>
 
+        <a href="<%= slice_items_path(aspect: "group_chronologically") %>" class="btn btn-default">
+            <span>Display chronologically (work in progress…)</span>
+            <span class="glyphicon glyphicon-sort-by-attributes"></span>
+        </a>
+
+        <a href="#" class="btn btn-default">
+            <span>Show thematically (to be done)</span>
+            <span class="glyphicon glyphicon-sort-by-attributes"></span>
+        </a>
+    </div>
+
+    <!-- you have to use >a< with "btn-group-justified" which suits me just fine -->
+
+    <div class="btn-group btn-group-justified" style="margin-bottom: 20px;">
+        <a class="btn btn-default" href="#">
+            <div class="media">
+                <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%;"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Ordered by Difficulty</h4>
+                    display sorted in order of difficulty (to be done)
+                </div>
+            </div>
+        </a>
+
+        <% if Rails.env.development? %>
+        <a class="btn btn-default" href="<%= slice_items_path %>">
+            <div class="media">
+                <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%;"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Database Order</h4>
+                    <i>developer option (unvarnished database order)</i>
+                </div>
+            </div>
+        </a>
+        <% else %>
+        <a class="btn btn-default" href="#">
+            <div class="media">
+                <span class="pull-left glyphicon glyphicon-sort-by-attributes"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Undecided Order</h4>
+                    coming soon to a transcriptor near you…
+                </div>
+            </div>
+        </a>
+        <% end %>
+
+        <a class="btn btn-default" href="#" >
+            <div class="media">
+                <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Undecided Order</h4>
+                    coming soon to a transcriptor near you…
+                </div>
+            </div>
+        </a>
+    </div>
+
+</div>

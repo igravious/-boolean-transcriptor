@@ -114,3 +114,20 @@ a {
 }
 */
 
+.img .overlay {
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0px 0px 0px 0px;
+    display: block;
+    color: rgb(255, 255, 255);
+    background-position: 10px 6px;
+    background-color: rgba(0, 0, 0, 0.6);
+    /*
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAARxJREFUeNpskM9KhFAUh6/agIXF2DCbKewFXLUIXEi08h1y1U5wLT6C4AvoWvAF2rdzIQRCGzVIV0EMOKMhYTCW/S7ciRYd+C7f4Zz775A4jgllGIa7IAhUQsjJXwc8rR+YpkloTNN0kWXZB3QmiuKvgxI9A9f3/bUkSTfkn/B9v3Nd9x76ykdRVDuO80gLlmUtdV2f7z0MwyX0HIgcliOa4OpbWZZPBUFYN00zgy+6rntB7QHUfNu2V7SJngLf0ibmG8/zeOgn+BYURfmq6/pYVdWFpmmrPM93hmGM1JMkGbBhjcYtb9v2pixLmpA0TceiKN73XlXVG3QDRvpGns3rEpyBChyCFXgCz2DHsUkIYM4+1rOcesdy8iPAAGt4gnafIB2qAAAAAElFTkSuQmCC");
+    */
+}
+
