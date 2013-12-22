@@ -1,0 +1,28 @@
+
+<%- content_for(:head) do -%>
+    <%= javascript_include_tag "jquery.bxslider", "data-turbolinks-track" => TURBO %>
+
+    <%= stylesheet_link_tag "jquery.bxslider", media: "all", "data-turbolinks-track" => TURBO %>
+<%- end -%>
+
+<%= render '/per_view_javascript' %>
+
+<%= render 'breadcrumb' %>
+
+<!-- scans slider route -->
+<!-- are we as pretty as we can be? -->
+<%# params.pretty_inspect %>
+<div class="slide-wrapper">
+    <%= render partial: "scan", collection: @scans, layout: "item_default_layout" %>
+</div>
+
+<%= render "notes/new" %>
+
+<%= render @notes %>
+
+<ul class="list-group" style="padding-top: 10px">
+    <li class="list-group-item"><b>date</b> <%= @item.item_date %></li>
+    <li class="list-group-item"><b>description</b><br><%= @item.description %></li>
+    <li class="list-group-item"><b>pp</b> <%= @item.pp %></li>
+</ul>
+
