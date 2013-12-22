@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
         respond_to do |format|
             @selector_id = params[:selector_id]
             # */* gets caught by whatever comes first, dunno how to force that to a default
-            format.html { render "_bx_slider" } # hmm
+            format.html { render "_bxslider" } # hmm
             format.js { render :layout => false } # not sure if i even need =>
         end
     end
@@ -24,6 +24,10 @@ class ItemsController < ApplicationController
     def show
         # for example, SELECT "scans".* FROM "scans" WHERE "scans"."item_id" = 3454
         @item = Item.find(params[:id])
+        if Rails.env.development?
+            render "horror_show"
+            return
+        end
     end
 
     def slice

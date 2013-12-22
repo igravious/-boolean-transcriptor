@@ -9,16 +9,7 @@
 
 <%= render 'breadcrumb' %>
 
-<!-- scans slider route -->
-<!-- are we as pretty as we can be? -->
-<%# params.pretty_inspect %>
 <div class="slide-wrapper">
     <%= render @scans %>
 </div>
-
-<ul class="list-group" style="padding-top: 10px">
-    <li class="list-group-item"><b>date</b> <%= @item.item_date %></li>
-    <li class="list-group-item"><b>description</b><br><%= @item.description %></li>
-    <li class="list-group-item"><b>pp</b> <%= @item.pp %></li>
-</ul>
 

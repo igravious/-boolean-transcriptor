@@ -58,7 +58,7 @@ var handleSimpleTreeMenu = function() {
             console.log(oops+oops.message);
 
         }
-    } else if ($('.item_container').length ) {
+    } else if ($('.items_preview_container').length ) {
         try {
             doLazy();
         } catch(oops) {

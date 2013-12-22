@@ -11,40 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131211154929) do
+ActiveRecord::Schema.define(version: 20131222150747) do
 
-  create_table "items", force: true do |t|
-    t.integer  "division"
-    t.string   "description"
-    t.integer  "folios"
-    t.integer  "pp"
-    t.date     "item_date"
-    t.integer  "penner"
-    t.string   "fa_seq"
-    t.string   "fa_structure"
+# Could not dump table "items" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
+
+  create_table "notes", force: true do |t|
+    t.integer  "note_type"
+    t.binary   "bytes"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "year"
   end
 
-  create_table "scans", force: true do |t|
-    t.string   "stringified"
-    t.string   "file_name"
-    t.integer  "institution"
-    t.string   "prefix"
-    t.integer  "major_seq"
-    t.integer  "seq"
-    t.integer  "minor_seq"
-    t.integer  "item_id"
-    t.integer  "state"
-    t.text     "transcription"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.binary   "image_data"
-    t.string   "directory"
-  end
-
-  add_index "scans", ["item_id"], name: "index_scans_on_item_id"
+# Could not dump table "scans" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

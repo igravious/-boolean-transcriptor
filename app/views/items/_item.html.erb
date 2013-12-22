@@ -1,17 +1,7 @@
-<div class="img">
-    
-<% scans = item.scan %>
-<% if scans.first.nil? %>
-    <!-- we have an item but no scan: BP/1/368 (3.V), BP/1/311 (1.E.II), BP/1/312 (1.E.III), BP/1/236 (1.A.IV.ii) -->
-    <!-- Verify with Special Collections -->
-
-    <!-- CONSTs for height, width, and margin, where? -->
-    <img src="/images/no-image.jpeg" alt="No scans for <%= item.fa_seq %>" title="<%= item.fa_seq %>">
-    <span class="overlay">0 scans</span>
-<% else %>
-    <% count = item.scan.length %>
-    <a href="<%= item_scans_path(item.id, aspect: params['aspect']) %>" data-counter="<%= (defined? item_counter) ? item_counter : ''%>" title="<%= item.fa_seq %>" style="display: inline"><%= render :partial => item.scan.first, :locals => {:item => item} %></a>
-    <span class="overlay"><%= "#{pluralize(count, 'scan')}" %></span>
-<% end %>
-
-</div>
+<%
+    if thumbnail
+        render "thumbnail", locals: {thumb: item}
+    else
+        render "default", locals: {thumb: item}
+    end
+%>

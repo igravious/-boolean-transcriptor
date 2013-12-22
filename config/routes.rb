@@ -23,8 +23,12 @@ PetulantOctoLana::Application.routes.draw do
   resources :transcriptions do
   end
 
+  resources :notes do
+  end
+
   resources :items, only: [:index, :show] do
     resources :scans, only: [:index]
+    resources :notes, only: [:index]
     collection do
       get 'slice'
     end

@@ -94,7 +94,7 @@ div.darken {
     background: rgba(0,0,0,0.07);
 }
 
-.item_container {
+.items_preview_container {
     width: 798px; /* (100+33) * 6 ... hullo, CONSTs anyone? */
     white-space: nowrap;
     overflow-x: auto;

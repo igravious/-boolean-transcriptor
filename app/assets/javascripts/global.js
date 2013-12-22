@@ -13,7 +13,7 @@ var doSlider = function() {
 }
 
 var doLazy = function() {
-    $('.item_container').each(function(){
+    $('.items_preview_container').each(function(){
         $("img.lazy").lazyload({
             effect : "fadeIn",
             container: this

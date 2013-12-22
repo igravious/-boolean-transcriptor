@@ -1,4 +1,4 @@
-<%# the logic in this needs sorting badly %>
+<%# the logic in this needs untangling badly %>
 
 <% if params["controller"] == "scans" or params["controller"] == "search" %>
     <% if Scan::VIRGIN == scan.state %>
@@ -12,7 +12,8 @@
         </a>
 <% elsif %>
     <!-- bit of a hack -->
-    <% if params["aspect"] == "group_chronologically" %>
+    <%# if params["aspect"] == "group_chronologically" %>
+    <% if scan.lazy_load? %>
         <img class="lazy" data-original="<%= '/images/thumbs/'+scan.file_name %>" width="100px" height="100px">
     <% else %>
         <%= image_tag("thumbs/"+scan.file_name) %>
