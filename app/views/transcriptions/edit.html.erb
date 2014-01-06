@@ -1,6 +1,9 @@
 
 <%- content_for(:head) do -%>
-    <%= javascript_include_tag "jquery.elevatezoom", "data-turbolinks-track" => TURBO %>
+    <%# javascript_include_tag "jquery.elevatezoom", "data-turbolinks-track" => TURBO %>
+    <%= javascript_include_tag "jquery.fs.zoomer", "data-turbolinks-track" => TURBO %>
+
+    <%= stylesheet_link_tag "jquery.fs.zoomer", media: "all", "data-turbolinks-track" => TURBO %>
 <%- end -%>
 
 <script type="text/javascript">
@@ -8,35 +11,76 @@
 </script>
 
 <%= render '/per_view_javascript' %>
+<%= render '/per_view_stylesheet' %>
 
 <%= render 'breadcrumb' %>
 
-<p>
 <%# html_escape @scan.pretty_inspect %>
 <%# @scan.prefix.to_s+"/"+@scan.major_seq.to_s+"/"+@scan.seq.to_s+" scan #"+@scan.minor_seq.to_s %>
-</p>
-<img id="zoom_it" src="/images/pint-size/<%= @scan.file_name %>" data-zoom-image="/serve_up_image/<%= @scan.id %>"/>
-<p/>
-<!-- for my convenience
-1-------10--------20--------30--------40--------50--------60--------70--------80--------90-------100-------110-------120-------130-------140-------150-------160--------
--->
 
-<%= form_for @scan, url: {action: "update"} do |f| %>
-    <input type="hidden" id="params_aspect" name="aspect" value="<%= params['aspect'] %>" />
-    <%# f.hidden_field(:params, 'aspect') %>
-    <div>
-        <%= f.submit "Update the transcription", :onclick => "need_to_confirm=false;" %>
-        <pre>
-            <%= f.text_area :transcription, size: "100x33", :autofocus=>true %>
-        </pre>
-    </div>
-    <div>
-        <%= f.submit "Select a version", disabled: true  %>
-        <ol>
-        <% @scan.versions.each do |v| %>
-            <li> <%= v.pretty_inspect %></li>
-        <% end %>
-        </ol>
+<%
+    pint_size = "/images/pint-size/#{@scan.file_name}"
+    large_size = "/serve_up_image/#{@scan.id}"
+%>
+<script type="text/javascript">
+    var img_id = <%= @scan.id %>;
+</script>
+<!-- <img id="zoom_it" src="<%= pint_size %>" data-zoom-image="<%= large_size %>" /> -->
+
+<div id="content" class=".clearfix">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div><i>Scan Goes Here</i></div>
+            <div class="viewer">
+                <img src="<%= large_size %>" />
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div><i>Transcription Goes Here</i></div>
+            <%= form_for @scan, url: {action: "update"} do |f| %>
+                <input type="hidden" id="params_aspect" name="aspect" value="<%= params['aspect'] %>" />
+                <%# f.hidden_field(:params, 'aspect') %>
+                <div>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs">
+                        <li id="last-nav-tab" class="active">
+                        <a href="#">Default&nbsp;&nbsp;<button type="button" class="close" data-dismiss="tab" aria-hidden="true">×</button></a>
+                        </li>
+                        <li><a href="#" onclick="add_tab()">+</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div id="last-content-tab" class="tab-pane active"> <%= f.text_area :transcription, size: "80x25", :autofocus=>true %> </div>
+                    </div>
+                </div>
+                <div> <%= f.submit "Update the transcription", :onclick => "need_to_confirm=false;" %> </div>
+            <% end %>
+        </div>
     </div>
 
-<% end %>
+    <!-- for my convenience
+    1-------10--------20--------30--------40--------50--------60--------70--------80--------90-------100-------110-------120-------130-------140-------150-------160--------
+    -->
+
+    <div class="row">
+        <div class="col-md-6">
+            <div><i>Versions Go Here</i></div>
+            <ol class="list-group" style="padding-top: 10px">
+                <%= render partial: @scan.versions, layout: "paper_trail/versions/version_group_layout" %>
+            </ol>
+        </div>
+        <div class="col-md-6">
+            <div id="things"><i>Thingies Go Here</i></div>
+            <ul class="list-group" style="padding-top: 10px">
+                <li id="insert_after_me" class="list-group-item">
+                    <%= link_to "Compose a new note", new_note_path(scan_id: @scan.id, aspect: params['aspect'], q: params['q']) %>
+                </li>
+                <%= render partial: @scan.notes, layout: "notes/note_group_layout" %>
+            </ul>
+        </div>
+    </div>
+
+</div>

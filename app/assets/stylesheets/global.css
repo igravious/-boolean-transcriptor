@@ -74,6 +74,7 @@ body {
     /* background-color: #f9ebcc; */
     background: url('/images/texture.jpg');
     margin-top: 22px;
+    margin-bottom: 32px;
 }
 
 div.rounded {

@@ -1,0 +1,8 @@
+    <%# html_escape @note.pretty_inspect %>
+    <%# html_escape params.pretty_inspect %>
+
+<h2>Add new note to item <%= @item.fa_seq %></h2>
+
+<%= render "breadcrumb" %>
+
+<%= render partial: "form", locals: {note: @note} %>

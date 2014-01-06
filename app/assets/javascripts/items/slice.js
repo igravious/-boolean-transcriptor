@@ -48,7 +48,8 @@ var handleSimpleTreeMenu = function() {
             console.log("why on earth is simple tree menu not loaded? ")
             console.log(oops+oops.message);
         }
-    // if there's any kind of slider (of scans or items) on the page wrapped
+    // if there's any kind of slider (of Thumbnail Scans of an Item
+    // or Thumbnail Items of an Item Group/Collection ) on the page wrapped
     } else if ($('.slide-wrapper').length ) {
         try {
             doSlider();

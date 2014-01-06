@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Boole Papers <%= @attempt %></title>
+        <title>Boolean Transcriptor <%= @attempt %></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => TURBO %>
         <%= javascript_include_tag "application", "data-turbolinks-track" => TURBO %>
@@ -23,20 +23,11 @@
     <body>
 
         <div id="the-container" class="rounded container">
-        <%= render "layouts/header" %>
-        <% if flash %>
-            <!-- shout out http://stackoverflow.com/questions/17931534/how-to-define-flash-notifications-with-twitter-bootstrap-rails-gem -->
-            <% flash.each do |name, msg| -%>
-                <% if msg.is_a?(String) %>
-                    <div class="alert alert-<%= name == :notice ? "success" : "danger" %>">
-                        <a class="close" data-dismiss="alert">&#215;</a>
-                        <%= content_tag :p, msg, :id => "flash_#{name}" %>
-                    </div>
-                <% end %>
-            <% end %>
-        <% end -%>
+        <%= render "layouts/header_panel" %>
+        <%= render "layouts/flash_panel" %>
         <%= yield %>
-        <%= render "layouts/footer" %>
+        <%= render "layouts/admin_panel" %>
+        <%= render "layouts/footer_panel" %>
         </div>
 
     </body>

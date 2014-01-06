@@ -1,5 +1,7 @@
 /*
  * our default slider - a horizontal carousel
+ *
+ * deprecated for simpler overflowed div solution
  */
 var doSlider = function() {
     $('.slide-wrapper').bxSlider({
@@ -12,6 +14,10 @@ var doSlider = function() {
     });
 }
 
+/*
+ * our default to lazily load images
+ * in all containers in the page
+ */
 var doLazy = function() {
     $('.items_preview_container').each(function(){
         $("img.lazy").lazyload({
@@ -21,7 +27,12 @@ var doLazy = function() {
     });
 }
 
-function unescapeHTML(unsafe) {
+var doZoomer = function() {
+    
+}
+
+
+var unescapeHTML = function(unsafe) {
     return unsafe
         .replace(/&amp;/g, "&")
         .replace(/&lt;/g, "<")

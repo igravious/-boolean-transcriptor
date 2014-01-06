@@ -1,0 +1,8 @@
+<%- content_for(:breadcrumb) do -%>
+<% if params['item_id'] %>
+    <%= render 'scans/breadcrumb' %>
+<% else %>
+    <%= render 'transcriptions/breadcrumb' %>
+<% end %>
+    <li class="active"><%= "#{params['action'].capitalize} Note" %></li>
+<%- end -%>

@@ -1,10 +1,14 @@
 class Item < ActiveRecord::Base
-    has_many :scan
-    def self.this_is_my_class_method
-    end
-    def this_is_my_instance_method
+    has_many :scans
+    has_many :notes
+
+    # instance method
+    # item.foo
+    def foo
     end
 
+    # class method
+    # Item.aspect
     def self.aspect str
         case str
         when "display_in_finding_aid_order"

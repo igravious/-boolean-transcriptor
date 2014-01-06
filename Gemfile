@@ -44,6 +44,9 @@ gem 'devise'
 # For Rails moronic assets breakage
 gem "non-stupid-digest-assets"
 
+# For snippity-snip of images
+gem "rmagick"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

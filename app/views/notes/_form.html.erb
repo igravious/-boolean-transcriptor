@@ -1,0 +1,21 @@
+<% note.type = Note::TEXT %>
+<%= form_for(note) do |f| %>
+  <%# f.error_messages %>
+  <p>
+    <%= f.label :bytes, 'Note text' %>:
+    <%= f.text_field :bytes %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+  <%= f.hidden_field :type %>
+  
+<% if params['item_id'] %>
+  <input id="item_id" name="item_id" type="hidden" value="<%= params['item_id'] %>" />
+<% else %>
+  <input id="scan_id" name="scan_id" type="hidden" value="<%= params['scan_id'] %>" />
+<% end %>
+
+  <!-- and if we come from search? -->
+  <input id="aspect" name="aspect" type="hidden" value="<%= params['aspect'] %>" />
+<% end %>

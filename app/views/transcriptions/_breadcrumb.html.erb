@@ -1,4 +1,9 @@
 <%- content_for(:breadcrumb) do -%>
     <%= render 'scans/breadcrumb' %>
-    <li class="active">Scan <%= @scan.minor_seq %> of <%= @item.scan.length %></li>
+    <% bread = "Scan #{@scan.minor_seq} of #{@item.scans.length}" %>
+    <% if params['controller'] != "transcriptions" %>
+        <li><a href="<%= edit_transcription_path(id: @scan.id, aspect: params['aspect'], q: params['q']) %>"><%= bread %></a></li>
+    <% else %>
+        <li class="active"><%= bread %></li>
+    <% end %>
 <%- end -%>

@@ -1,13 +1,13 @@
 <%- content_for(:breadcrumb) do -%>
     <%= render 'items/breadcrumb' %>
     <%
-        count = @item.scan.length
+        count = @item.scans.length
         crumb = "#{@item.fa_seq} ……… #{pluralize(count, 'scan')}"
     %>
-    <% if params['controller'] == 'scans' %>
+    <% if params['controller'] == 'items' %>
         <li class="active"><%= crumb %></li>
     <% else %>
         <!-- prolly you can just pass params to _path ? -->
-        <li><a href="<%= item_scans_path(@item.id, aspect: params['aspect'], q: params['q']) %>"><%= crumb %></a></li>
+        <li><a href="<%= item_path(@item.id, aspect: params['aspect'], q: params['q']) %>"><%= crumb %></a></li>
     <% end %>
 <%- end -%>

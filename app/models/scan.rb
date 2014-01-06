@@ -2,6 +2,7 @@ class Scan < ActiveRecord::Base
   has_paper_trail
 
   belongs_to :item
+  has_many :notes
 
   VIRGIN=1
   BEING_EDITED=2

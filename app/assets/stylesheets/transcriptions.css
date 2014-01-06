@@ -2,3 +2,9 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+/*
+.viewer { height: 380px; width: 380px; background-color: white !important; }
+*/
+.viewer { height: 380px; width: 380px; }
+.note-thumb { height: 100px; width: 100px; }

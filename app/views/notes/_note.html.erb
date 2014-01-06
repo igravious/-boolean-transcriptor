@@ -1,0 +1,14 @@
+<!-- note (in document) sequence number -->
+<%
+    if note.type == Note::TEXT
+%>
+<div><%= note.bytes %></div>
+<%
+    else
+%>
+<div class="note-thumb">
+    <%=raw note.img_tag %>
+</div>
+<%
+    end
+%>

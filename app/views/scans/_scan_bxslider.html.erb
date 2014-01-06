@@ -1,0 +1,14 @@
+<%- content_for(:head) do -%>
+    <%= javascript_include_tag "jquery.bxslider", "data-turbolinks-track" => TURBO %>
+ 
+    <%= stylesheet_link_tag "jquery.bxslider", media: "all", "data-turbolinks-track" => TURBO %>
+<%- end -%>
+ 
+<%= render '/per_view_javascript' %>
+
+<!-- in lieu of index route -->
+<%# params.pretty_inspect %>
+
+<div class="slide-wrapper">
+    <%= render partial: "scans/scan", collection: scan_bxslider, layout: "scans/scan_bxslider_layout" %>
+</div>

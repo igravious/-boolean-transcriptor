@@ -1,7 +1,7 @@
-<%
-    if thumbnail
-        render "thumbnail", locals: {thumb: item}
+<%=
+    if defined? thumbnail
+        render partial: "thumbnail", object: item
     else
-        render "default", locals: {thumb: item}
+        render partial: "default", object: item
     end
 %>

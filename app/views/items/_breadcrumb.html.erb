@@ -1,5 +1,5 @@
 <%- content_for(:breadcrumb) do -%>
-    <% if params['controller'] == 'items' %>
+    <% if params['controller'] == 'items' and params['action'] == 'slice' %>
             <li class="active"><%= Item.aspect params['aspect'] %></li>
     <% else %>
         <% if params['q'] %>

@@ -1,0 +1,21 @@
+<!-- in the hack for showing a note at the start of a group -->
+<!-- TODO
+    can't figure out why
+    render_to_string( partial: @note, layout: "notes/note_group_layout" )
+    is not finding the correct layout in
+    app/controllers/images_controller.rb
+    even though it works in
+    app/views/transcriptions/edit.html.erb
+    app/views/items/_default.html.erb
+    three differences are,
+    render (not render_to_string)
+    call from view, not controller
+    call with a collection, not an single object
+-->
+
+<li class="list-group-item">
+    <%= form_for(@note, :method => :delete) do |f| %>
+        <%= render @note %>
+        <%= f.submit "delete this note" %>
+    <% end %>
+</li>

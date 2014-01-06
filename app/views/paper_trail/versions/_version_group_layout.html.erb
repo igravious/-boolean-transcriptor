@@ -1,0 +1,7 @@
+<!-- in the layout for showing versions in a group -->
+<li class="list-group-item">
+    <%= form_tag(edit_transcription_path(id: @scan.id, aspect: params['aspect'], q: params['q']), method: "get") do %>
+        <%= yield %>
+        <%= submit_tag("choose this version", disabled: true) %>
+    <% end %>
+</li>

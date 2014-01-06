@@ -1,0 +1,15 @@
+<!-- in the layout for bxslider in scans -->
+
+<%
+    if Scan::VIRGIN == scan.state
+        path = new_transcription_path(scan_id: scan.id, aspect: params['aspect'], q: params['q'])
+    elsif Scan::COMPLETED == scan.state
+        path = transcriptions_path(id: scan.id, aspect: params['aspect'], q: params['q'])
+    else
+        path = edit_transcription_path(id: scan.id, aspect: params['aspect'], q: params['q'])
+    end
+%>
+
+<a href="<%= path %>" rel="tooltip" data-original-title="<%= scan.stringified %>">
+    <%= yield %>
+</a>

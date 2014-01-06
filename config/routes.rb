@@ -23,6 +23,7 @@ PetulantOctoLana::Application.routes.draw do
   resources :transcriptions do
   end
 
+  # index only makes sense for end-notes
   resources :notes do
   end
 
@@ -35,17 +36,21 @@ PetulantOctoLana::Application.routes.draw do
   end
 
   get '/serve_up_image/:id' => 'images#serve'
+  match '/portion_of_image/:id' => 'images#portion', via: [:post]
 
   get '/archival_finding_aid' => 'finding_aids#type'
 
   get '/search' => 'search#index'
 
-  # pages grouped together
-  get '/welcome' => 'pages#welcome'
-  get '/transcribe' => 'pages#transcribe'
-  get '/guide' => 'pages#guide'
-  get '/intro' => 'pages#intro'
-  get '/leader' => 'pages#leader'
+  # pages grouped together, additional user pages should be read from db
+  # whether these should be in the db or not is debatable
+  # ideally should all be given in markdown, though transcribe is special
+  # and as such is probably a 'site' page
+  ['welcome', 'transcribe', 'guide', 'intro', 'leader', 'legal', 'stats'].each { |x| get '/'+x => 'pages#'+x }
+
+  # site 
+  ['inspiration', 'code', 'acknowledgments', 'secretions'].each { |x| get '/'+x => 'site#'+x }
+
   # need to be able to dynamically add pages based on entries in the control file
 
   # Example resource route with options:

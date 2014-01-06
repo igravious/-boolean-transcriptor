@@ -1,0 +1,11 @@
+<ol class="breadcrumb" style="float: left">
+    <%# binding.pry %>
+    <% if params['controller'] == 'pages' %>
+        <li class="active"><%= params['action'].capitalize %></li>
+    <% elsif params['controller'] =~ /devise/ %>
+        <li class="active"><%= params['action'].capitalize %> User</li>
+    <% else %>
+        <li><%= link_to "Transcribe", transcribe_path %></li>
+    <% end %>
+    <%= yield :breadcrumb -%> <!-- hurrah for this pattern -->
+</ol>

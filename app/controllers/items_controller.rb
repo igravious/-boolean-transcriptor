@@ -22,9 +22,8 @@ class ItemsController < ApplicationController
     end
 
     def show
-        # for example, SELECT "scans".* FROM "scans" WHERE "scans"."item_id" = 3454
         @item = Item.find(params[:id])
-        if Rails.env.development?
+        if Rails.env.development? and params['debug']
             render "horror_show"
             return
         end

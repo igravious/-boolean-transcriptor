@@ -10,15 +10,15 @@
 
 <p>
 <strong>Number of Scans:</strong>
-<%= @item.scan.length %>
+<%= @item.scans.length %>
 </p>
 <%
-    if @item.scan.length
+    if @item.scans.length
 %>
     <p>
     <strong>First Scan:</strong>
     <ul>
-        <%= render @item %>
+        <%= render partial: @item, locals: {thumbnail: true} %>
     </ul>
     </p>
 <%
