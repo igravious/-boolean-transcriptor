@@ -1,7 +1,14 @@
 <%
+    # binding.pry
+    # TODO get first scan
     thumb_name = 'thumbs/'+scan.file_name
-    alt = "scan #{scan.minor_seq}"
-    # for the moment, also need a badge?
+    if defined? scan_counter
+        alt = "scan #{scan.minor_seq}"
+        # for the moment, also need a badge?
+    else
+        count = item.scans.length
+        alt = "#{pluralize(count, 'scan')}"
+    end
     title = alt
 %>
 
