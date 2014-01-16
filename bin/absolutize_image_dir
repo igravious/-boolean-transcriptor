@@ -1,0 +1,50 @@
+#!/usr/bin/env runner
+
+begin
+
+    SCANS=["../../mediawiki-transcription-desk/boole/BOOLE-MASTER-STAMPED-JPEG-1-OF-2", "../../mediawiki-transcription-desk/boole/BOOLE-MASTER-STAMPED-JPEG-2-OF-2"]
+
+    SCANS.each do |dir|
+        # p dir
+        d = Dir.new dir
+        # p d
+        d.entries.each do |file|
+            #
+            # file is in format
+            # BP-1-iii-nnn_stamped.jpeg
+            # /BP-1-(\d+)-(\d+)_stamped\.jpeg/.match(d.entries[2])
+            #
+            #<Scan id: nil, stringified: nil, file_name: nil, institution: nil, prefix: nil, major_seq: nil, seq: nil, minor_seq: nil,
+            #item_id: nil, state: nil, transcription: nil, created_at: nil, updated_at: nil, image_data: nil, directory: nil>
+            #
+            m = /BP-1-(\d+)-(\d+)_stamped\.jpeg/.match(file)
+            unless m.nil?
+                # check if the scan is already in the database!
+                # p i
+                # find model
+                p m
+                s = Scan.where('file_name = ?', file)
+                # do we match?
+                if s.length > 1
+                    raise "Whoa Betsy"
+                elsif s.length == 1
+                    s = s.first
+                    h = {}
+                    h[:directory] = File.realpath dir
+                    if not (s.update_attributes h)
+                        # handle failure, be noisy
+                        puts "Unable to update #{s.file}"
+                    end 
+                else
+                    $stderr.puts file
+                    # no item matches scan, oops!
+                end
+            end # otherwise no match
+        end # d.entries
+    end # SCANS.each
+
+rescue Exception => e
+    puts e.message
+end
+
+# vim: set syntax=ruby:

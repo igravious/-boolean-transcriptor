@@ -1,0 +1,15 @@
+#!/usr/bin/env runner
+
+    Item.find_each do |item|
+      begin
+        i = item.item_date.to_i
+        # either a year (i is year) or NULL (i is 0)
+        item.year = item.item_date
+      rescue Exception => e
+        # in DotW, dd, m, yyyy format - get year with .year
+        item.year = item.item_date.year
+      end
+      item.save
+    end
+
+# vim: set syntax=ruby:

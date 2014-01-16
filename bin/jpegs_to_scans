@@ -1,9 +1,8 @@
-#!/usr/bin/env ruby
-
-# why no workee!?
-# !/usr/bin/env /home/groobiest/Code/petulant-octo-lana/bin/rails runner 
+#!/usr/bin/env runner
 
 # invoke from RAILS_ROOT
+
+# superseded by seeds.rb
  
 thing = YAML.load_file('db/bp_control.yml')
 

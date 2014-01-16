@@ -1,0 +1,205 @@
+#!/usr/bin/env runner
+
+#
+# need to update for collections, when that happens
+#
+
+# specific to Boole collection
+# each collection will have a way of converting from
+# the ordered fa_seq to an ordered int
+def boole_seq_to_int seq
+  seq[Regexp.new("BP/1/(.+)"), 1].to_i
+end
+
+# get all the items
+@items = Item.all
+
+# sort them
+@items.sort! do |i,j|
+    i_seq = i.fa_seq
+    # puts i_seq
+    j_seq = j.fa_seq
+    # puts j_seq
+    int_i_seq = boole_seq_to_int i_seq
+    int_j_seq = boole_seq_to_int j_seq
+    # puts int_i_seq
+    # puts int_j_seq
+    int_i_seq <=> int_j_seq
+end
+
+PREAMBLE= <<EOS
+# https://en.wikipedia.org/wiki/YAML
+
+# this is a really simple control file
+# for turning the information in the
+# descriptive list into machine readable
+# structured data
+#
+# part should be called parts!!
+
+EOS
+# boole_papers_descriptive_list:                                             -     metadata
+#    file:                                                                   -         old_skool_finding_aid
+#        finding_aid_code: IE BP/1 # ref code IE BP/1 on website             -             reference_code
+#
+#        title:                                                              -             title
+#            titleproper: PAPERS OF GEORGE BOOLE – CONTENT AND STRUCTURE     -                 title_proper
+#            author: Carol Quinn, Archivist                                  -                 compiler
+#        publication:                                                        -             publication
+#            repositorycode: IE-BL/1 # from desc list                        -                 repository_code
+#            publisher: UCC Library, University College Cork                 -                 publisher
+#    profile:                                                                -         electronic_finding_aid
+#        creation: Anthony Durity, PhD Researcher                            -             compiler
+#    part:
+
+def fa_header
+    # build from the inside out, should be taken from constants, all in good time
+    meta = {}
+    title = {"title_proper" => "PAPERS OF GEORGE BOOLE – CONTENT AND STRUCTURE", "compiler" => "Carol Quinn, Archivist"}
+    publication = {"repository_code" => "IE-BL/1", "publisher" => "UCC Library, University College Cork"}
+    meta["old_skool_finding_aid"] = {"reference_code" => "IE BP/1", "title" => title, "publication" => publication}
+    meta["electronic_finding_aid"] = {"compiler" => "Anthony Durity, PhD Researcher"}
+    meta
+end
+
+yml = {}
+
+yml["metadata"] = fa_header
+
+ROMAN_NUMERALS_SMALL_01_TO_09 = ['i','ii','iii','iv','v','vi','vii','viii','ix']
+ROMAN_NUMERALS_SMALL_10_TO_19 = ['x'] + ROMAN_NUMERALS_SMALL_01_TO_09.map { |n| 'x'+n }
+ROMAN_NUMERALS_SMALL_20_TO_29 = ['xx'] + ROMAN_NUMERALS_SMALL_01_TO_09.map { |n| 'xx'+n }
+ROMAN_NUMERALS_SMALL_30_TO_39 = ['xxx'] + ROMAN_NUMERALS_SMALL_01_TO_09.map { |n| 'xxx'+n }
+ROMAN_NUMERALS_SMALL_40_TO_49 = ['xl'] + ROMAN_NUMERALS_SMALL_01_TO_09.map { |n| 'xl'+n }
+ROMAN_NUMERALS_SMALL_50_TO_59 = ['l'] + ROMAN_NUMERALS_SMALL_01_TO_09.map { |n| 'l'+n }
+ROMAN_NUMERALS_SMALL_60_TO_69 = ['lx'] + ROMAN_NUMERALS_SMALL_01_TO_09.map { |n| 'lx'+n }
+ROMAN_NUMERALS_SMALL_70_TO_79 = ['lxx'] + ROMAN_NUMERALS_SMALL_01_TO_09.map { |n| 'lxx'+n }
+ROMAN_NUMERALS_SMALL_80_TO_89 = ['lxxx'] + ROMAN_NUMERALS_SMALL_01_TO_09.map { |n| 'lxxx'+n }
+ROMAN_NUMERALS_SMALL_90_TO_99 = ['xc'] + ROMAN_NUMERALS_SMALL_01_TO_09.map { |n| 'xc'+n }
+
+ROMAN_NUMERALS_SMALL_01_TO_99 = ROMAN_NUMERALS_SMALL_01_TO_09 + 
+                                ROMAN_NUMERALS_SMALL_10_TO_19 +
+                                ROMAN_NUMERALS_SMALL_20_TO_29 +
+                                ROMAN_NUMERALS_SMALL_30_TO_39 +
+                                ROMAN_NUMERALS_SMALL_40_TO_49 +
+                                ROMAN_NUMERALS_SMALL_50_TO_59 +
+                                ROMAN_NUMERALS_SMALL_60_TO_69 +
+                                ROMAN_NUMERALS_SMALL_70_TO_79 +
+                                ROMAN_NUMERALS_SMALL_80_TO_89 +
+                                ROMAN_NUMERALS_SMALL_90_TO_99
+
+ROMAN_NUMERALS_LARGE_01_TO_99 = ROMAN_NUMERALS_SMALL_01_TO_99.map { |n| n.upcase }
+
+LATIN_LETTERS_SMALL_a_TO_z    = ('a'..'z').to_a
+
+LATIN_LETTERS_LARGE_A_TO_Z    = LATIN_LETTERS_SMALL_a_TO_z.map { |l| l.upcase }
+
+ARABIC_NUMERALS_01_TO_99      = (1..99).to_a
+
+def item_date d
+    begin
+        d.strftime("%-d %b %Y")
+    rescue
+        # p d
+        if d.nil?
+            '_'
+        else
+            d
+        end
+    end
+end
+
+def go_into_level level, struct
+    a = []
+    level.each do |section|
+        # print "__section__\n"
+        # p section
+        h = {}
+
+        sub = section["sub"]
+        h["sub"] = sub
+        label = section["label"]
+        h["label"] = label
+
+        # print "__sub__\n"
+        # p sub
+        # print "__label__\n"
+        # p label
+
+        next_level = section["part"]
+        if next_level.nil?
+            items = section["items"]
+            h["items"] = []
+            if items.nil?
+                puts "Error in control file" # where would be a nice touch
+                exit 1
+            else
+                fa_structure = struct+"#{sub}"
+                    # items.each do |item|
+                    # check if the item is already in the database!
+                    # fa_seq = item["name"]
+
+                    # description = item["desc"]
+                    # pp = item["pp"]
+                    # date validation !!
+                    # item_date = item["date"]
+                    # size = item["size"]
+                    # commentary = item["note"]
+                    
+                    # find model
+                items = Item.where('fa_structure = ?', fa_structure)
+                    # do we match? 
+                if items.length
+                    items.each do |m|
+                        i = {}
+                        i["item"] = nil # pointless obviously
+                        i["name"] = m.fa_seq
+                        p m.fa_seq
+                        i["note"] = m.commentary if m.commentary # otherwise there is no i["note"]
+                        i["size"] = m.size if m.size # otherwise there is no i["size"]
+                        i["date"] = item_date m.item_date
+                        i["also"] = item_date m.also if m.also
+                        i["to"]   = item_date m.range if m.range
+                        i["month"]= m.month if m.month
+                        i["desc"] = m.description
+                        i["year"] = m.year if m.year
+                        if m.pp_extra
+                            i["pp"] = m.pp.to_s + " " + m.pp_extra
+                        else
+                            i["pp"]   = m.pp
+                        end 
+                        h["items"] << i
+                    end
+                else
+                    raise "Our db and file structures should match for now!"
+                end
+            end
+        else
+            h["part"] = go_into_level(next_level, struct+"#{sub}.")
+        end
+        a << h
+    end
+    a
+end
+
+begin
+    thing = YAML.load_file('db/Boole_Finding_Aid.yml')
+
+    top_level = thing["data"]
+
+    a = go_into_level(top_level, "")
+    yml["data"] = a
+
+    # tmp_file = "#{Rails.root}/tmp/note_grab#{@note.id}.jpeg"
+    File.open( "#{Rails.root}/tmp/New_Finding_Aid.yml", "w+" ) do | f|
+        f.puts PREAMBLE
+        f.puts yml.to_yaml
+    end
+rescue Exception => e
+    puts e.message
+    exit 2
+end
+
+exit 0
+
+# vim: set syntax=ruby:

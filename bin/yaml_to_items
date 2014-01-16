@@ -1,17 +1,10 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env runner
 
-# why no workee!?
-# !/usr/bin/env /home/groobiest/Code/petulant-octo-lana/bin/rails runner 
- 
-class Scans < ActiveRecord::Base
-end
+# use my own runner
+# see https://rails.lighthouseapp.com/projects/8994/tickets/4249-rails-runner-cant-be-used-in-shebang-lines
 
-class Themes < ActiveRecord::Base
-end
-
-thing = YAML.load_file('db/bp_control.yml')
-
-# slice = thing["boole_papers_descriptive_list"]["part"][0]["part"][0]["part"][1]["part"][0]["items"][0]["desc"]
+DATA_SECTION = "data"
+NEXT_LEVEL = "part"
 
 def go_into_level level, struct
     level.each do |section|
@@ -28,24 +21,87 @@ def go_into_level level, struct
         # print "__label__\n"
         # p label
 
-        next_level = section["part"]
+        next_level = section[NEXT_LEVEL]
         if next_level.nil?
             items = section["items"]
             if items.nil?
-                p "Error in control file"
-                exit
+                puts "Error in control file" # where would be a nice touch
+                exit 1
             else
                 items.each do |item|
                     # check if the item is already in the database!
-                    p item["name"]
+                    puts item["name"]
                     i = Item.new
-                    i.description = item["desc"]
-                    i.pp = item["pp"]
-                    # date validation !!
-                    i.item_date = item["date"]
                     i.fa_seq = item["name"]
                     i.fa_structure = struct+"#{sub}"
-                    i.save
+
+                    i.description = item["desc"]
+                    pp = item["pp"]
+                    i.pp = pp
+                    begin
+                        pp = pp.split(' ')
+                        i.pp_extra = pp[1]
+                    rescue
+                        # do nufink
+                    end
+                    # date validation !!
+                    i.item_date = item["date"]
+                    i.size = item["size"]
+                    i.commentary = item["note"]
+                    i.also = item["also"]
+                    i.range = item["to"]
+                    i.month = item["month"]
+                    if @update
+                        # find model
+                        m = Item.where('fa_seq = ? AND fa_structure = ?', i.fa_seq, i.fa_structure)
+                        # do we match? 
+                        if m.length > 1
+                            raise "Whoa Betsy"
+                        elsif m.length == 1
+                            m = m.first
+                            # are all attributes equal or if not are the attrs in db `blank'?
+                            h = {}
+                            if m.description != i.description and m.description.nil?
+                                puts "description is blank!"
+                                h[:description] = i.description
+                            end
+                            if m.pp != i.pp and m.pp.nil?
+                                puts "pp is blank!"
+                                h[:pp] = i.pp
+                            end
+                            # TODO figure out why date doesn't trigger
+                            if m.item_date != i.item_date and m.item_date.nil?
+                                puts "item_date is blank!"
+                                h[:item_date] = i.item_date
+                            end
+                            if m.size != i.size and m.size.nil?
+                                puts "size is blank!"
+                                h[:size] = i.size
+                            end
+                            if m.commentary != i.commentary and m.commentary.nil?
+                                puts "commentary is blank!"
+                                h[:commentary] = i.commentary
+                            end
+                            if not (m.update_attributes h)
+                                # handle failure, be noisy
+                                puts "Unable to update #{i.fa_seq}"
+                            end 
+                            
+                        else
+                            # we have a situation where our identifying columns don't match
+                            # possibly new item in the db, only insert if told to
+                            if @force
+                                # unusual case so be noisy
+                                puts "Looks like I found new item in update mode, inserting"
+                                i.save!
+                            else
+                                raise "If we are updating we really should match!"
+                            end
+                        end
+                    else
+                        i.save!
+                    end
+
                 end
             end
         else
@@ -54,6 +110,64 @@ def go_into_level level, struct
     end
 end
 
-top_level = thing["boole_papers_descriptive_list"]["part"]
+require 'getoptlong'
 
-go_into_level(top_level, "")
+opts = GetoptLong.new(
+  [ '--help', '-h', GetoptLong::NO_ARGUMENT ],
+  [ '--update', '-u', GetoptLong::NO_ARGUMENT ]
+)
+
+def usage
+
+    <<-EOS
+#{File.basename($0)} [OPTION]
+
+-h, --help:
+   show help
+
+--update, -u:
+   update database if record already exists, only updates if db attribute is `blank'
+    EOS
+
+end
+
+@update = false
+
+begin
+    opts.each do |opt, arg|
+      case opt
+        when '--help'
+          puts usage
+        when '--update'
+          puts "switching on update rather than insert"
+          @update = true
+      end
+    end
+rescue Exception => e
+    # getops is noisy
+    puts usage
+    # dunno if you can use return from here
+    exit 2
+end
+
+begin
+    yml_file = 'db/Gold_Finding_Aid.yml'
+    thing = YAML.load_file(yml_file)
+    puts "#{yml_file} loaded"
+
+    top_level = thing[DATA_SECTION]
+    raise "no data" if !top_level
+
+    go_into_level(top_level, "")
+rescue Exception => e
+    puts e
+    exit 3
+end
+
+exit 0
+
+# http://vim.wikia.com/wiki/Modeline_magic
+# http://www.lornajane.net/posts/2011/using-modelines-in-vim
+# note trailing : (the colon symbol, the coder's symbolic enema)
+
+# vim: set syntax=ruby:

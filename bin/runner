@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+path_to_rails = File.dirname(File.expand_path(__FILE__))
+run_me = "#{path_to_rails}/rails runner #{ARGV.join(' ')}"
+exec(run_me)
