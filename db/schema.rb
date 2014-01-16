@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140116074428) do
+ActiveRecord::Schema.define(version: 20140116135139) do
 
   create_table "items", force: true do |t|
     t.integer  "division"
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20140116074428) do
     t.string   "fa_structure"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "year"
     t.string   "size"
     t.string   "commentary"
     t.date     "also"

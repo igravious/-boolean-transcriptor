@@ -8,9 +8,8 @@
 
 # copied from bin/yaml_to_items
 
-thing = YAML.load_file('db/Boole_Finding_Aid.yml')
-
-# slice = thing["boole_papers_descriptive_list"]["part"][0]["part"][0]["part"][1]["part"][0]["items"][0]["desc"]
+DATA_SECTION = "data"
+NEXT_LEVEL = "part"
 
 def go_into_level level, struct
     level.each do |section|
@@ -27,26 +26,36 @@ def go_into_level level, struct
         # print "__label__\n"
         # p label
 
-        next_level = section["part"]
+        next_level = section[NEXT_LEVEL]
         if next_level.nil?
             items = section["items"]
             if items.nil?
-                p "Error in control file"
-                exit
+                raise "Error in control file"
             else
                 items.each do |item|
                     # check if the item is already in the database!
-                    p item["name"]
+                    puts item["name"]
                     i = Item.new
-                    i.description = item["desc"]
-                    i.pp = item["pp"]
-                    # date validation !!
-                    i.item_date = item["date"]
                     i.fa_seq = item["name"]
                     i.fa_structure = struct+"#{sub}"
-                    i.year = item["year"]
-                    # note, commentary
-                    i.save
+
+                    i.description = item["desc"]
+                    pp = item["pp"]
+                    i.pp = pp
+                    begin
+                        pp = pp.split(' ')
+                        i.pp_extra = pp[1]
+                    rescue
+                        # do nufink
+                    end
+                    # date validation !!
+                    i.item_date = item["date"]
+                    i.size = item["size"]
+                    i.commentary = item["note"]
+                    i.also = item["also"]
+                    i.range = item["to"]
+                    i.month = item["month"]
+                    i.save!
                 end
             end
         else
@@ -55,7 +64,11 @@ def go_into_level level, struct
     end
 end
 
-top_level = thing["boole_papers_descriptive_list"]["part"]
+thing = YAML.load_file('db/Boole_Finding_Aid.yml')
+
+# slice = thing["boole_papers_descriptive_list"]["part"][0]["part"][0]["part"][1]["part"][0]["items"][0]["desc"]
+
+top_level = thing["data"]
 
 go_into_level(top_level, "")
 

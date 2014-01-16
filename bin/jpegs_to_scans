@@ -4,9 +4,9 @@
 
 # superseded by seeds.rb
  
-thing = YAML.load_file('db/bp_control.yml')
+thing = YAML.load_file('db/Boole_Finding_Aid.yml')
 
-SCANS=["../transcription-desk/boole/BOOLE-MASTER-STAMPED-JPEG-1-OF-2", "../transcription-desk/boole/BOOLE-MASTER-STAMPED-JPEG-2-OF-2"]
+SCANS=["../../mediawiki-transcription-desk/boole/BOOLE-MASTER-STAMPED-JPEG-1-OF-2", "../../mediawiki-transcription-desk/boole/BOOLE-MASTER-STAMPED-JPEG-2-OF-2"]
 
 SCANS.each do |dir|
     # p dir
@@ -35,7 +35,7 @@ SCANS.each do |dir|
                 s = Scan.new
                 # store the directory separately!
                 s.file_name = file
-                s.directory = dir
+                s.directory = File.realpath dir
                 # SLOW !!!
                 # File.open(dir+"/"+file, 'rb') { |io| s.image_data = io.read }
                 s.institution = 1 # UCC
