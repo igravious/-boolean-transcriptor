@@ -25,6 +25,8 @@
 # Ignore rbenv app specific file
 .rbenv-version
 
-# Ignore images ? For now
+# Ignore image sym links because they should be per collection
 public/images/pint-size
 public/images/thumbs
+# Ignore public assets
+public/assets
