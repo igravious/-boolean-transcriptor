@@ -8,7 +8,7 @@
 
 # copied from bin/yaml_to_items
 
-thing = YAML.load_file('db/bp_control.yml')
+thing = YAML.load_file('db/Boole_Finding_Aid.yml')
 
 # slice = thing["boole_papers_descriptive_list"]["part"][0]["part"][0]["part"][1]["part"][0]["items"][0]["desc"]
 
@@ -44,6 +44,8 @@ def go_into_level level, struct
                     i.item_date = item["date"]
                     i.fa_seq = item["name"]
                     i.fa_structure = struct+"#{sub}"
+                    i.year = item["year"]
+                    # note, commentary
                     i.save
                 end
             end
@@ -59,9 +61,7 @@ go_into_level(top_level, "")
 
 # copied from bin/jpegs_to_scans
 
-thing = YAML.load_file('db/bp_control.yml')
-
-SCANS=["../transcription-desk/boole/BOOLE-MASTER-STAMPED-JPEG-1-OF-2", "../transcription-desk/boole/BOOLE-MASTER-STAMPED-JPEG-2-OF-2"]
+SCANS=["../../mediawiki-transcription-desk/boole/BOOLE-MASTER-STAMPED-JPEG-1-OF-2", "../../mediawiki-transcription-desk/boole/BOOLE-MASTER-STAMPED-JPEG-2-OF-2"]
 
 SCANS.each do |dir|
     # p dir
@@ -90,7 +90,7 @@ SCANS.each do |dir|
                 s = Scan.new
                 # store the directory separately!
                 s.file_name = file
-                s.directory = dir
+                s.directory = File.realpath dir
                 # SLOW !!!
                 # File.open(dir+"/"+file, 'rb') { |io| s.image_data = io.read }
                 s.institution = 1 # UCC

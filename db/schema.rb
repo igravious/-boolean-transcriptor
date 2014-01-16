@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131222145550) do
+ActiveRecord::Schema.define(version: 20140116074428) do
 
   create_table "items", force: true do |t|
     t.integer  "division"
@@ -25,7 +25,15 @@ ActiveRecord::Schema.define(version: 20131222145550) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "year"
+    t.string   "size"
+    t.string   "commentary"
+    t.date     "also"
+    t.date     "range"
+    t.string   "month"
+    t.string   "pp_extra"
   end
+
+  add_index "items", ["fa_seq", "fa_structure"], name: "index_items_on_fa_seq_and_fa_structure", unique: true
 
   create_table "notes", force: true do |t|
     t.integer  "type"

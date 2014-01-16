@@ -51,6 +51,6 @@ class ImagesController < ApplicationController
     def path
         # TODO error handling
         scan = Scan.find params[:id]
-        Rails.root.to_s+"/#{scan.directory}/#{scan.file_name}"
+        "#{scan.directory}/#{scan.file_name}"
     end
 end
