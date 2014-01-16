@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+set -e
+
+DEVELOPMENT=/var/www/localhost/htdocs/transcriptor/RoR-transcription-desk/boolean-transcriptor
+PRE_PRODUCTION=/var/www/localhost/htdocs/transcriptor/RoR-transcription-desk/pre-production
+PRODUCTION=/var/www/localhost/htdocs/transcriptor/RoR-transcription-desk/live
+
+set -x
+
+if [ "$1" == "dev" ]; then
+  export RAILS_ENV=development
+  cd $DEVELOPMENT
+  exec $(which bash)
+fi
+
+if [ "$1" == "prod" ]; then
+  export RAILS_ENV=production
+  cd $PRODUCTION
+  exec $(which bash)
+fi
+
+if [ "$1" == "pre" ]; then
+  export RAILS_ENV=production
+  cd $PRE_PRODUCTION
+  exec $(which bash)
+fi
