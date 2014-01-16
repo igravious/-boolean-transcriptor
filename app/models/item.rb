@@ -3,8 +3,8 @@ class Item < ActiveRecord::Base
     has_many :notes
 
     # instance method
-    # item.year
-    def year
+    # item.date_to_year
+    def date_to_year
       begin
         i = item_date.to_i
         # either a year (i is year) or NULL (i is 0)

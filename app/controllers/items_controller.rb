@@ -61,5 +61,4 @@ class ItemsController < ApplicationController
     def time
         render "order_by_time"
     end
-
 end
