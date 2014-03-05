@@ -4,7 +4,7 @@ var slide_it = function() {
         // check if it's there, paranoia mode
         if ($('.slide-wrapper').length ) doSlider();
     } catch(oops) {
-        // let the user know somehow
+        // let the member know somehow
         console.log('oopsie in scans/index.js unfortunately');
         console.log(oops+oops.message);
     }

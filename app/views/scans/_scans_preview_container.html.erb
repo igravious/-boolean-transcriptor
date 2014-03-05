@@ -1,0 +1,5 @@
+<div class="preview-container">
+    <div class="inner-container" stlye="width: <%= ((@scans.length)*(100+33)) %>px">
+        <%= render partial: "scans/scan", collection: @scans, layout: "scans/lazy_layout", locals: {thumbnail: true, lazy_load: true} %>
+    </div>
+</div>

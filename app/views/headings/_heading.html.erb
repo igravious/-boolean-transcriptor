@@ -1,0 +1,14 @@
+<%
+    # heading = nil
+    # Heading::TYPES.each do |t|
+    #     heading ||= local_assigns[t.to_sym]
+    # end
+    # binding.pry
+%>
+<div class="heading-item">
+    <p>
+    <strong><%= heading.type.capitalize %>: </strong>
+        <%= link_to heading.index_term, edit_heading_path(heading.id, params) %>
+        <%= link_to 'Delete?', heading_path(heading.id), :confirm => "are you sure?", :method => :delete %>
+    </p>
+</div>

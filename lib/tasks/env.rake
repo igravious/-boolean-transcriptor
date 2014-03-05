@@ -20,3 +20,26 @@ namespace :prep do
     end
   end
 end
+
+namespace :cron do
+  desc "expire locked facsimiles"
+  task expire_locks: :environment do
+    msg = "Attempting to expire locks (if any) at #{Time.now}"
+    # puts msg
+    Rails.logger.info msg
+    Scan.find_each do |scan|
+      if scan.state == Scan::LOCKED
+        v = scan.versions.last
+        if scan.updated_at < 24.hours.ago
+          msg = "Unlocking #{scan.pretty_inspect}"
+          puts msg
+          Rails.logger.info msg
+          scan.state = Scan::BEING_EDITED
+          # Anything with an exclamation with raise an error if it is not 
+          # successful, without an exclamation it will just return false
+          scan.save!
+        end
+      end
+    end
+  end
+end

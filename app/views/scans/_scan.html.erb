@@ -1,5 +1,4 @@
 <%
-    # binding.pry
     # TODO get first scan
     thumb_name = 'thumbs/'+scan.file_name
     alt = ''
@@ -18,7 +17,7 @@
 %>
 
 <% if defined? lazy_load %>
-    <img class="lazy" data-original="<%= '/images'+thumb_name %>" alt=<%= alt %> title=<%= title %> width="100px" height="100px">
+    <img class="lazy" data-original="<%= '/images/'+thumb_name %>" alt="<%= alt %>" title="<%= title %>" width="100px" height="100px">
 <% else %>
     <%= image_tag(thumb_name, alt: alt, title: title) %>
 <% end %>

@@ -18,11 +18,14 @@ class Item < ActiveRecord::Base
     # class method
     # Item.aspect
     def self.aspect str
+        # l10n
         case str
         when "display_in_finding_aid_order"
             "Finding Aid Order"
         when "group_chronologically"
             "Ordered by Year"
+        when "ordered_by_transcription_state"
+            "Ordered by State"
         else
             "Database Order"
         end

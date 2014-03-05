@@ -1,12 +1,15 @@
 <%- content_for(:breadcrumb) do -%>
     <% if params['controller'] == 'items' and params['action'] == 'slice' %>
-            <li class="active"><%= Item.aspect params['aspect'] %></li>
+        <li class="active"><%= Item.aspect params['aspect'] %></li>
     <% else %>
         <% if params['q'] %>
-           <li><a href="<%= search_path(q: params['q']) %>">Search Order</a></li>
-        <% else %>
+            <li><a href="<%= search_path(q: params['q']) %>">Search Order</a></li>
+        <% elsif params['aspect'] %>
             <!-- works but not generic enough -->
-           <li><a href="<%= slice_items_path(aspect: params['aspect'], item_group: @item.fa_structure) %>"><%= Item.aspect params['aspect'] %></a></li>
+            <li><a href="<%= slice_items_path(aspect: params['aspect'], item_group: @item.fa_structure) %>"><%= Item.aspect params['aspect'] %></a></li>
+        <% else %>
+            <!-- shouldn't get here at the moment -->
+            <li class="active"><%= params['action'] %></li>
         <% end %>
     <% end %>
 <%- end -%>

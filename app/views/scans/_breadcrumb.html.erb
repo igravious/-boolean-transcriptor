@@ -1,4 +1,5 @@
 <%- content_for(:breadcrumb) do -%>
+    <%# render 'items/breadcrumb' unless (params['controller'] == 'transcriptions' or params['controller'] == 'notes') %>
     <%= render 'items/breadcrumb' %>
     <%
         count = @item.scans.length

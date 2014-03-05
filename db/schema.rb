@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140116074428) do
+ActiveRecord::Schema.define(version: 20140202120949) do
+
+  create_table "headings", force: true do |t|
+    t.string   "index_term", null: false
+    t.string   "type",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "headings", ["index_term"], name: "index_headings_on_index_term", unique: true
 
   create_table "items", force: true do |t|
     t.integer  "division"
@@ -35,6 +44,35 @@ ActiveRecord::Schema.define(version: 20140116074428) do
 
   add_index "items", ["fa_seq", "fa_structure"], name: "index_items_on_fa_seq_and_fa_structure", unique: true
 
+  create_table "locators", force: true do |t|
+    t.integer  "heading_id"
+    t.integer  "scan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "content"
+  end
+
+  add_index "locators", ["scan_id", "heading_id"], name: "index_locators_on_scan_id_and_heading_id", unique: true
+
+  create_table "members", force: true do |t|
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "admin",                  default: false
+  end
+
+  add_index "members", ["email"], name: "index_members_on_email", unique: true
+  add_index "members", ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
+
   create_table "notes", force: true do |t|
     t.integer  "type"
     t.binary   "bytes"
@@ -42,6 +80,7 @@ ActiveRecord::Schema.define(version: 20140116074428) do
     t.integer  "scan_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_id"
   end
 
   create_table "scans", force: true do |t|
@@ -62,24 +101,6 @@ ActiveRecord::Schema.define(version: 20140116074428) do
   end
 
   add_index "scans", ["item_id"], name: "index_scans_on_item_id"
-
-  create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "versions", force: true do |t|
     t.string   "item_type",  null: false

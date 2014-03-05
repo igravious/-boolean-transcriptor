@@ -1,2 +1,16 @@
-<h1>Editing note</h1>
+
+<%= render 'breadcrumb' %>
+
+<% if @note.type == Note::TEXT %>
+    <h4>Editing <span class="hot-cinnamon">note</span></h2>
+<% else %>
+    <h4>Editing <span class="hot-cinnamon">snippet</span></h2>
+<% end %>
+<hr>
 <%= render partial: "form", locals: {note: @note} %>
+<hr>
+<% if @note.type == Note::TEXT %>
+    <div>View all the <%= link_to 'endnotes', scribbled_notes_path(params) %></div>
+<% else %>
+    <div>View all the <%= link_to 'snippets', snapped_notes_path(params) %></div>
+<% end %>

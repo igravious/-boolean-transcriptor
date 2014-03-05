@@ -1,13 +1,21 @@
 <!-- note (in document) sequence number -->
 <%
     if note.type == Note::TEXT
+        note.bytes.force_encoding("UTF-8")
 %>
-<div><%= note.bytes %></div>
+<p>
+    <strong>Title:</strong>
+    <%= link_to (note.bytes.blank? ? '(empty)' : note.bytes), edit_note_path(note.id, params) %>
+    <%= link_to ' delete? ', note_path(note.id, params), data: { confirm: 'are you sure?' }, :method => :delete %>
+</p>
 <%
     else
 %>
 <div class="note-thumb">
-    <%=raw note.img_tag %>
+    <%= link_to edit_note_path(note.id, params) do %>
+        <% raw(note.img_tag) %>
+    <% end %>
+    <%= link_to ' delete? ', note_path(note.id, params), data: { confirm: 'are you sure?' }, :method => :delete %>
 </div>
 <%
     end

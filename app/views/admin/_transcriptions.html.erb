@@ -1,0 +1,14 @@
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div><i>Versions Go Here</i></div>
+            <ol class="list-group" style="padding-top: 10px">
+                <%= render partial: @scan.versions, layout: "paper_trail/versions/version_group_layout" %>
+            </ol>
+        </div>
+        <div class="col-md-6">
+            <div><i>Reserved</i></div>
+        </div>
+    </div>

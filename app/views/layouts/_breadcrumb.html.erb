@@ -1,11 +1,15 @@
 <ol class="breadcrumb" style="float: left">
     <%# binding.pry %>
     <% if params['controller'] == 'pages' %>
-        <li class="active"><%= params['action'].capitalize %></li>
+        <li class="active"><%= params['action'].split('_').map(&:capitalize).join(' ') %></li>
     <% elsif params['controller'] =~ /devise/ %>
-        <li class="active"><%= params['action'].capitalize %> User</li>
+        <li class="active"><%= params['action'].capitalize %> Member</li>
+    <% elsif params['controller'] == 'transcriptions' %>
+        <li><%= link_to 'Transcribe', browse_path %></li>
+    <% elsif params['whence'] %>
+        <li><%= link_to 'Plan', controller.send("#{params['whence']}_path") %></li>
     <% else %>
-        <li><%= link_to "Transcribe", transcribe_path %></li>
+        <li><%= link_to 'Browse', browse_path %></li>
     <% end %>
     <%= yield :breadcrumb -%> <!-- hurrah for this pattern -->
 </ol>

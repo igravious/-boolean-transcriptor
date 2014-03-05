@@ -1,0 +1,22 @@
+<%
+%>
+<%= form_for(heading) do |f| %>
+  <p>
+    <%= f.label :index_term %><br>
+    <%= f.text_field :index_term %>
+  </p>
+ 
+  <p>
+    <%= f.label :type %><br>
+    <%# f.text_field :type, :"data-dropdown" => "#heading-dropdown" %>
+    <!-- select("post", "person_id", Person.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) -->
+    <%= f.select( :type, Heading::TYPES.collect {|t| t.capitalize}, { include_blank: true } ) %>
+    <%# Heading::TYPES.each do |t| %>
+        <%# f.radio_button :type, "foo" %>
+    <%# end %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

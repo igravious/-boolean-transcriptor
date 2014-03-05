@@ -1,0 +1,21 @@
+<%# form_for :heading, url: headings_path do |f| %>
+  <%# binding.pry %>
+  <p>
+    <%= f.label :index_term %><br>
+    <% if heading.index_term.blank? %>
+        <%= f.text_field :index_term %>
+    <% else %>
+        <%= f.text_field :index_term, { readonly: 'readonly'} %>
+    <% end %>
+  </p>
+ 
+  <p>
+    <%= f.label :type %><br>
+    <%# f.text_field :type, :"data-dropdown" => "#heading-dropdown" %>
+    <!-- select("post", "person_id", Person.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) -->
+    <%= f.select( :type, Heading::TYPES.collect {|t| t.capitalize}, { include_blank: true } ) %>
+    <%# Heading::TYPES.each do |t| %>
+        <%# f.radio_button :type, "foo" %>
+    <%# end %>
+  </p>
+<%# end %>

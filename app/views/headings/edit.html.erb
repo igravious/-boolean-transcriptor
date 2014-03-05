@@ -1,0 +1,7 @@
+
+<%= render 'breadcrumb' %>
+
+<h2>Edit heading <span class="hot-cinnamon"><%= @heading.index_term %></span></h2>
+<hr>
+
+<%= render partial: "form", locals: {heading: @heading} %>

@@ -7,7 +7,7 @@
                 <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%;"></span>
                 <div class="media-body">
                     <h4 class="media-heading">Finding Aid Order</h4>
-                    display in finding aid order (work in progress…)
+                    show in finding aid order (work in progress…)
                 </div>
             </div>
         </a>
@@ -27,7 +27,7 @@
                 <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%;"></span>
                 <div class="media-body">
                     <h4 class="media-heading">Order by Topic</h4>
-                    Show thematically (to be done)
+                    show thematically (to be done)
                 </div>
             </div>
         </a>
@@ -78,5 +78,38 @@
             </div>
         </a>
     </div>
+    
+    <!-- you have to use >a< with "btn-group-justified" which suits me just fine -->
 
+    <div class="btn-group btn-group-justified" style="margin-bottom: 20px;">
+        <a class="btn btn-default" href="<%= slice_items_path(aspect: "ordered_by_transcription_state") %>" >
+            <div class="media">
+                <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Order by State</h4>
+                    sorted by transcription state (in progress…)
+                </div>
+            </div>
+        </a>
+
+        <a class="btn btn-default" href="#" >
+            <div class="media">
+                <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Undecided Order</h4>
+                    coming soon to a transcriptor near you…
+                </div>
+            </div>
+        </a>
+
+        <a class="btn btn-default" href="#" >
+            <div class="media">
+                <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Undecided Order</h4>
+                    coming soon to a transcriptor near you…
+                </div>
+            </div>
+        </a>
+    </div>
 </div>

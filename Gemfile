@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.2'
+gem 'rails', '4.0.3'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -19,10 +19,11 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 2.1'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# (makes development more difficult and slower)
+# gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -38,7 +39,7 @@ gem 'paper_trail', '~> 3.0.0'
 # For breakpointing and introspection
 gem 'pry'
 
-# For user
+# To easily track membership
 gem 'devise'
 
 # For Rails moronic assets breakage
@@ -46,6 +47,20 @@ gem "non-stupid-digest-assets"
 
 # For snippity-snip of images
 gem "rmagick"
+
+# For snippity-snip of 
+gem "nokogiri"
+
+###
+# 
+# nb: we do not support mediawiki, textile, github flavored markdown, ...
+#
+# For common wiki syntax
+gem "creole"
+# For markdown syntax
+gem "redcarpet"
+# GitHub Markup Renderer
+# gem "github-markup"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

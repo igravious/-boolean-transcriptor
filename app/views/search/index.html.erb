@@ -29,8 +29,7 @@
         <div class="well" style="margin-bottom: 0px"><%= render partial: scan, layout: "scans/scan_bxslider_layout" %></div>
         <div class="well">
             <%=raw scan.transcription.gsub(Regexp.new(Regexp.escape(params['q']), "i")) {|match_q| "<span class='search'>#{match_q}</span>"} %>
-            <!-- warning, total hack -->
-            <span class="label label-primary"><%= "Being Edited" %></span>
+            <span class="label label-primary"><%= Scan::STATE_STRING[scan.state] %></span>
         </div>
     </li>
 <% end %>

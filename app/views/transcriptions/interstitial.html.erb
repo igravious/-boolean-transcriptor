@@ -1,0 +1,53 @@
+<div>existing index terms</div>
+<%# binding.pry %>
+<%= render @existing %>
+<hr>
+
+<div>found these new terms</div>
+
+<%
+    @headings = []
+    @must_create.each do |m|
+        temp = Heading.new
+        # temp.index_term = m['href']
+        # you're fucking joking
+        temp.index_term = (URI.unescape m.attr('href')).gsub('+',' ')
+        l = Locator.new
+        l.scan_id = @scan.id
+        l.content = m.text
+        @headings <<= temp
+%>
+    <%# render partial: "headings/new_panel" %>
+<%
+    end
+%>
+<%# fields_for "headings[]" do |hf| %>
+    <%# pf.text_field :caption %>
+    <%# binding.pry %>
+<%# end %>
+
+<%= form_for "headings[]", :url => bulk_create_headings_path do |f| %>
+     <% @headings.each_with_index do |heading,i| %> 
+        <%= fields_for "headings[#{i}]", heading do |hf| %>
+            <%= render partial: 'headings/new_panel', locals: {heading: heading, f: hf} %>
+            <%# binding.pry %>
+            <!-- other heading fields -->
+            <%# render :partial => "photo_form", :locals => {f => f} %>
+        <% end %>
+    <% end %>
+    <p>
+        <input type="hidden" id="scan_id" name="scan[id]" value="<%= params[:id] %>" />
+        <input type="hidden" id="scan_transcription" name="scan[transcription]" value="<%= params[:scan][:transcription] %>" />
+        <input type="hidden" id="aspect" name="aspect" value="<%= params['aspect'] %>" />
+        <input type="hidden" id="q" name="q" value="<%= params['q'] %>" />
+        <%= f.submit "Process Heading(s)"%>
+    </p>
+<% end %>
+<hr>
+
+<div>deleting the following</div>
+<ul>
+<% @to_delete.each do |d| %>
+    <li><%= d.pretty_inspect %></li>
+<% end %>
+</ul>

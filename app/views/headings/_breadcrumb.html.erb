@@ -1,0 +1,13 @@
+<%- content_for(:breadcrumb) do -%>
+    <%
+        if params['action'] == 'index'
+            # Index Index is dumb
+            prefix = 'The'
+        elsif params['action'] == 'from_wiki'
+            prefix = 'Edit'
+        else
+            prefix = params['action'].capitalize
+        end
+    %>
+    <li class="active"><%= "#{prefix} Index" %></li>
+<%- end -%>

@@ -1,21 +1,12 @@
-<% note.type = Note::TEXT %>
 <%= form_for(note) do |f| %>
   <%# f.error_messages %>
-  <p>
-    <%= f.label :bytes, 'Note text' %>:
-    <%= f.text_field :bytes %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+  <%= render partial: "form_for_#{note.type}", locals: {f: f, note: note} %>
   <%= f.hidden_field :type %>
+  <%= f.hidden_field :scan_id %>
+  <%= f.hidden_field :item_id %>
   
-<% if params['item_id'] %>
-  <input id="item_id" name="item_id" type="hidden" value="<%= params['item_id'] %>" />
-<% else %>
-  <input id="scan_id" name="scan_id" type="hidden" value="<%= params['scan_id'] %>" />
-<% end %>
-
-  <!-- and if we come from search? -->
+  <!-- or how do we look and where did we come from? -->
   <input id="aspect" name="aspect" type="hidden" value="<%= params['aspect'] %>" />
+  <!-- TODO DRY -->
+  <input id="whence" name="whence" type="hidden" value="<%= params['whence'] %>" />
 <% end %>

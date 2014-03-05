@@ -1,16 +1,29 @@
 class NotesController < ApplicationController
-    # uh, what dis for?
+
+    # index-like methods
+
+    # normal index
     def index
-        # @item = Item.find params[:item_id]
-        # @scan = Scan.find params[:scan_id]
-        # @item_notes = @item.notes
-        # @scan_notes = @item.notes
+        @all_notes = Note.all
     end
 
+    # only type == TEXT
+    def scribbled
+        @all_notes = Note.where('type = ?', Note::TEXT)
+    end
+
+    # only type == IMAGE
+    def snapped
+        @all_notes = Note.where('type = ?', Note::IMAGE)
+    end
+
+    # ===
+
     def new
-        # return an HTML form for creating a new
+        # return an HTML (aitch, not haitch baby) form for creating a new
         # piece of text or an image grab
         @note = Note.new
+        @note.type = Note::TEXT
         if params['item_id']
             @item = Item.find params['item_id']
             @note.item_id = @item.id
@@ -21,7 +34,7 @@ class NotesController < ApplicationController
             @item = Item.find @scan.item_id
             render "new_for_scan"
         else
-            raise "A note must belong to an item or a scan I reckon"
+            raise ActionController::RoutingError.new("You'd like that, wouldn't you?")
         end
     end
 
@@ -46,14 +59,14 @@ class NotesController < ApplicationController
             raise "Now, that's not good, most unusual" if !@note.bytes
             @note.type = note['type']
             raise "Now, that's not good, dang it anyway" if !@note.type
-            if params['item_id']
-                @item = Item.find params['item_id']
+            if note['item_id']
+                @item = Item.find note['item_id']
                 @note.item_id = @item.id
                 if Note.where('type = ? AND bytes LIKE ? AND item_id = ?', @note.type, @note.bytes, @note.item_id).length > 0
                     raise "Duplicate note by the looks of things"
                 end
-            elsif params['scan_id']
-                @scan = Scan.find params[:scan_id]
+            elsif note['scan_id']
+                @scan = Scan.find note['scan_id']
                 @note.scan_id = @scan.id
                 if Note.where('type = ? AND bytes LIKE ? AND scan_id = ?', @note.type, @note.bytes, @note.scan_id).length > 0
                     raise "Duplicate note by the looks of things"
@@ -67,7 +80,19 @@ class NotesController < ApplicationController
             flash[:notice] = "Note successfully created methinks"
         rescue Exception => e
             flash[:alert] = "Oh fiddlesticks: #{e.message}"
+        end
+        redirect_to :back
+    end
+
+    def edit
+        begin
+            @note = Note.find params['id']
+            @note.bytes.force_encoding("UTF-8")
+            render 'edit'
+        rescue Exception => e
+            flash[:alert] = "Oh fiddlesticks: #{e.message}"
             redirect_to :back
         end
     end
+
 end

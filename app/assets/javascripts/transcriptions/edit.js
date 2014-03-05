@@ -1,14 +1,15 @@
 // included by transcriptions#show or something like that
 
-var zoom_zoom = function() {
+var zoomer_enable = function() {
     console.log('i am ready - transcriptions/edit.js');
     try {
         // extra paranoid mode
         if ($('.viewer').length ) $(".viewer").zoomer({
-            snapFn: zoom_callback
+            snapFn: snap_callback,
+            markupFn: markup_callback
         });
     } catch(oops) {
-        // communicate to the user somehow
+        // communicate to the member somehow
         console.log('oopsie in transcriptionis/edit.js unfortunately');
         console.log(oops+oops.message);
     }
@@ -16,6 +17,7 @@ var zoom_zoom = function() {
     return true;
 }
 
+/*
 var zoom_it = function() {
     console.log('i am ready - transcriptions/edit.js');
     try {
@@ -30,7 +32,7 @@ var zoom_it = function() {
            tintOpacity: 0.5
         });
     } catch(oops) {
-        // communicate to the user somehow
+        // communicate to the member somehow
         console.log('oopsie in transcriptionis/edit.js unfortunately');
         console.log(oops+oops.message);
     }
@@ -40,15 +42,16 @@ var zoom_it = function() {
 
 $(document).on('ready', zoom_it);
 $(document).on('page:load', zoom_it);
+*/
 
-$(document).on('ready', zoom_zoom);
-$(document).on('page:load', zoom_zoom);
+$(document).on('ready', zoomer_enable);
+$(document).on('page:load', zoomer_enable);
 
 var add_tab = function() {
-    alert("if you click me again i'll break your face");
+    alert("i like being clicked, don't you?");
 }
 
-var zoom_callback = function(data) {
+var snap_callback = function(data) {
     console.log(data);
 
     var tiw = data.targetImageWidth;
@@ -68,7 +71,7 @@ var zoom_callback = function(data) {
     if (scale > 833) { // geez, 1% is not enough
         save_coords(ratio, tiw, tih, fw, fh, nw, nh, til, tit, tpl, tpt);
     } else {
-        alert("Unable to take snapshot, not zoomed in enough");
+        alert("Unable to grab snippet, not zoomed in enough");
     }
 }
 
@@ -76,16 +79,14 @@ var num_times = 0;
 var save_coords = function(ratio, tiw, tih, fw, fh, nw, nh, til, tit, tpl, tpt) {
 
     var note_id = "note"+num_times;
-    // $( "<p>"+num_times+": "+ratio+"</p><div id="+note_id+"></div>" ).insertAfter( "#notes" );
     var request = $.ajax({
-      url: "/portion_of_image/"+img_id,
+      url: "/snap/"+img_id,
       type: "POST",
       data: { note_id: note_id, ratio: ratio, tiw: tiw, tih: tih, fw: fw, fh: fh, nw: nw, nh: nh, til: til, tit: tit, tpl: tpl, tpt: tpt },
       dataType: "json"
     });
      
     request.done(function( msg ) {
-      // $( "#"+msg.note_id ).html( msg.note_msg );
       $( msg.note_msg ).insertAfter( "#insert_after_me" );
     });
      
@@ -93,6 +94,36 @@ var save_coords = function(ratio, tiw, tih, fw, fh, nw, nh, til, tit, tpl, tpt) 
       alert( "Request failed: " + textStatus );
     });
     num_times += 1;
+}
+
+var markup = true;
+var markup_callback = function(data) {
+    console.log(data);
+
+    if (markup) {
+        var request = $.ajax({
+          url: "/markup",
+          type: "GET",
+          data: { transcription: $('#scan_transcription').val() },
+          dataType: "json"
+        });
+         
+        request.done(function( msg ) {
+            $('#scan_transcription').hide();
+            $('#scan_markup').html( msg.markup );
+            // <a href="#" data-dropdown="#heading-dropdown">dropdown</a>
+            $('#scan_markup').show();
+            markup = false;
+        });
+         
+        request.fail(function( jqXHR, textStatus ) {
+          alert( "Request failed: " + textStatus );
+        });
+    } else {
+        $('#scan_markup').hide();
+        $('#scan_transcription').show();
+        markup = true;
+    }
 }
 
 var transcription_has_changed = function() {

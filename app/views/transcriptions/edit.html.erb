@@ -2,8 +2,10 @@
 <%- content_for(:head) do -%>
     <%# javascript_include_tag "jquery.elevatezoom", "data-turbolinks-track" => TURBO %>
     <%= javascript_include_tag "jquery.fs.zoomer", "data-turbolinks-track" => TURBO %>
-
     <%= stylesheet_link_tag "jquery.fs.zoomer", media: "all", "data-turbolinks-track" => TURBO %>
+    <%# javascript_include_tag "jquery.dropdown", "data-turbolinks-track" => TURBO %>
+    <%# stylesheet_link_tag "jquery.dropdown", media: "all", "data-turbolinks-track" => TURBO %>
+    <%= stylesheet_link_tag "notes", media: "all", "data-turbolinks-track" => TURBO %>
 <%- end -%>
 
 <script type="text/javascript">
@@ -24,6 +26,7 @@
 %>
 <script type="text/javascript">
     var img_id = <%= @scan.id %>;
+    var aspect = "<%= params['aspect'] %>";
 </script>
 <!-- <img id="zoom_it" src="<%= pint_size %>" data-zoom-image="<%= large_size %>" /> -->
 
@@ -31,16 +34,15 @@
 
     <div class="row">
         <div class="col-md-4">
-            <div><i>Scan Goes Here</i></div>
             <div class="viewer">
                 <img src="<%= large_size %>" />
             </div>
         </div>
 
         <div class="col-md-8">
-            <div><i>Transcription Goes Here</i></div>
             <%= form_for @scan, url: {action: "update"} do |f| %>
-                <input type="hidden" id="params_aspect" name="aspect" value="<%= params['aspect'] %>" />
+                <input type="hidden" id="aspect" name="aspect" value="<%= params['aspect'] %>" />
+                <input type="hidden" id="q" name="q" value="<%= params['q'] %>" />
                 <%# f.hidden_field(:params, 'aspect') %>
                 <div>
                     <!-- Nav tabs -->
@@ -53,10 +55,36 @@
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div id="last-content-tab" class="tab-pane active"> <%= f.text_area :transcription, size: "80x25", :autofocus=>true %> </div>
+                        <div id="last-content-tab" class="tab-pane active">
+                            <div id="make-same">
+                                <%= f.text_area :transcription, size: "80x25", :autofocus=>true %>
+                                    <div id="scan_markup" style="display:none" />
+                                <script>
+                                    // fake table does not work?
+                                    // https://stackoverflow.com/questions/2997767/how-do-i-keep-two-divs-that-are-side-by-side-the-same-height
+                                    // neither does css trickery
+                                    // http://www.ejeliot.com/blog/61
+                                    // try this
+                                    // https://stackoverflow.com/questions/3275850/set-a-div-height-equal-with-of-another-div
+                                    // using this
+                                    // http://api.jquery.com/ready/
+
+                                    $(function() {
+                                        // Handler for .ready() called. Off by 6? Why, oh why?
+                                        $("#scan_markup").css({'height':((parseInt($("#scan_transcription").height())+6)+'px')});
+                                    });
+                                </script>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div> <%= f.submit "Update the transcription", :onclick => "need_to_confirm=false;" %> </div>
+                <div>
+                    <!-- disable buttons unless in the right state -->
+                    <%= f.submit "Update the transcription", :onclick => "need_to_confirm=false;" %>
+                    <%= f.submit "Submit for review", :name => "review_button" %>
+                    <%= f.submit "Lock the transcription", :name => "lock_button" %>
+                    <%= f.submit("Unlock the transcription", :name => "unlock_button") if member_signed_in? and current_member.special? %>
+                </div>
             <% end %>
         </div>
     </div>
@@ -65,22 +93,27 @@
     1-------10--------20--------30--------40--------50--------60--------70--------80--------90-------100-------110-------120-------130-------140-------150-------160--------
     -->
 
+    <hr> <!-- puffin stuff -->
+
     <div class="row">
         <div class="col-md-6">
-            <div><i>Versions Go Here</i></div>
-            <ol class="list-group" style="padding-top: 10px">
-                <%= render partial: @scan.versions, layout: "paper_trail/versions/version_group_layout" %>
-            </ol>
-        </div>
-        <div class="col-md-6">
-            <div id="things"><i>Thingies Go Here</i></div>
             <ul class="list-group" style="padding-top: 10px">
                 <li id="insert_after_me" class="list-group-item">
-                    <%= link_to "Compose a new note", new_note_path(scan_id: @scan.id, aspect: params['aspect'], q: params['q']) %>
+                    Snippets go here
                 </li>
-                <%= render partial: @scan.notes, layout: "notes/note_group_layout" %>
+                <%= render partial: @scan.notes.where('type = ?', Note::IMAGE), layout: "notes/note_group_layout" %>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group" style="padding-top: 10px">
+                <li id="insert_after_me" class="list-group-item">
+                    Compose a new <%= link_to "note", new_note_path(scan_id: @scan.id, aspect: params['aspect'], q: params['q']) %>
+                </li>
+                <%= render partial: @scan.notes.where('type = ?', Note::TEXT), layout: "notes/note_group_layout" %>
             </ul>
         </div>
     </div>
 
 </div>
+
+<% render partial: 'headings/type' %>

@@ -11,5 +11,5 @@
  *= require_self
  *= require global
  * require_tree .
- *= require bootstrap
+ *= require bootstrap.min
  */

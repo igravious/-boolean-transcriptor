@@ -1,5 +1,5 @@
-<div class="items_preview_container">
-    <div class="inner_container" stlye="width: <%= ((@items.length)*(100+33)) %>px">
+<div class="preview-container">
+    <div class="inner-container" stlye="width: <%= ((@items.length)*(100+33)) %>px">
         <%= render partial: "item", collection: @items, layout: "lazy_layout", locals: {thumbnail: true, lazy_load: true} %>
     </div>
 </div>

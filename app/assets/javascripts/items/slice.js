@@ -8,7 +8,7 @@
  * the default from happening (because it's on a link_to) - an
  * alternative here would be to wire up a div but this is simpler
  */
-var handleRemote = function(el, target) {
+var handleRemote = function(el, event) {
     // is, ahem, this different from
     console.log("handleRemote: $(this)");
     console.log($(this));
@@ -18,9 +18,11 @@ var handleRemote = function(el, target) {
     // why yes it is ...
     
     target = event.target;
-    console.log("v2: $(target)");
+    console.log("v2: event");
+    console.log(event);
+    console.log("v3: $(target)");
     console.log($(target));
-    console.log("v3: $(this).data('remote')");
+    console.log("v4: $(target).data('remote')");
     console.log($(target).data('remote'));
     if ($(target).data('remote')) {
         $.rails.handleRemote($(target));
@@ -54,16 +56,16 @@ var handleSimpleTreeMenu = function() {
         try {
             doSlider();
         } catch(oops) {
-            // let the user know somehow
+            // let the member know somehow
             console.log('oopsie in doSlider() in items/slice.js unfortunately');
             console.log(oops+oops.message);
 
         }
-    } else if ($('.items_preview_container').length ) {
+    } else if ($('.preview-container').length ) {
         try {
             doLazy();
         } catch(oops) {
-            // let the user know somehow
+            // let the member know somehow
             console.log('oopsie in doLazy() in items/slice.js unfortunately');
             console.log(oops+oops.message);
 

@@ -1,9 +1,10 @@
 <!-- in the layout for showing notes in groups -->
-<!-- keep in sync with app/views/images/cannot_figure_out.html.erb -->
+<!-- keep in sync with app/views/notes/snap.html.erb
+-->
 
 <li class="list-group-item">
-    <%= form_for(note, :method => :delete) do |f| %>
+    <%= form_for( note, :method => :delete) do |f| %>
         <%= yield %>
-        <%= f.submit "delete this note" %>
+        <%# f.submit "delete this note" %>
     <% end %>
 </li>

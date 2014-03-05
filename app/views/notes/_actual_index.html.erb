@@ -1,0 +1,54 @@
+
+<%= render '/per_view_javascript' %>
+<%= render '/per_view_stylesheet' %>
+
+<%= render 'breadcrumb' %>
+
+<ul class="list-group" style="padding-top: 10px">
+    <!--
+        <hr>
+        <h3>Item notes</h3>
+    -->
+    <%
+        @all_notes.group(:item_id).count.each do |item_id, count|
+            if item_id
+                item = Item.find item_id
+    %>
+    <li class="list-group-item">
+        <div class="well" style="margin-bottom: 0px"><%= link_to item.fa_seq, item_path(item.id) %>
+            <span class="label label-primary"><%= item.year %></span>
+        </div>
+        <div class="well">
+            <ul class="list-group" style="padding-top: 10px">
+                <%= render partial: item.notes, layout: "notes/note_group_layout" %>
+            </ul>
+        </div>
+    </li>
+    <%
+            end 
+        end
+    %>
+    <!--
+        <hr>
+        <h3>Scan notes</h3>
+    -->
+    <% 
+        @all_notes.group(:scan_id).count.each do |scan_id, count|
+            if scan_id
+                scan = Scan.find scan_id
+    %>
+    <li class="list-group-item">
+        <div class="well" style="margin-bottom: 0px"><%= render partial: scan, layout: "scans/scan_bxslider_layout" %>
+            <span class="label label-primary"><%= Scan::STATE_STRING[scan.state] %></span>
+        </div>
+        <div class="well">
+            <ul class="list-group" style="padding-top: 10px">
+                <%= render partial: scan.notes, layout: "notes/note_group_layout" %>
+            </ul>
+        </div>
+    </li>
+    <%
+            end
+        end
+    %>
+</ul>

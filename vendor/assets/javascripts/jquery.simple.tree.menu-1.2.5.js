@@ -31,10 +31,6 @@ var window;
 	}, methods = {
 
 		init: function (options) {
-            var callback;
-			if (options) {
-                callback = options.callback;
-			}
 			return this.each(function () {
 				var $this = $(this);
 				if ($this.hasClass("simpleTreeMenu") === false) {
@@ -42,7 +38,7 @@ var window;
 					$this.hide();
 					$(this).addClass("simpleTreeMenu");
 					$this.children("li").each(function () {
-						methods.buildNode($(this),callback);
+						methods.buildNode($(this), options);
 					});
 					$(this).show();
 				} else {
@@ -51,14 +47,14 @@ var window;
 			});
 		},
 
-		buildNode: function ($li,callback) {
+		buildNode: function ($li, options) {
 			if ($li.children("ul").length > 0) { // nested ul
 				$li.children("ul").hide();
 
 				var $how_many = 0;
 				$li.children("ul").children("li").each(function () {
 					$how_many += 1;
-					methods.buildNode($(this),callback);
+					methods.buildNode($(this), options);
 				});
 
 				$li.addClass("Node");
@@ -110,7 +106,8 @@ var window;
                     console.log("leaf event stop");
                     //console.log(this);
                     //console.log(event.target);
-                    if (callback) {
+                    if (options && options.callback) {
+                        var callback = options.callback
                         return callback(this, event);
                     } else {
 					    //return false;

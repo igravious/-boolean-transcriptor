@@ -9,8 +9,7 @@ class ItemsController < ApplicationController
             @items = Item.where("year #{(year ? '=' : 'is')} ?", year)
         else
             # else shows index which is selection screen
-            render "index"
-            return
+            raise ActionController::RoutingError.new('Halt! Who goes there!')
         end
         @all_scans = Scan.all
         respond_to do |format|
@@ -23,6 +22,9 @@ class ItemsController < ApplicationController
 
     def show
         @item = Item.find(params[:id])
+        # XXX is this X-rated?
+        params[:item_id] = params[:id]
+        params.delete(:id)
         if Rails.env.development? and params['debug']
             render "horror_show"
             return
@@ -45,6 +47,8 @@ class ItemsController < ApplicationController
             time
         when "group_by_difficulty"
             render "hard"
+        when "ordered_by_transcription_state"
+            state
         else # show_raw
             render "raw"
         end
@@ -60,5 +64,9 @@ class ItemsController < ApplicationController
 
     def time
         render "order_by_time"
+    end
+
+    def state
+        render "order_by_state"
     end
 end

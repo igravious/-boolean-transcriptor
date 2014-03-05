@@ -7,4 +7,9 @@
 .viewer { height: 380px; width: 380px; background-color: white !important; }
 */
 .viewer { height: 380px; width: 380px; }
-.note-thumb { height: 100px; width: 100px; }
+
+#make-same { display: table-row; }
+
+#make-same div { border: 1px solid #ddd; display: table-cell; padding: 2px; }
+#make-same textarea { border: 1px solid #ddd; display: table-cell; }
+

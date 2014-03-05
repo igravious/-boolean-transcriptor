@@ -10,9 +10,10 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+// you can disable min.map in chrome
+//= require jquery.min
 //= require jquery_ujs
-//= require turbolinks
+// require turbolinks
 // require_tree .
 //= require global
-//= require bootstrap
+//= require bootstrap.min

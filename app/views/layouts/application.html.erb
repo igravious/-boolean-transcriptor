@@ -5,6 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Boolean Transcriptor <%= @attempt %></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href='http://fonts.googleapis.com/css?family=Cedarville+Cursive' rel='stylesheet' type='text/css'>
+        <%= favicon_link_tag 'favicon.ico' %>
+
         <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => TURBO %>
         <%= javascript_include_tag "application", "data-turbolinks-track" => TURBO %>
         <%= csrf_meta_tags %>
@@ -16,9 +20,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
 
-        <link href='http://fonts.googleapis.com/css?family=Cedarville+Cursive' rel='stylesheet' type='text/css'>
-
-        <%= yield(:head) -%> <!-- hurrah for sneakiness -->
+        <%= yield(:head) -%>
     </head>
     <body>
 

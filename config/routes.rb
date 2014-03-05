@@ -1,7 +1,9 @@
 PetulantOctoLana::Application.routes.draw do
 
-  devise_for :users
   root 'pages#welcome'
+
+  devise_for :members
+  get 'members/locked_scans' => 'pages#locked_by_member'
 
   Rails.env.development? and get 'qwux' => 'qwux#new'
 
@@ -21,11 +23,43 @@ PetulantOctoLana::Application.routes.draw do
   #   resources :products
 
   resources :transcriptions do
+    # member do
+    #   get :index_term
+    # end
+  end
+  # http://leto.electropoiesis.org:3301/transcriptions/2703/health
+  # must be a more railsy way
+  get '/transcriptions/:scan_id/:index_term' => 'headings#from_wiki'
+
+  resources :headings do
+    collection do
+      match 'bulk_create', via: [:post]
+    end
+  end
+  Heading::TYPES.each do |t|
+    resources t.pluralize.to_sym do
+    end
   end
 
   # index only makes sense for end-notes
   resources :notes do
+    collection do
+      get 'scribbled'
+      get 'snapped'
+    end
   end
+
+  # concern :notable do
+  #      resources :notes
+  # end
+   
+  # concern :snippet_attachable do
+  #      resources :snippets
+  # end
+
+  # concern :citable do
+  #      resources :references
+  # end
 
   resources :items, only: [:index, :show] do
     resources :scans, only: [:index]
@@ -36,22 +70,32 @@ PetulantOctoLana::Application.routes.draw do
   end
 
   get '/serve_up_image/:id' => 'images#serve'
-  match '/portion_of_image/:id' => 'images#portion', via: [:post]
+  match '/snap/:id' => 'images#snap', via: [:post]
+  match '/upload_image/:id' => 'images#upload', via: [:post]
+  get '/markup' => 'images#markup'
 
   get '/archival_finding_aid' => 'finding_aids#type'
 
   get '/search' => 'search#index'
 
-  # pages grouped together, additional user pages should be read from db
+  # pages grouped together, additional customized pages should be read from db
   # whether these should be in the db or not is debatable
   # ideally should all be given in markdown, though transcribe is special
   # and as such is probably a 'site' page
-  ['welcome', 'transcribe', 'guide', 'intro', 'leader', 'legal', 'stats'].each { |x| get '/'+x => 'pages#'+x }
-
-  # site 
+  ['welcome', 'browse', 'guide', 'intro', 'leader', 'legal', 'info', 'plan'].each { |x| get '/'+x => 'pages#'+x }
+  # ...
+  # info = architecure of the collection
+  # plan = archaeology of the collection
+  # ...
+  #
+  # site (needs to be plural for symmetry?)
   ['inspiration', 'code', 'acknowledgments', 'secretions'].each { |x| get '/'+x => 'site#'+x }
 
   # need to be able to dynamically add pages based on entries in the control file
+
+  namespace :admin, only: [:index] do
+    resources :transcriptions, :images, :pages
+  end
 
   # Example resource route with options:
   #   resources :products do

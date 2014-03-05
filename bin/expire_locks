@@ -1,0 +1,13 @@
+#!/usr/bin/env runner
+
+    Scan.find_each do |scan|
+        if scan.state == Scan::LOCKED
+            v = scan.versions.last
+            if scan.updated_at < 24.hours.ago
+                puts "Unlocking #{scan.pretty_inspect}"
+                scan.state = Scan::BEING_EDITED
+            end
+        end
+    end
+
+# vim: set syntax=ruby:
