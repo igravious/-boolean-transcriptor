@@ -31,7 +31,7 @@ class HeadingsController < ApplicationController
             create_heading heading['index_term'], heading['type'], scan
             flash[:notice] = "Oh joy of joys, index term created"
         rescue Exception => dang
-            flash[:alert] = "Oh fiddlesticks: #{dang.message}"
+            flash[:alert] = "Insert expletive here: #{dang.message}"
         end
         redirect_to :back
     end
@@ -53,6 +53,7 @@ class HeadingsController < ApplicationController
         # TODO flubify
         flub = {}
         flub[:aspect] = params[:aspect] if not params[:aspect].blank?
+        flub[:whence] = params[:whence] if not params[:whence].blank?
         flub[:q] = params[:q] if not params[:q].blank?
         redirect_to edit_transcription_path(@scan, flub)
     end
@@ -68,6 +69,7 @@ class HeadingsController < ApplicationController
     def update heading
         begin
             heading_id = params[:id]
+            # TODO do i need to be paramsing here?
             aspect = params['aspect']
             @heading = Heading.find heading_id
             # http://guides.rubyonrails.org/getting_started.html#updating-posts
@@ -79,7 +81,7 @@ class HeadingsController < ApplicationController
                 render 'edit'
             end
         rescue Exception => dang
-            flash[:alert] = "Oh fiddlesticks, unable to update index term: #{dang.message}"
+            flash[:alert] = "You know what I was trying to d? I was trying to update that index term. And I couldn't: #{dang.message}"
             render 'edit'
         end
     end
@@ -95,7 +97,7 @@ class HeadingsController < ApplicationController
             flash[:notice] = "Oh joy of joys, index term <strong>#{@heading.index_term}</strong> deleted"
             redirect_to headings_path
         rescue Exception => dang
-            flash[:alert] = "Oh fiddlesticks, unable to delete index term: #{dang.message}"
+            flash[:alert] = "Behold my terseness - unable to delete index term: #{dang.message}"
             render 'edit'
         end
     end

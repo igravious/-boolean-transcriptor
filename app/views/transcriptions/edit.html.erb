@@ -42,6 +42,7 @@
         <div class="col-md-8">
             <%= form_for @scan, url: {action: "update"} do |f| %>
                 <input type="hidden" id="aspect" name="aspect" value="<%= params['aspect'] %>" />
+                <input type="hidden" id="whence" name="whence" value="<%= params['whence'] %>" />
                 <input type="hidden" id="q" name="q" value="<%= params['q'] %>" />
                 <%# f.hidden_field(:params, 'aspect') %>
                 <div>
@@ -107,7 +108,7 @@
         <div class="col-md-6">
             <ul class="list-group" style="padding-top: 10px">
                 <li id="insert_after_me" class="list-group-item">
-                    Compose a new <%= link_to "note", new_note_path(scan_id: @scan.id, aspect: params['aspect'], q: params['q']) %>
+                Compose a new <%= link_to "note", new_note_path(scan_id: @scan.id, aspect: params['aspect'], q: params['q'], whence: params['whence']) %>
                 </li>
                 <%= render partial: @scan.notes.where('type = ?', Note::TEXT), layout: "notes/note_group_layout" %>
             </ul>

@@ -6,7 +6,7 @@
 <%= render partial: "scans/scan_bxslider", object: item.scans %>
 
 <ul class="list-group" style="padding-top: 10px">
-    <li class="list-group-item"><%= link_to "Compose a new note", new_note_path(item_id: item.id, aspect: params['aspect'], q: params['q']) %></li>
+    <li class="list-group-item"><%= link_to "Compose a new note", new_note_path(item_id: item.id, aspect: params['aspect'], q: params['q'], whence: params['whence']) %></li>
     <%= render partial: item.notes, layout: "notes/note_group_layout" %>
 </ul>
 

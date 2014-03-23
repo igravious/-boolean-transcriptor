@@ -7,9 +7,12 @@
         <% elsif params['aspect'] %>
             <!-- works but not generic enough -->
             <li><a href="<%= slice_items_path(aspect: params['aspect'], item_group: @item.fa_structure) %>"><%= Item.aspect params['aspect'] %></a></li>
+        <% elsif params['whence'] %>
+            <!-- no way to narrow breadcrumb scope to where in Plan yet -->
         <% else %>
             <!-- shouldn't get here at the moment -->
-            <li class="active"><%= params['action'] %></li>
+            <!-- <li class="active"><%= params['action'] %></li> -->
+            <li class="active">You're holding it wrong.</li>
         <% end %>
     <% end %>
 <%- end -%>

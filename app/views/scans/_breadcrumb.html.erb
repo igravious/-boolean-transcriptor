@@ -9,6 +9,6 @@
         <li class="active"><%= crumb %></li>
     <% else %>
         <!-- prolly you can just pass params to _path ? -->
-        <li><a href="<%= item_path(@item.id, aspect: params['aspect'], q: params['q']) %>"><%= crumb %></a></li>
+        <li><a href="<%= item_path(@item.id, aspect: params['aspect'], q: params['q'], whence: params['whence']) %>"><%= crumb %></a></li>
     <% end %>
 <%- end -%>

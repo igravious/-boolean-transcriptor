@@ -42,6 +42,7 @@ class ImagesController < ApplicationController
             @reply = {:note_id => params['note_id'], :note_msg => render_to_string("notes/snap", layout: false) }
         end
         @note.save
+
         render json: @reply
     end
 

@@ -2,7 +2,7 @@
     <%= render 'scans/breadcrumb' %>
     <% bread = "Scan #{@scan.minor_seq} of #{@item.scans.length}" %>
     <% if params['controller'] != "transcriptions" %>
-        <li><a href="<%= edit_transcription_path(id: @scan.id, aspect: params['aspect'], q: params['q']) %>"><%= bread %></a></li>
+        <li><a href="<%= edit_transcription_path(id: @scan.id, aspect: params['aspect'], q: params['q'], whence: params['whence']) %>"><%= bread %></a></li>
     <% else %>
         <li class="active"><%= bread %></li>
     <% end %>

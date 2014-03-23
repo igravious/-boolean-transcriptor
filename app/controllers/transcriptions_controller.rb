@@ -3,6 +3,7 @@ class TranscriptionsController < ApplicationController
         begin
             scan_id = params[:scan_id]
             aspect = params['aspect']
+            whence = params['whence']
             q = params['q']
             @scan = Scan.find scan_id
             raise "Not a blank transcription" unless @scan.state == Scan::VIRGIN
@@ -12,7 +13,7 @@ class TranscriptionsController < ApplicationController
         rescue Exception => oops
             redirect_to :back, alert: oops.message
         else
-            redirect_to edit_transcription_path(id: scan_id, aspect: aspect, q: q), notice: ok
+            redirect_to edit_transcription_path(id: scan_id, aspect: aspect, q: q, whence: whence), notice: ok
         end
     end
 
@@ -28,6 +29,8 @@ class TranscriptionsController < ApplicationController
         begin
             scan_id = params[:id]
             aspect = params['aspect']
+            whence = params['whence']
+            q = params['q']
             @scan = Scan.find scan_id
             if params[:lock_button]
                 raise "You gotta be signed in to lock a transcription" unless member_signed_in?
@@ -83,7 +86,6 @@ class TranscriptionsController < ApplicationController
 
                     # @scan.transcription = params[:scan][:transcription]
                     # @scan.save!
-                    binding.pry
                     if @must_create.length
                         render "interstitial"
                         ok = "need type info"
@@ -93,18 +95,18 @@ class TranscriptionsController < ApplicationController
                         else
                             ok = "Updated transcription"
                         end
-                        redirect_to edit_transcription_path(id: scan_id, aspect: aspect), notice: ok
+                        redirect_to edit_transcription_path(id: scan_id, aspect: aspect, q: q, whence: whence), notice: ok
                     end
                 else
                     ok = "No need to update, transcription unchanged"
-                    redirect_to edit_transcription_path(id: scan_id, aspect: aspect), notice: ok
+                    redirect_to edit_transcription_path(id: scan_id, aspect: aspect, q: q, whence: whence), notice: ok
                 end
             end
             @item = Item.find @scan.item_id
         rescue Exception => oops
-            redirect_to edit_transcription_path(id: scan_id, aspect: aspect), alert: oops.message
+            redirect_to edit_transcription_path(id: scan_id, aspect: aspect, q: q, whence: whence), alert: oops.message
         else
-            redirect_to edit_transcription_path(id: scan_id, aspect: aspect), notice: ok
+            redirect_to edit_transcription_path(id: scan_id, aspect: aspect, q: q, whence: whence), notice: ok
         end
     end
 

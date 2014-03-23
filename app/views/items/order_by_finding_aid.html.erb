@@ -46,7 +46,7 @@
                         count = @struct_count[id]
                         link_name = "#{handle} ……… #{pluralize(count, 'item')}"
                     %>
-                    <%= link_to( link_name, items_path(fa_structure: id, selector_id: fill_id, aspect: params['aspect']), remote: true, id: id, class: "ajax_trigger", style: "display: inline", onclick: "wasClicked()") %>
+                    <%= link_to( link_name, items_path(fa_structure: id, selector_id: fill_id, aspect: params['aspect'], whence: params['whence']), remote: true, id: id, class: "ajax_trigger", style: "display: inline", onclick: "wasClicked()") %>
                 </b>
             </span>
             <div id="<%= fill_id %>" style="display: inline; cursor: default" data-trigger="<%= id %>"></div>

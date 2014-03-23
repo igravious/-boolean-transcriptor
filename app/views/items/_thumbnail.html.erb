@@ -12,7 +12,7 @@
     <!--span class="overlay">0 scans</span-->
 <% else %>
     <% count = scans.length %>
-    <a href="<%= item_path(item.id, aspect: params['aspect']) %>" data-counter="<%= (defined? item_counter) ? item_counter : ''%>" title="<%= item.fa_seq %>" style="display: inline"><%= render :partial => scans.first, locals: local_assigns %></a>
+    <a href="<%= item_path(item.id, aspect: params['aspect'], q: params['q'], whence: params['whence']) %>" data-counter="<%= (defined? item_counter) ? item_counter : ''%>" title="<%= item.fa_seq %>" style="display: inline"><%= render :partial => scans.first, locals: local_assigns %></a>
     <!--span class="overlay"><%= "#{pluralize(count, 'scan')}" %></span-->
 <% end %>
 </span>
