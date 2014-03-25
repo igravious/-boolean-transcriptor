@@ -4,15 +4,18 @@
 
 <%= render 'breadcrumb' %>
 
+<!-- why a ul? -->
 <ul class="list-group" style="padding-top: 10px">
+<!-- only show these if there are items with notes (scribbles/snippets), potentially refactor out each to theirs own -->
 <!--
 <h4>delicious notes from items</h4>
 <hr>
 -->
+<%# debug @all_notes %>
     <%
-        @all_notes.group(:item_id).count.each do |item_id, count|
-            if item_id
-                item = Item.find item_id
+        @all_notes.group(:item_id).each do |note|
+            if note.item_id
+                item = Item.find note.item_id
     %>
         <div class="well" style="margin-bottom: 0px"><%= link_to item.fa_seq, item_path(item.id, whence: params['whence']) %>
             <span class="label label-primary"><%= item.year %></span>
@@ -20,7 +23,7 @@
         <div class="well">
         <li class="list-group-item">
             <ul class="list-group" style="padding-top: 10px">
-                <%= render partial: item.notes, layout: "notes/note_group_layout" %>
+                <%= render partial: item.notes.where(constraint), layout: "notes/note_group_layout" %>
             </ul>
         </li>
         </div>
@@ -33,9 +36,9 @@
 <hr>
 -->
     <% 
-        @all_notes.group(:scan_id).count.each do |scan_id, count|
-            if scan_id
-                scan = Scan.find scan_id
+        @all_notes.group(:scan_id).each do |note|
+            if note.scan_id
+                scan = Scan.find note.scan_id
     %>
         <div class="well" style="margin-bottom: 0px"><%= render partial: scan, layout: "scans/scan_bxslider_layout" %>
             <span class="label label-primary"><%= Scan::STATE_STRING[scan.state] %></span>
@@ -43,7 +46,7 @@
         <div class="well">
         <li class="list-group-item">
             <ul class="list-group" style="padding-top: 10px">
-                <%= render partial: scan.notes, layout: "notes/note_group_layout" %>
+                <%= render partial: scan.notes.where(constraint), layout: "notes/note_group_layout" %>
             </ul>
         </li>
         </div>
@@ -51,4 +54,5 @@
             end
         end
     %>
+<!-- won't anyone tell me why? -->
 </ul>

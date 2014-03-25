@@ -25,11 +25,11 @@ module PetulantOctoLana
     # for each controller that has a js in app/assets/javascripts
     config.assets.precompile += ['items.js', 'scans.js', 'transcriptions.js', 'search.js']
     # for each controller that has a css in app/assets/stylesheets
-    config.assets.precompile += ['search.css', 'transcriptions.css']
+    config.assets.precompile += ['search.css', 'transcriptions.css', 'notes.css']
     # for each vendor javascript used
-    config.assets.precompile += ['jquery.bxslider.js', 'jquery.lazyload.js', 'jquery.elevatezoom.js', 'jquery.cookie.js', 'jquery.simple.tree.menu.js', 'jquery.fs.zoomer.js']
+    config.assets.precompile += ['jquery.bxslider.js', 'jquery.lazyload.js', 'jquery.cookie.js', 'jquery.simple.tree.menu.js', 'jquery.fs.zoomer.js', 'jquery.colorpicker.js', 'jquery-ui.js', 'easeljs.min.js']
     # for each vendor stylesheet used
-    config.assets.precompile += ['jquery.bxslider.css', 'jquery.simple.tree.menu.css', 'jquery.fs.zoomer.css']
+    config.assets.precompile += ['jquery.bxslider.css', 'jquery.simple.tree.menu.css', 'jquery.fs.zoomer.css', 'jquery.colorpicker.css', 'jquery-ui.min.css']
     # and their images, a bit shotgun
     config.assets.precompile += %w[*.png *.jpg *.jpeg *.gif]
   end

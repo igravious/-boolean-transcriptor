@@ -19,6 +19,9 @@
   "dependencies": {
      "bootstrap": "*",
      "jquery.lazyload": "*",
-     "Zoomer": "*"
+     "Zoomer": "*",
+     "easeljs": "*",
+     "jqueryui": "*",
+     "jquery.colorpicker": "*"
   }
 }

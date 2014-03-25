@@ -82,7 +82,7 @@ var save_coords = function(ratio, tiw, tih, fw, fh, nw, nh, til, tit, tpl, tpt) 
     var request = $.ajax({
       url: "/snap/"+img_id,
       type: "POST",
-      data: { note_id: note_id, ratio: ratio, tiw: tiw, tih: tih, fw: fw, fh: fh, nw: nw, nh: nh, til: til, tit: tit, tpl: tpl, tpt: tpt },
+      data: { note_id: note_id, ratio: ratio, tiw: tiw, tih: tih, fw: fw, fh: fh, nw: nw, nh: nh, til: til, tit: tit, tpl: tpl, tpt: tpt, aspect: aspect, whence: whence },
       dataType: "json"
     });
      

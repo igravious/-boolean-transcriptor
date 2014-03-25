@@ -1,8 +1,25 @@
 <!-- note (in document) sequence number -->
+<%# debug params %>
 <%
-    save_id = params[:id]
-    params.delete(:id)
-    params[:scan_id] = save_id
+    if params[:id]
+        # this is coming from snippet save, :id is actually :scan_id
+        # raise "I was not expecting this at all, params[:id] is #{params[:id]} , Why?"
+        save_id = params[:id]
+        params.delete(:id)
+        params.delete(:fh)
+        params.delete(:fw)
+        params.delete(:note_id)
+        params.delete(:nh)
+        params.delete(:nw)
+        params.delete(:ratio)
+        params.delete(:tih)
+        params.delete(:tiw)
+        params.delete(:til)
+        params.delete(:tit)
+        params.delete(:tpl)
+        params.delete(:tpt)
+        params[:scan_id] = save_id
+    end
 %>
 <%
     if note.type == Note::TEXT
@@ -34,5 +51,5 @@
     end
 %>
 <%
-    params[:id] = save_id
+    # params[:id] = save_id
 %>

@@ -33,13 +33,13 @@ ActiveRecord::Schema.define(version: 20140202120949) do
     t.string   "fa_structure"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "year"
     t.string   "size"
     t.string   "commentary"
     t.date     "also"
     t.date     "range"
     t.string   "month"
     t.string   "pp_extra"
-    t.string   "year"
   end
 
   add_index "items", ["fa_seq", "fa_structure"], name: "index_items_on_fa_seq_and_fa_structure", unique: true
