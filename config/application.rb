@@ -23,9 +23,9 @@ module PetulantOctoLana
     ### only applies to produciton
      #
     # for each controller that has a js in app/assets/javascripts
-    config.assets.precompile += ['items.js', 'scans.js', 'transcriptions.js', 'search.js']
+    config.assets.precompile += ['items.js', 'scans.js', 'transcriptions.js',  'search.js',  'notes.js',  'collection_pages.js',  'desk_pages.js']
     # for each controller that has a css in app/assets/stylesheets
-    config.assets.precompile += ['search.css', 'transcriptions.css', 'notes.css']
+    config.assets.precompile += [                        'transcriptions.css', 'search.css', 'notes.css', 'collection_pages.css', 'desk_pages.css']
     # for each vendor javascript used
     config.assets.precompile += ['jquery.bxslider.js', 'jquery.lazyload.js', 'jquery.cookie.js', 'jquery.simple.tree.menu.js', 'jquery.fs.zoomer.js', 'jquery.colorpicker.js', 'jquery-ui.js', 'easeljs.min.js']
     # for each vendor stylesheet used

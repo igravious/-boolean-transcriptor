@@ -1,7 +1,7 @@
 <%
 
     def switch_on toggle
-        if params['controller'] == "pages"
+        if params['controller'] == "collection_pages"
             if params['action'] == "welcome" and toggle == "brand"
                 return "brand-active"
             end
@@ -36,17 +36,17 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="desk-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="<%= switch_on "intro" %>"><a href="/intro">Introduction</a></li>
-                <li class="<%= switch_on "leader" %>"><a href="<%= leader_path %>">Leaderboard</a></li>
-                <li class="<%= switch_on "browse" %>"><a href="<%= browse_path %>">Browse</a></li>
-                <li class="<%= switch_on "guide" %>"><a href="/guide">FAQs &amp; Guide</a></li>
+                <li class="<%= switch_on "desk" %>"><a href="<%= desk_path %>" alt="The Desk">The Desk</a></li>
+                <li class="<%= switch_on "faqs_n_guide" %>"><a href="/faqs_n_guide" alt="FAQs & Guide">FAQs &amp; Guide</a></li>
                 <li class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Propaganda<b class="caret"></b></a>
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" alt="Propaganda">Propaganda<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="http://leto.electropoiesis.org/propaganda/entering-the-digital-humanities/">The Blog</a></li>
                     <li><a href="javascript:void(0)">In The Press</a></li>
-                    <li><a href="javascript:void(0)">advertising and promotion links</a></li>
-                    <li><a href="http://uccshop.ie/leisurewear/t-shirts/ucc-boole-is-coole-t-shirt.html">UCC Boole is Coole T-Shirt</a></li>
+                    <li><a href="javascript:void(0)">Share This Site / Spread The Love</a></li>
+                    <li><a href="javascript:void(0)">Advertising And Promotion</a></li>
+                    <li><a href="javascript:void(0)">Merchandise</a></li>
+                    <!-- <li><a href="http://uccshop.ie/leisurewear/t-shirts/ucc-boole-is-coole-t-shirt.html">UCC Boole is Coole T-Shirt</a></li> -->
                     <li class="divider"></li>
                     <li><a href="javascript:void(0)">Obey</a></li>
                     <li class="divider"></li>
@@ -57,16 +57,16 @@
             <form method="get" action="<%= search_path %>" class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                     <% if params['q'] %>
-                        <input name="q" type="text" class="form-control" value="<%= params['q'] %>">
+                        <input name="q" type="text" class="form-control" value="<%= params['q'] %>" alt="Search">
                     <% else %>
-                        <input name="q" type="text" class="form-control" placeholder="Search this site">
+                        <input name="q" type="text" class="form-control" placeholder="Search this site" alt="Search">
                     <% end %>
                 </div>
-                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Go do it…</button>
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" alt="Go do it…"></span> Go do it…</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" alt="About">About<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="http://www.ucc.ie">University College Cork (UCC)</a></li>
                     <li><a href="http://booleweb.ucc.ie">UCC Library</a></li>
@@ -92,7 +92,7 @@
     </div>
     <div class="row darken">
         <%= render "layouts/breadcrumb" %>
-        <h4 style="float: right">
+        <h4 style="float: right; margin-right: 20px;">
             <% begin %>
                 <% if member_signed_in? %>
                     Logged in as <strong><%= current_member.email %></strong>;
@@ -125,6 +125,9 @@
                 </button>
                 <button type="button" class="btn btn-default btn-xs">
                     <span class="glyphicon glyphicon-file"><a href="/archival_finding_aid?type=yaml">YAML</a></span>
+                </button>
+                <button type="button" class="btn btn-default btn-xs">
+                    <span class="glyphicon glyphicon-file"><a href="/archival_finding_aid?type=edm">EDM</a></span>
                 </button>
             </span>
         </span>

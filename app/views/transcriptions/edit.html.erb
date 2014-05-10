@@ -17,6 +17,7 @@
 
 <%= render 'breadcrumb' %>
 
+<%# debug request.env %>
 <%# html_escape @scan.pretty_inspect %>
 <%# @scan.prefix.to_s+"/"+@scan.major_seq.to_s+"/"+@scan.seq.to_s+" scan #"+@scan.minor_seq.to_s %>
 
@@ -41,10 +42,13 @@
         </div>
 
         <div class="col-md-8">
-            <%= form_for @scan, url: {action: "update"} do |f| %>
-                <input type="hidden" id="aspect" name="aspect" value="<%= params['aspect'] %>" />
-                <input type="hidden" id="whence" name="whence" value="<%= params['whence'] %>" />
-                <input type="hidden" id="q" name="q" value="<%= params['q'] %>" />
+            <!-- see aspect? do this. -->
+            <%= form_for @scan, url: {action: "update", aspect: params['aspect'], whence: params['whence'], q: params['q']} do |f| %>
+                <!-- not this. -->
+                <!--input type="hidden" id="aspect" name="aspect" value="<%= params['aspect'] %>" /-->
+                <!--input type="hidden" id="whence" name="whence" value="<%= params['whence'] %>" /-->
+                <!--input type="hidden" id="q" name="q" value="<%= params['q'] %>" /-->
+                <!-- nor this. -->
                 <%# f.hidden_field(:params, 'aspect') %>
                 <div>
                     <!-- Nav tabs -->
@@ -82,10 +86,48 @@
                 </div>
                 <div>
                     <!-- disable buttons unless in the right state -->
-                    <%= f.submit "Update the transcription", :onclick => "need_to_confirm=false;" %>
-                    <%= f.submit "Submit for review", :name => "review_button" %>
-                    <%= f.submit "Lock the transcription", :name => "lock_button" %>
-                    <%= f.submit("Unlock the transcription", :name => "unlock_button") if member_signed_in? and current_member.special? %>
+                    <%
+                        if @scan.state == Scan::VIRGIN or @scan.state == Scan::BEING_EDITED
+                    %>
+                            <%= f.submit "Update the transcription", :onclick => "need_to_confirm=false;" %>
+                            <%= f.label "Bulk annotation on update" %>
+                            <%= f.check_box "annotate" %>
+                            <br/>
+                            <%= f.submit "Submit for review", :name => "review_button" %>
+                    <%
+                        end
+                    %>
+
+                    <%
+                        if member_signed_in?
+                            if @scan.state == Scan::VIRGIN or @scan.state == Scan::BEING_EDITED
+                    %>
+                                <%= f.submit "Lock the transcription", :name => "lock_button" %>
+                    <%
+                            end
+                            if current_member.matches_whodunnit? @scan or current_member.special?
+                                if @scan.state == Scan::LOCKED
+                    %>
+                                    <%= f.submit "Update the transcription", :onclick => "need_to_confirm=false;" %>
+                                    <%= f.label "Bulk annotation on update" %>
+                                    <%= f.check_box "annotate" %>
+                                    <br/>
+                                    <%= f.submit "Submit for review", :name => "review_button" %>
+                                    <%= f.submit "Unlock the transcription", :name => "unlock_button" %>
+                    <%
+                                end
+                            end
+                            if current_member.special? and @scan.state == Scan::IN_REVIEW
+                    %>
+                                <%= f.submit "Accept this transcription", :name => "accept_button" %>
+                                <%= f.submit "Reject this transcription", :name => "reject_button" %>
+                                <%= f.text_field "narrative" %>
+                    <%
+
+                            end
+                        else # member is not signed in, what to show?
+                        end
+                    %>
                 </div>
             <% end %>
         </div>

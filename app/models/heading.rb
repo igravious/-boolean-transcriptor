@@ -4,6 +4,9 @@ class Heading < ActiveRecord::Base
     # I confess I've taken the idea of activities from FromThePage
     TYPES=['person', 'place', 'event', 'concept', 'activity']
 
+    self::NO_TYPE = ""
+
+    has_many :locators
 end
 
 Heading::TYPES.each do |t|

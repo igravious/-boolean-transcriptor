@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
       begin
         @admin_panel = controller.send(admin_path)
       rescue Exception => e
-        flash[:alert] = "I'm not in a good place right now let me tell you: #{e.message}"
+        flash[:alert] = "Haven't created an admin one of these yet: #{e.message}"
         @admin_panel = {text: ""}
       end
     else

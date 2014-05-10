@@ -1,12 +1,30 @@
 
 <% item = default %>
+ 
+<%# if params['controller'] != 'desk_pages' %>
+    <%= render 'scans/breadcrumb' %>
+<%# end %>
 
-<%= render 'scans/breadcrumb' %>
+<%
+if item.scans.length > 0
+%>
+    <%# #see app/controllers/collection_pages for another example of this %>
+    <%= render partial: "scans/scan_bxslider", object: item.scans.order(:minor_seq) %>
+<%
+else
+%>
+    <ul class="list-group" style="padding-top: 10px">
+        <li class="list-group-item"><b>No scans for this item</b></li>
+    </ul>
+<%
+end
+%>
 
-<%= render partial: "scans/scan_bxslider", object: item.scans %>
 
 <ul class="list-group" style="padding-top: 10px">
-    <li class="list-group-item"><%= link_to "Compose a new note", new_note_path(item_id: item.id, aspect: params['aspect'], q: params['q'], whence: params['whence']) %></li>
+    <li class="list-group-item">
+        <%= link_to "Compose a new note", new_note_path(item_id: item.id, aspect: params['aspect'], q: params['q'], whence: params['whence']) %>
+    </li>
     <%= render partial: item.notes, layout: "notes/note_group_layout" %>
 </ul>
 

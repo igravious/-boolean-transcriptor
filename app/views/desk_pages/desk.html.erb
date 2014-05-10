@@ -1,0 +1,32 @@
+
+<%- content_for(:head) do -%>
+    <%= javascript_include_tag "jquery-ui", "data-turbolinks-track" => TURBO %>
+    <%= stylesheet_link_tag "jquery-ui.min", media: "all", "data-turbolinks-track" => TURBO %>
+<%- end -%>
+
+<%# render '/per_view_javascript' %>
+<%= render '/per_view_stylesheet' %>
+
+<%# render 'breadcrumb' %>
+
+<fieldset>
+    <legend>
+        <h2>This is <span class="hot-cinnamon">
+        <% if member_signed_in? %>
+            <%= "#{current_member.nick}'s" %>
+        <% else %>
+            Anonymous's
+        <% end %>
+        </span>transcription desk</h2>
+    </legend>
+    <div id="desk">A desk with circles
+        <div class="draggable ui-widget-content ui-draggable" style="position: relative; left: 60px; top: 27px;"><a href="<%= outline_path %>" class="hot-cinnamon">WiP</a></div>
+        <div class="draggable ui-widget-content ui-draggable" style="position: relative; left: 160px; top: 27px;"><a href="javascript:void(0)">1st</a></div>
+        <div class="draggable ui-widget-content ui-draggable" style="position: relative; left: 260px; top: 27px;"><a href="javascript:void(0)">2nd</a></div>
+    </div>
+</fieldset>
+<script>
+  $(function() {
+    $( ".draggable" ).draggable();
+  });
+  </script>

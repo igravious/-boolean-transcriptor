@@ -1,0 +1,26 @@
+<h2>Welcome to the <span class="hot-cinnamon">George Boole Collection</span> software transcription desk</h2>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+        <!-- dispense following style using a class, but where? -->
+        <h4 style="text-align:justify; text-justify:inter-word;">The papers saved for posterity here were collected by Boole’s sister Maryann after his death, to provide the sourcework for a proposed biography by her. They were subsequently purchased at auction by UCC. You can help us bring them to life.</h4>
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <p><span>Continue on to <span><span class="glyphicon glyphicon glyphicon-link" alt="Continue on to Browse"></span> <%= link_to 'Browse', browse_path(whence: params[:whence]) %></p>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+<!--img style="max-width: 100%; height: auto; margin-bottom: 15px;" src="/images/archive-service-maths-dude.jpg" alt="archive service Boole logo" /-->
+<!-- https://stackoverflow.com/questions/17722132/how-can-i-make-my-header-image-properly-responsive -->
+<!-- use image_tag to deliver images in asset pipeline -->
+<%= image_tag "archive-service-maths-dude.jpg", {alt: "archive service Boole logo", style: "max-width: 100%; height: auto; margin-bottom: 15px;"} %>

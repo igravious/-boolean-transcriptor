@@ -4,11 +4,19 @@
     #     heading ||= local_assigns[t.to_sym]
     # end
     # binding.pry
+
+    locators = Locator.where("heading_id = ?", heading.id)
 %>
 <div class="heading-item">
     <p>
     <strong><%= heading.type.capitalize %>: </strong>
-        <%= link_to heading.index_term, edit_heading_path(heading.id, params) %>
+    <%= link_to heading.index_term, edit_heading_path(heading.id, params) %>
+    <br/>
+    <% if locators.length > 0 then locators.each do |l| %>
+        <%= link_to l.content, edit_transcription_path(l.scan_id, params) %>
+        <span>,</span><br/>
+    <% end else %>
         <%= link_to 'Delete?', heading_path(heading.id), :confirm => "are you sure?", :method => :delete %>
+    <% end %>
     </p>
 </div>

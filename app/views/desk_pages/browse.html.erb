@@ -1,0 +1,127 @@
+<div id="ministry_of_the_interior">
+    <h2>Here you can browse the <span class="hot-cinnamon">Collection</span>. They have been <span class="hot-cinnamon">sliced 'n diced</span> in many different ways. Please select an ordering.</h2>
+    <hr>
+
+    <div class="btn-group btn-group-justified" style="padding-top: 10px; margin-bottom: 20px;">
+        <a class="btn btn-default" href="<%= slice_items_path(aspect: "display_in_finding_aid_order", whence: params[:whence]) %>">
+            <div class="media">
+                <span class="deep-space-maths-dude pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%;"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Finding Aid Order</h4>
+                    show in finding aid order (work in progress…)
+                </div>
+            </div>
+        </a>
+
+        <a class="btn btn-default" href="<%= slice_items_path(aspect: "group_chronologically", whence: params[:whence]) %>">
+            <div class="media">
+                <span class="deep-space-maths-dude pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%;"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Order by Time</h4>
+                    display chronologically (work in progress…)
+                </div>
+            </div>
+        </a>
+
+        <a class="btn btn-default" href="<%= slice_items_path(aspect: "group_by_significant_term", whence: params[:whence]) %>">
+            <div class="media">
+                <span class="deep-space-maths-dude pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%;"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Order by Topic</h4>
+                    show ordered by significant term (in progress…)
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- you have to use >a< with "btn-group-justified" which suits me just fine -->
+
+    <div class="btn-group btn-group-justified" style="margin-bottom: 20px;">
+        <a class="btn btn-default" href="<%= slice_items_path(aspect: "display_by_number_of_scans", whence: params[:whence]) %>">
+            <div class="media">
+                <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%;"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">By Number of Scans</h4>
+                    sorted by how many scans in an item
+                </div>
+            </div>
+        </a>
+
+        <% if Rails.env.development? %>
+        <a class="btn btn-default" href="<%= slice_items_path(whence: params[:whence]) %>">
+            <div class="media">
+                <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%;"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Database Order</h4>
+                    <i>developer option (unvarnished database order)</i>
+                </div>
+            </div>
+        </a>
+        <% else # env is production %>
+        <a class="btn btn-default" href="#">
+            <div class="media">
+                <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%;"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Undecided Order</h4>
+                    coming soon to a transcriptor near you…
+                </div>
+            </div>
+        </a>
+        <% end %>
+
+        <a class="btn btn-default" href="#" >
+            <div class="media">
+                <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Ordered by Difficulty</h4>
+                    display sorted in order of difficulty (to be done)
+                </div>
+            </div>
+        </a>
+    </div>
+    
+    <!-- you have to use >a< with "btn-group-justified" which suits me just fine -->
+
+    <div class="btn-group btn-group-justified" style="margin-bottom: 20px;">
+        <a class="btn btn-default" href="<%= slice_items_path(aspect: "ordered_by_transcription_state", whence: params[:whence]) %>" >
+            <div class="media">
+                <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Order by State</h4>
+                    sorted by status of transcription (in progress…)
+                </div>
+            </div>
+        </a>
+
+        <a class="btn btn-default" href="#" >
+            <div class="media">
+                <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Undecided Order</h4>
+                    coming soon to a transcriptor near you…
+                </div>
+            </div>
+        </a>
+
+        <a class="btn btn-default" href="#" >
+            <div class="media">
+                <span class="pull-left glyphicon glyphicon-sort-by-attributes" style="font-size: 333%"></span>
+                <div class="media-body">
+                    <h4 class="media-heading">Undecided Order</h4>
+                    coming soon to a transcriptor near you…
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+        <p><span>Back to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Back to Edition Notice"></span> <%= link_to 'Edition Notice', edition_notice_path(whence: params[:whence]) %></p>
+    </div>
+    <div class="col-md-4">
+        <p><span>Continue on to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Continue on to Foreword"></span> <%= link_to 'Foreword', foreword_path(whence: params[:whence]) %> by Des MacHale</p>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>

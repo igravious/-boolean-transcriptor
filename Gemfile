@@ -1,7 +1,13 @@
 source 'https://rubygems.org'
 
+# Twiddle Wakka ~> Ruby's pessimistic operator
+#
+# ~> 3.0.3 means that when you bundle install, you'll get the highest-released gem version of rails between the range >= 3.0.3 and < 3.1.
+#
+# ~> 1.1 means that when you bundle install, you'll get the highest-released gem version of thin between the range >= 1.1 and < 2.0
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.3'
+gem 'rails', '~> 4.0.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -10,7 +16,7 @@ gem 'sqlite3'
 # gem 'sass-rails', '~> 4.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '~> 2.4.0'
 
 # Use CoffeeScript for .js.coffee assets and views - no thanks!
 # gem 'coffee-rails', '~> 4.0.0'
@@ -19,7 +25,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 2.1'
+gem 'jquery-rails', '~> 2.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # (makes development more difficult and slower)
@@ -40,7 +46,7 @@ gem 'paper_trail', '~> 3.0.0'
 gem 'pry'
 
 # To easily track membership
-gem 'devise'
+gem 'devise', '~> 3.2.0'
 
 # For Rails moronic assets breakage
 gem "non-stupid-digest-assets"

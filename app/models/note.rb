@@ -21,4 +21,14 @@ class Note < ActiveRecord::Base
         jpeg_base_64 = Base64.strict_encode64(bytes)
         "data:image/jpeg;base64,#{jpeg_base_64}"
     end
+
+    def user_visible_name
+        what = 'thingy' # should never be thingy of course
+        if type == Note::TEXT
+            what = 'note'
+        elsif type == Note::IMAGE
+            what = 'snippet'
+        end
+        what
+    end
 end

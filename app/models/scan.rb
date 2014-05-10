@@ -3,6 +3,7 @@ class Scan < ActiveRecord::Base
 
   belongs_to :item
   has_many :notes
+  has_many :locators
 
   VIRGIN=1
   BEING_EDITED=2
@@ -31,5 +32,13 @@ class Scan < ActiveRecord::Base
   end
 
   def self.set_to_void_if_empty
+  end
+
+  def annotate
+      0
+  end
+
+  def narrative
+      ""
   end
 end

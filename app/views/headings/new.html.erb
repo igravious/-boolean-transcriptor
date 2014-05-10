@@ -13,9 +13,9 @@
 
 <!-- put this in _form ? -->
 <!-- can it figure out url: -->
-<%= form_for @heading, url: headings_path do |f| %>
+<%= form_for @heading, url: the_index_headings_path do |f| %>
     <!-- prolly can extract Heading.new from f -->
-    <%= render partial: 'new_panel', locals: {heading: @heading, f: f} %>
+    <%= render partial: 'new_panel', locals: {heading: @heading, locator: Locator.new, f: f} %>
     <p>
         <input type="hidden" id="params_scan_id" name="scan_id" value="<%= params['scan_id'] %>" />
         <%# f.hidden_field params[:scan_id] %>

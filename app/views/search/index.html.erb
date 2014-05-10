@@ -4,23 +4,13 @@
 
 <hr>
 <h3>
-    <i>In item description</i> <%= "#{pluralize(@items.length, 'match')}" %>
+    <%= "#{pluralize(@items.length, 'match')}" %> in <i>item</i> description
 </h3>
 <hr>
-<ul>
-<% @items.each do |item| %>
-    <li>
-          <div class="well" style="margin-bottom: 0px"><%= link_to item.fa_seq, item_path(item.id, q: params['q']) %></div>
-          <div class="well">
-              <%=raw item.description.gsub(Regexp.new(Regexp.escape(params['q']), "i")) {|match_q| "<span class='search'>#{match_q}</span>"} %>
-              <span class="label label-primary"><%= item.year %></span>
-          </div>
-    </li>
-<% end %>
-</ul>
+<%= render partial: "items/item_group", locals: {item_group: @items} %>
 <hr>
 <h3>
-    <i>In scan transcription</i> <%= "#{pluralize(@scans.length, 'match')}" %>
+    <%= "#{pluralize(@scans.length, 'match')}" %> in <i>scan</i> description
 </h3>
 <hr>
 <ul>

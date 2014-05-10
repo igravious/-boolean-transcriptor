@@ -34,6 +34,7 @@ def go_into_level level, struct
             else
                 items.each do |item|
                     # check if the item is already in the database!
+                    # encapsulate in method, so can re-use for sub-item
                     puts item["name"]
                     i = Item.new
                     i.fa_seq = item["name"]
@@ -56,6 +57,11 @@ def go_into_level level, struct
                     i.range = item["to"]
                     i.month = item["month"]
                     i.save!
+                    sub_items = item[NEXT_LEVEL]
+                    if !sub_items.nil?
+                        sub_items.each do |sub_item|
+                        end
+                    end
                 end
             end
         else

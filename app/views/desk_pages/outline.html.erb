@@ -1,0 +1,108 @@
+
+<h2>Outline of the <span class="hot-cinnamon">collection</span></h2>
+<hr>
+<p>Map or plan of the collection. Think of it like the <a class="external" href="https://en.wikipedia.org/wiki/Template:Book_structure">anatomy</a> of a book; <a class="external" href="https://en.wikipedia.org/wiki/Text_(literary_theory)">text</a> and <a class="external" href="https://en.wikipedia.org/wiki/Paratext">paratext</a>.</p>
+
+<div id="content" class=".clearfix">
+    <div class="row">
+        <div class="col-md-6" style="border-right:1px">
+            <ul>
+                <li>
+                    <%= link_to 'front cover', welcome_path(whence: 'outline') %>
+                </li>
+                <ul>
+                    <li>half-title</li>
+                    <li>title</li>
+                    <!-- (agency/agent that brought the work (of art/lit/knowledge) into being) -->
+                    <li><%= link_to 'edition notice', edition_notice_path(whence: 'outline') %>: publishing info and dates, copyright claims by the author/editor/compiler/coder/builder, qr code for website; eadid for ead; finding code for archive; isbn for digital edition; ...</li>
+                        <p>The <a class="external" href"https://en.wikipedia.org/wiki/Edition_notice">edition notice</a> (or copyright page) is the page in a book containing information about the current edition, usually on the back of the title page. It often contains a copyright notice, legal notices, publication information, printing history, cataloguing information from a national library, and an ISBN that uniquely identifies the work.</p>
+                </ul>
+                <li>front matter</li>
+                <ul>
+                    <li>
+                        <a href="<%= browse_path(whence: 'outline') %>">browse: select an ordering</a>
+                        <p>Choose one of a number of complete or partial orderings. There is the <a class="external" href="https://en.wikipedia.org/wiki/Finding_aid">finding aid</a> order, compiled by Carol Quinn. It is a complete ordering or arranging of the collection, which is to say that every item is itemized, no item is skipped. There may be many complete orderings of a collection, an archivist's job is to impose a hierarchical and thematic one. Maps very well to the notion of a <a class="external" href="https://en.wikipedia.org/wiki/Table_of_contents">table of contents</a> if one stops to think about it.<p>
+                    </li>
+                    <li>
+                        <%= link_to 'foreword by Des MacHale', foreword_path(whence: 'outline') %>
+                        <p>An introduction to the work written by Boole's foremost biographer.</p>
+                    </li>
+                    <li>
+                        <%= link_to 'preface by Anthony Durity', preface_path(whence: 'outline') %>
+                        <p>Introductory essay to the work by the author with acknowldgments.</p> 
+                    </li>
+                </ul>
+                <li>body matter</li>
+                <ul>
+                    <!--
+                    <li>groups of items</li>
+                    <li>items</li>
+                    <li>sub-items</li>
+                    <li>digital surrogates (scans) with attendant transcriptions</li>
+                    -->
+                    <!-- https://stackoverflow.com/questions/11823290/what-is-the-difference-between-calling-a-javascript-function-onclick-javascript -->
+                    <li><i><span id="item_desc"></span></i>
+                    <li>
+                        <%# form_for :desk_pages, :url => url_for(:action => 'item_view'), :method => 'get' do |f| %>
+                            <form action="/item_view?whence=outline" method="get">
+                            <button type="submit" class="btn btn-default" style="display:inline;" onclick="rewind();set_desc();set_focus();return false;"><span class="glyphicon glyphicon-fast-backward" alt="Fast Backward"></span></button>
+                            <button type="submit" class="btn btn-default" style="display:inline;" onclick="rewind_1();set_desc();set_focus();return false;"><span class="glyphicon glyphicon-step-backward" alt="Step Backward"></span></button>
+                            <input id="item_id" name="fa_seq" type="text" value="" alt="Item">
+                            <button type="submit" class="btn btn-default" style="display:inline;" onclick="forward_1();set_desc();set_focus();return false;"><span class="glyphicon glyphicon-step-forward" alt="Step Forward"></span></button>
+                            <button type="submit" class="btn btn-default" style="display:inline;" onclick="forward();set_desc();set_focus();return false;"><span class="glyphicon glyphicon-fast-forward" alt="Fast Forward"></span></button>
+                            <input id="whence" name="whence" type="hidden" value="outline" />
+                            <input style="display:inline;" type="submit" value="View Item" />
+                            <%# f.submit "yay :)", style: "display:inline;" %>
+                            <p>Digital surrogates: groups of items, items, sub-items, scan with their attendant transcriptions. The meat of the matter.</p>
+                            </form>
+                        <%# end %>
+                    </li>
+                </ul>
+                <li>back matter</li>
+                <ul>
+                    <li>bibliography/ref matter (collated from refs throughout)</li>
+                    <li>
+                    <%= link_to 'endnotes', endnote_notes_path(whence: 'outline') %>
+                        <p>Collated from <a class="external" href="https://en.wikipedia.org/wiki/Note_(typography)">notes</a> throughout the collection.</p>
+                    </li>
+                    <li>
+                        <%= link_to 'snippets', snippet_notes_path(whence: 'outline') %>
+                        <p>Collated from <a class="external" href="https://en.wikipedia.org/wiki/Highlighter">highlighted</a> snippets throughout.</p>
+                    </li>
+                    <li>
+                        <%= link_to 'index', the_index_headings_path(whence: 'outline') %>
+                        <p>Unassigned headings and <a class="external" href="https://en.wikipedia.org/wiki/Index_(publishing)">index</a> terms from transcription themselves.</p>
+                    </li>
+                </ul>
+            </ul>
+        </div>
+        <div class="col-md-6" style="border-right:1px">
+            <div>Working Draft</div>
+            <%# f.submit "Submit for review", :name => "review_button" %>
+            <%= submit_tag "Create digital scholarly edition", :name => "edition_button" %>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var item = new Array();
+    var code = new Array();
+    var index = 0;
+    <%- 
+        @all_items.each_with_index do |item,i,|
+            desc = item.description[0..63].gsub('"',"'") 
+    %>
+        <%=raw "item[#{i}] = \"#{desc.chop!}\";" %>
+        <%=raw "code[#{i}] = \"#{item.fa_seq}\";" %>
+    <%- end %>
+
+    var rewind_1 = function() { if (index>0) { index -= 1; } };
+    var forward_1 = function() { if (index<(item.length-1)) { index += 1; } };
+    var rewind = function() { index = 0; };
+    var forward = function() { index = item.length-1; };
+    var set_desc = function() { $('#item_desc').html(item[index]); };
+    var set_focus = function() { $('#item_id').val(code[index]); $('#item_id').focus(); };
+
+    set_desc();
+    set_focus();
+</script>

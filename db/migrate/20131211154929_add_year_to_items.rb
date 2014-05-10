@@ -1,6 +1,6 @@
 class AddYearToItems < ActiveRecord::Migration
   def up
-    add_column :items, :year
+    add_column :items, :year, :integer
   end
 
   def down

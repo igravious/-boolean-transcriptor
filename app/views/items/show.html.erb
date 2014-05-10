@@ -1,3 +1,25 @@
 
 <%= render @item %>
 
+<hr>
+<div class="row">
+    <div class="col-md-4">
+        <%- if prev_item = @item.prev %>
+            <p><span>Previous <span><span class="glyphicon glyphicon glyphicon-link" alt="Previous Item"></span> <%= link_to 'Item', item_view_path(fa_seq: prev_item, whence: params[:whence]) %></p>
+        <%- else %>
+            <p><span>Back to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Back to the Preface"></span> <%= link_to 'Preface', preface_path(whence: params[:whence]) %> by Anthony Durity</p>
+            <!-- <p>At the first item</p> -->
+        <%- end %>
+    </div>
+    <div class="col-md-4">
+        <%- if next_item = @item.next %> 
+            <p><span>Next <span><span class="glyphicon glyphicon glyphicon-link" alt="Next Item"></span> <%= link_to 'Item', item_view_path(fa_seq: next_item, whence: params[:whence]) %></p>
+        <%- else %>
+            <p><span>Continue on to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Continue on to the Endnotes"></span> <%= link_to 'Endnotes', endnote_notes_path(whence: params[:whence]) %></p>
+            <!-- <p>At the last item</p> -->
+        <%- end %>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+

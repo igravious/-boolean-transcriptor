@@ -6,9 +6,11 @@
 var doSlider = function() {
     $('.slide-wrapper').bxSlider({
         slideWidth: 100,
-        slideMargin: 33,
-        minSlides: 1,
+        infiniteLoop: false,
+        slideMargin: 2,
+        minSlides: 6,
         maxSlides: 6,
+        moveSlides: 5,
         captions: true,
         pagerType: 'short'
     });

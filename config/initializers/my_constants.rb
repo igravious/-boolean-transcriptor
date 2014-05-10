@@ -60,7 +60,7 @@ NUMBER_OF_ELEMENTS = 377
 FA_TITLE_PROPER = "PAPERS OF GEORGE BOOLE – CONTENT AND STRUCTURE"
 FA_COMPILER = "Carol Quinn, Archivist"
 FA_PUBLISHER = PUBLISHER
-FA_WHEN = "2006"
+FA_WHEN = "2006" # 1990 ?
 FA_URL = "http://booleweb.ucc.ie/media/Archives/George_Boole_Descriptive_List.pdf"
 FA_LANGUAGE = LANGUAGE
 

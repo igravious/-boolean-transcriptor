@@ -3,6 +3,7 @@ try {
     // render the chosen items and scans into a string
     
     var output = '<!-- index.js.erb path --><%= j render(:partial => "item_bxslider", :locals => {:items => @items}) %>';
+    // var output = '<!-- index.js.erb path --><%= j render(:partial => "items_preview_container", :locals => {:items => @items}) %>';
     // proof
     // console.log("0: ");
     // console.log(output);
@@ -27,9 +28,11 @@ try {
     console.log("4: about to fill new one: gotcha.empty().append(output);");
     gotcha.empty().append(output);
 
-    // there needs to be an auld bx-wrapper in output
+    // there needs to be an auld bx-wrapper in output, not sure how true this is any more
     console.log("5: about to doSlider()");
     doSlider();
+    // console.log("5: about to doLazy()");
+    // doLazy();
 } catch(oops) {
     console.log("caught exception in index.js");
     console.log(oops+oops.message);

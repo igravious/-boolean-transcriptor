@@ -4,39 +4,26 @@
 <h2>Index of heading <span class="hot-cinnamon">terms</span> in the collection</h2>
 <hr>
 
-<%= debug params %>
-
 <p>
     <%= link_to "Compose a new heading", new_heading_path %>
 </p>
-<div id="content" class=".clearfix">
+<hr/>
 
-    <div class="row">
-        <div class="col-md-6" style="border-right:1px">
-<ul class="list-group" style="padding-top: 10px">
-    <%
-        col1 = @all_headings[0,@all_headings.length/2]
-        col2 = @all_headings[@all_headings.length/2,@all_headings.length]
-
-        col1.each do |heading|
-    %>
-    <%= render partial: heading, layout: "headings/heading_group_layout" %>
-    <%
-        end
-    %>
-</ul>
-        </div>
-        <div class="col-md-6" style="border-right:1px">
-<ul class="list-group" style="padding-top: 10px">
-    <%
-        col2.each do |heading|
-    %>
-    <%= render partial: heading, layout: "headings/heading_group_layout" %>
-    <%
-        end
-    %>
-</ul>
-        </div>
+<h3>Index</h3>
+<%= render partial: "heading_chunk", object: @refd_headings %>
+<h3>Orphaned Headings</h3>
+<%= render partial: "heading_chunk", object: @orphaned_headings %>
+<h3>Index (with types)</h3>
+<%= render partial: "heading_chunk", object: @typd_headings %>
+<h3>Typeless Headings</h3>
+<%= render partial: "heading_chunk", object: @typeless_headings %>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+        <p><span>Back to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Back to the Snippets"></span> <%= link_to 'Snippets', snippet_notes_path(whence: params[:whence]) %></p>
     </div>
-
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+    </div>
 </div>

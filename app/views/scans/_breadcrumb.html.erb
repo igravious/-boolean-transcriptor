@@ -5,7 +5,7 @@
         count = @item.scans.length
         crumb = "#{@item.fa_seq} ……… #{pluralize(count, 'scan')}"
     %>
-    <% if params['controller'] == 'items' %>
+    <% if params['controller'] == 'items' or params['controller'] == 'desk_pages' %>
         <li class="active"><%= crumb %></li>
     <% else %>
         <!-- prolly you can just pass params to _path ? -->

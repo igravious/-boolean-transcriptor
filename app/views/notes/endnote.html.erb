@@ -1,0 +1,22 @@
+<h3>all of the notes with text</h3>
+<hr>
+<!--
+    at the moment if a note has neither scan_id nor item_id set
+    eventually add collection_id
+-->
+<!--
+<div>Compose a new (collection-level) <%= link_to "note", new_note_path %></div>
+<hr>
+-->
+<%= render partial: "actual_index", locals: {constraint: {type: Note::TEXT}} %>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+        <p><span>Back to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Back to BP/1/377"></span> <%= link_to 'last item', item_view_path(fa_seq: 'BP/1/377', whence: params[:whence]) %> in the collection</p> <!-- TODO select by last item? -->
+    </div>
+    <div class="col-md-4">
+        <p><span>Continue on to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Continue on to the Snippets"></span> <%= link_to 'Snippets', snippet_notes_path(whence: params[:whence]) %></p>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>

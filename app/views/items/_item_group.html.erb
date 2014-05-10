@@ -1,0 +1,26 @@
+<ul>
+<%
+    q = params['q']
+    aspect = params['aspect']
+    whence = params['whence']
+    item_group.each do |item|
+%>
+    <li>
+        <div class="well" style="margin-bottom: 0px"><%= link_to item.fa_seq, item_path(item.id, q: q, aspect: aspect, whence: whence) %></div>
+            <div class="well">
+<%
+    if params['q']
+%>
+    <%=raw item.description.gsub(Regexp.new(Regexp.escape(params['q']), "i")) {|match_q| "<span class='search'>#{match_q}</span>"} %>
+<%
+    else
+%>
+    <%= item.description %>
+<%
+    end
+%>
+            <span class="label label-primary"><%= item.year %></span>
+        </div>
+    </li>
+<% end %>
+</ul>

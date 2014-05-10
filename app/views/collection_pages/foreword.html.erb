@@ -1,0 +1,15 @@
+<h2>The foreword to the <span class="hot-cinnamon">George Boole Collection</span> by Des MacHale</h2>
+<hr>
+<%# CONSTs, etc. %>
+<%=raw Redcarpet::Markdown.new(Redcarpet::Render::HTML.new).render(File.read("#{Rails.root}/FOREWORD.md")) %>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+        <p><span>Back to <span><span class="glyphicon glyphicon glyphicon-link" alt="Back to Browse"></span> <%= link_to 'Browse' , browse_path(whence: params[:whence]) %></p>
+    </div>
+    <div class="col-md-4">
+        <p><span>Continue on to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Continue on to the Preface"></span> <%= link_to 'Preface', preface_path(whence: params[:whence]) %> by Anthony Durity</p>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>

@@ -1,0 +1,2 @@
+module DeskPagesHelper
+end

@@ -1,6 +1,6 @@
 <%- content_for(:breadcrumb) do -%>
     <%
-        if params['action'] == 'index'
+        if params['action'] == 'index' or params['action'] == 'the_index'
             # Index Index is dumb
             prefix = 'The'
         elsif params['action'] == 'from_wiki'

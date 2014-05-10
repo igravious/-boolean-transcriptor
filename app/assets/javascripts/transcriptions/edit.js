@@ -1,7 +1,7 @@
 // included by transcriptions#show or something like that
 
 var zoomer_enable = function() {
-    console.log('i am ready - transcriptions/edit.js');
+    console.log('we should really silence the console - transcriptions/edit.js');
     try {
         // extra paranoid mode
         if ($('.viewer').length ) $(".viewer").zoomer({
@@ -52,6 +52,7 @@ var add_tab = function() {
 }
 
 var snap_callback = function(data) {
+    console.log('snap callback data');
     console.log(data);
 
     var tiw = data.targetImageWidth;
@@ -67,6 +68,7 @@ var snap_callback = function(data) {
 
     var scale = Math.round((tiw/nw)*1000); // not sure why i round it
     var ratio = scale/1000;
+    console.log('ratio of mr. zoom');
     console.log(ratio);
     if (scale > 833) { // geez, 1% is not enough
         save_coords(ratio, tiw, tih, fw, fh, nw, nh, til, tit, tpl, tpt);
@@ -86,18 +88,25 @@ var save_coords = function(ratio, tiw, tih, fw, fh, nw, nh, til, tit, tpl, tpt) 
       dataType: "json"
     });
      
-    request.done(function( msg ) {
-      $( msg.note_msg ).insertAfter( "#insert_after_me" );
+    request.done(function( reply ) {
+      console.log('the reply from afar on creating new image');
+      console.log( reply );
+      if (reply.note_id != null) {
+        $( reply.note_msg ).insertAfter( "#insert_after_me" );
+      } else {
+        alert("I am afraid not: " + reply.note_msg);
+      }
     });
      
     request.fail(function( jqXHR, textStatus ) {
-      alert( "Request failed: " + textStatus );
+      alert( "That did not go so good: " + textStatus );
     });
     num_times += 1;
 }
 
 var markup = true;
 var markup_callback = function(data) {
+    console.log('markup callback data');
     console.log(data);
 
     if (markup) {

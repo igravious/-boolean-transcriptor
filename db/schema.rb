@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140202120949) do
+ActiveRecord::Schema.define(version: 20140423185817) do
 
   create_table "headings", force: true do |t|
     t.string   "index_term", null: false
@@ -33,13 +33,14 @@ ActiveRecord::Schema.define(version: 20140202120949) do
     t.string   "fa_structure"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "year"
+    t.integer  "year"
     t.string   "size"
     t.string   "commentary"
     t.date     "also"
     t.date     "range"
     t.string   "month"
     t.string   "pp_extra"
+    t.integer  "sub"
   end
 
   add_index "items", ["fa_seq", "fa_structure"], name: "index_items_on_fa_seq_and_fa_structure", unique: true
@@ -52,7 +53,7 @@ ActiveRecord::Schema.define(version: 20140202120949) do
     t.string   "content"
   end
 
-  add_index "locators", ["scan_id", "heading_id"], name: "index_locators_on_scan_id_and_heading_id", unique: true
+  add_index "locators", ["scan_id", "heading_id", "content"], name: "index_locators_on_scan_id_and_heading_id_and_content"
 
   create_table "members", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -68,6 +69,8 @@ ActiveRecord::Schema.define(version: 20140202120949) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",                  default: false
+    t.integer  "scans_accepted",         default: 0
+    t.string   "nick"
   end
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true
@@ -81,6 +84,7 @@ ActiveRecord::Schema.define(version: 20140202120949) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parent_id"
+    t.integer  "member_id"
   end
 
   create_table "scans", force: true do |t|

@@ -1,8 +1,8 @@
 <%=
     if defined? thumbnail
         #why doesn't locals: local_assigns work?
-        render partial: "thumbnail", object: item, locals: local_assigns
+        render partial: "items/thumbnail", object: item, locals: local_assigns
     else
-        render partial: "default", object: item, locals: local_assigns
+        render partial: "items/default", object: item, locals: local_assigns
     end
 %>

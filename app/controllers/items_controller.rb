@@ -1,23 +1,31 @@
 class ItemsController < ApplicationController
 
+    # grabs a bunch of items and show them in a slider, one scan per item
+    # (i think)
+    # could use for
+    #     1) groups of items (based on certain criteria)
+    #     2) one item with many sub-items
     def index
         if params[:fa_structure] and params[:selector_id]
+            @selector_id = params[:selector_id]
             @items = Item.where("fa_structure = ?", params[:fa_structure])
-        elsif params[:year]
-            year = params[:year]
-            year = nil if year == ''
-            @items = Item.where("year #{(year ? '=' : 'is')} ?", year)
+        # where the fuck did i think this would be called from?
+        # elsif params[:year]
+        #    year = params[:year]
+        #    year = nil if year == ''
+        #    @items = Item.where("year #{(year ? '=' : 'is')} ?", year)
         else
-            # else shows index which is selection screen
-            raise ActionController::RoutingError.new('Halt! Who goes there!')
+            # could this show what we show when we click Browse?
+            raise ActionController::RoutingError.new('Selection criteria not recognised')
         end
         @all_scans = Scan.all
         respond_to do |format|
-            @selector_id = params[:selector_id]
             # */* gets caught by whatever comes first, dunno how to force that to a default
-            format.html { render "_bxslider" } # hmm
+            # format.html { render "_bxslider" } # hmm
             format.js { render :layout => false } # not sure if i even need =>
         end
+        # i still don't fully understand respond_to
+        # raise ActionController::RoutingError.new('I only respond to JS at the moment')
     end
 
     def show
@@ -41,8 +49,8 @@ class ItemsController < ApplicationController
         case aspect
         when "display_in_finding_aid_order"
             finding_aid
-        when "group_by_theme"
-            render "theme"
+        when "group_by_significant_term" # reference
+            significant_term
         when "group_chronologically"
             time
         when "group_by_difficulty"
@@ -68,5 +76,9 @@ class ItemsController < ApplicationController
 
     def state
         render "order_by_state"
+    end
+
+    def significant_term
+        render "order_by_significant_term"
     end
 end

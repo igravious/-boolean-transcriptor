@@ -3,8 +3,89 @@
 # use my own runner
 # see https://rails.lighthouseapp.com/projects/8994/tickets/4249-rails-runner-cant-be-used-in-shebang-lines
 
+# it'd be nice if i left a comment for myself telling myself what this does
+
 DATA_SECTION = "data"
 NEXT_LEVEL = "part"
+
+def update_item i
+    # find model
+    m = Item.where('fa_seq = ? AND fa_structure = ?', i.fa_seq, i.fa_structure)
+    # do we match? 
+    if m.length > 1
+        raise "Whoa Betsy"
+    elsif m.length == 1
+        m = m.first
+        # are all attributes equal or if not are the attrs in db `blank'?
+        h = {}
+        if m.description != i.description and m.description.nil?
+            puts "description is blank!"
+            h[:description] = i.description
+        end
+        if m.pp != i.pp and m.pp.nil?
+            puts "pp is blank!"
+            h[:pp] = i.pp
+        end
+        # TODO figure out why date doesn't trigger
+        if m.item_date != i.item_date and m.item_date.nil?
+            puts "item_date is blank!"
+            h[:item_date] = i.item_date
+        end
+        if m.size != i.size and m.size.nil?
+            puts "size is blank!"
+            h[:size] = i.size
+        end
+        if m.commentary != i.commentary and m.commentary.nil?
+            puts "commentary is blank!"
+            h[:commentary] = i.commentary
+        end
+        if h == {}
+            puts "nothing to update for: #{i.fa_seq}"
+        else
+            if not (m.update_attributes h)
+                # handle failure, be noisy
+                raise "object is invalid. unable to update: #{i.fa_seq}"
+            else
+                puts "successfully updated: #{i.fa_seq} - #{h.inspect}"
+            end
+        end
+    else
+        # we have a situation where our identifying columns don't match
+        # possibly new item in the db, only insert if told to
+        if @match_only
+            raise "If we are updating we really should match!"
+        else
+            # unusual case so be noisy
+            puts "Looks like I found new item (or sub item) in update mode, inserting: #{i.fa_seq}"
+            i.save!
+        end
+    end
+    m
+end
+
+def new_item item, struct, sub
+    i = Item.new
+    i.fa_seq = item["name"] #-
+    i.fa_structure = struct+"#{sub}" #-
+
+    i.description = item["desc"] #-
+    pp = item["pp"] #-
+    i.pp = pp
+    begin
+        pp = pp.split(' ')
+        i.pp_extra = pp[1] #-
+    rescue
+        # do nufink
+    end
+    # date validation !!
+    i.item_date = item["date"] #-
+    i.size = item["size"] #-
+    i.commentary = item["note"] #-
+    i.also = item["also"] #-
+    i.range = item["to"] #-
+    i.month = item["month"] #-
+    i
+end
 
 def go_into_level level, struct
     level.each do |section|
@@ -29,79 +110,29 @@ def go_into_level level, struct
                 exit 1
             else
                 items.each do |item|
-                    # check if the item is already in the database!
-                    puts item["name"]
-                    i = Item.new
-                    i.fa_seq = item["name"]
-                    i.fa_structure = struct+"#{sub}"
-
-                    i.description = item["desc"]
-                    pp = item["pp"]
-                    i.pp = pp
-                    begin
-                        pp = pp.split(' ')
-                        i.pp_extra = pp[1]
-                    rescue
-                        # do nufink
-                    end
-                    # date validation !!
-                    i.item_date = item["date"]
-                    i.size = item["size"]
-                    i.commentary = item["note"]
-                    i.also = item["also"]
-                    i.range = item["to"]
-                    i.month = item["month"]
+                    i = new_item item, struct, sub
                     if @update
-                        # find model
-                        m = Item.where('fa_seq = ? AND fa_structure = ?', i.fa_seq, i.fa_structure)
-                        # do we match? 
-                        if m.length > 1
-                            raise "Whoa Betsy"
-                        elsif m.length == 1
-                            m = m.first
-                            # are all attributes equal or if not are the attrs in db `blank'?
-                            h = {}
-                            if m.description != i.description and m.description.nil?
-                                puts "description is blank!"
-                                h[:description] = i.description
-                            end
-                            if m.pp != i.pp and m.pp.nil?
-                                puts "pp is blank!"
-                                h[:pp] = i.pp
-                            end
-                            # TODO figure out why date doesn't trigger
-                            if m.item_date != i.item_date and m.item_date.nil?
-                                puts "item_date is blank!"
-                                h[:item_date] = i.item_date
-                            end
-                            if m.size != i.size and m.size.nil?
-                                puts "size is blank!"
-                                h[:size] = i.size
-                            end
-                            if m.commentary != i.commentary and m.commentary.nil?
-                                puts "commentary is blank!"
-                                h[:commentary] = i.commentary
-                            end
-                            if not (m.update_attributes h)
-                                # handle failure, be noisy
-                                puts "Unable to update #{i.fa_seq}"
-                            end 
-                            
-                        else
-                            # we have a situation where our identifying columns don't match
-                            # possibly new item in the db, only insert if told to
-                            if @force
-                                # unusual case so be noisy
-                                puts "Looks like I found new item in update mode, inserting"
-                                i.save!
-                            else
-                                raise "If we are updating we really should match!"
-                            end
-                        end
+                        i = update_item i
                     else
+                        puts "about to insert new item: #{i.fa_seq}"
                         i.save!
                     end
-
+                    sub_item = item[NEXT_LEVEL]
+                    if !sub_item.nil?
+                        puts "found sub item(s) for #{i.fa_seq}"
+                        sub_item.each do |item|
+                            # struct and sub remain the same
+                            j = new_item item, struct, sub
+                            j.sub = i.id
+                            # puts "debug: inspecting sub: #{j.inspect}"
+                            if @update
+                                j = update_item j
+                            else
+                                puts "about to insert new sub item: #{j.fa_seq}"
+                                j.save!
+                            end
+                        end
+                    end
                 end
             end
         else
@@ -114,7 +145,8 @@ require 'getoptlong'
 
 opts = GetoptLong.new(
   [ '--help', '-h', GetoptLong::NO_ARGUMENT ],
-  [ '--update', '-u', GetoptLong::NO_ARGUMENT ]
+  [ '--update', '-u', GetoptLong::NO_ARGUMENT ],
+  [ '--match-only', '-m', GetoptLong::NO_ARGUMENT ]
 )
 
 def usage
@@ -132,6 +164,7 @@ def usage
 end
 
 @update = false
+@match_only = false
 
 begin
     opts.each do |opt, arg|
@@ -141,6 +174,9 @@ begin
         when '--update'
           puts "switching on update rather than insert"
           @update = true
+        when '--match-only'
+          puts "strict matching on update"
+          @match_only = true
       end
     end
 rescue Exception => e

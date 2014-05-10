@@ -1,0 +1,14 @@
+<h3>all the snippets belonging to this collection</h3>
+<hr>
+<%= render partial: "actual_index", locals: {constraint: {type: Note::IMAGE}} %>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+        <p><span>Back to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Back to the Endnotes"></span> <%= link_to 'Endnotes', endnote_notes_path(whence: params[:whence]) %></p>
+    </div>
+    <div class="col-md-4">
+        <p><span>Continue on to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Continue on to the Index"></span> <%= link_to 'Index', the_index_headings_path(whence: params[:whence]) %></p>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>

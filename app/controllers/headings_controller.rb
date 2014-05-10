@@ -43,10 +43,19 @@ class HeadingsController < ApplicationController
             @scan = Scan.find params['scan']['id']
             @scan.transcription = params['scan']['transcription']
             @scan.save!
-            headings.each do |h|
-                create_heading h[1]['index_term'], h[1]['type'], @scan
+            if !headings.nil?
+                headings.each do |h|
+                    create_heading h[1]['index_term'], h[1]['type'], @scan
+                end
             end
             # flash[:notice] = "Oh joy of joys, index terms created"
+            to_delete = params['to_delete']
+            if !to_delete.nil?
+                to_delete.each do |id|
+                    (Locator.find id.to_i).destroy
+                end
+            end
+            Rails.logger.info("to_delete in bulk_create: #{to_delete.inspect}")
         # rescue Exception
             # flash[:alert] = "Oh arse biscuits: #{dang.message}"
         # end
@@ -59,29 +68,47 @@ class HeadingsController < ApplicationController
     end
 
     def index
-        @all_headings = Heading.order(:index_term)
+        @typd_headings = Heading.where('NOT type = ""', Heading::NO_TYPE).order(:index_term)
+        @typeless_headings = Heading.where('type = ""', Heading::NO_TYPE).order(:index_term)
+        # Heading.find(Locator.pluck(:heading_id))
+        # # pluck replaces
+        # Locator.select(:heading_id).map { |h| h.heading_id }
+        # # or
+        # Locator.select(:heading_id).map(&:heading_id)
+        # 
+        # https://stackoverflow.com/questions/4307411/how-to-express-a-not-in-query-with-activerecord-rails
+        # Heading.find(:all, :conditions => ['id not in (?)', Locator.select(:heading_id).map(&:heading_id)])
+        # check out named_scope as well
+        #
+        @refd_headings = Heading.where(id: Locator.pluck(:heading_id))
+        @orphaned_headings = Heading.where.not(id: Locator.pluck(:heading_id))
+        render 'index'
+    end
+
+    def the_index
+        index
     end
 
     def edit
         @heading = Heading.find params['id']
     end
 
-    def update heading
+    def update
         begin
             heading_id = params[:id]
             # TODO do i need to be paramsing here?
             aspect = params['aspect']
+            heading = params['heading']
             @heading = Heading.find heading_id
             # http://guides.rubyonrails.org/getting_started.html#updating-posts
             if @heading.update(heading.permit(:index_term, :type))
                 flash[:notice] = "Oh joy of joys, index term updated"
-                redirect_to @heading
+                redirect_to the_index_headings_path
             else
-                flash[:alert] = "Unable to update index term, um"
-                render 'edit'
+                raise "You know what I was trying to do? I was trying to update that index term. And I couldn't."
             end
         rescue Exception => dang
-            flash[:alert] = "You know what I was trying to d? I was trying to update that index term. And I couldn't: #{dang.message}"
+            flash[:alert] = "Exceptional circumstances: #{dang.message}"
             render 'edit'
         end
     end
@@ -95,7 +122,7 @@ class HeadingsController < ApplicationController
             @heading.destroy
             # TODO create a `shorten' method
             flash[:notice] = "Oh joy of joys, index term <strong>#{@heading.index_term}</strong> deleted"
-            redirect_to headings_path
+            redirect_to the_index_headings_path
         rescue Exception => dang
             flash[:alert] = "Behold my terseness - unable to delete index term: #{dang.message}"
             render 'edit'

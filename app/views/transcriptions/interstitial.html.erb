@@ -1,21 +1,17 @@
-<div>existing index terms</div>
-<%# binding.pry %>
-<%= render @existing %>
-<hr>
-
-<div>found these new terms</div>
 
 <%
     @headings = []
+    @references = [] # known here as locators, as in descriptors/locators
     @must_create.each do |m|
-        temp = Heading.new
-        # temp.index_term = m['href']
+        temp_h = Heading.new
+        # temp_h.index_term = m['href']
         # you're fucking joking
-        temp.index_term = (URI.unescape m.attr('href')).gsub('+',' ')
-        l = Locator.new
-        l.scan_id = @scan.id
-        l.content = m.text
-        @headings <<= temp
+        temp_h.index_term = (URI.unescape m.attr('href')).gsub('+',' ')
+        temp_l = Locator.new
+        temp_l.scan_id = @scan.id
+        temp_l.content = m.text
+        @headings <<= temp_h
+        @references <<= temp_l
 %>
     <%# render partial: "headings/new_panel" %>
 <%
@@ -27,14 +23,45 @@
 <%# end %>
 
 <%= form_for "headings[]", :url => bulk_create_headings_path do |f| %>
-     <% @headings.each_with_index do |heading,i| %> 
+    <h2>These are the <span class="hot-cinnamon">existing</span> terms</h2>
+    <% @existing_term.each_with_index do |heading,i|
+        temp_l = Locator.new
+        temp_l.scan_id = @scan.id
+        temp_l.content = @assoc_wiki[i].text
+    %>
+    <%= field_set_tag "Heading #{i}" do %>
         <%= fields_for "headings[#{i}]", heading do |hf| %>
-            <%= render partial: 'headings/new_panel', locals: {heading: heading, f: hf} %>
+            <%= render partial: 'headings/new_panel', locals: {heading: heading, locator: temp_l, f: hf} %>
             <%# binding.pry %>
             <!-- other heading fields -->
             <%# render :partial => "photo_form", :locals => {f => f} %>
         <% end %>
     <% end %>
+    <% end %>
+    <hr>
+
+    <h2>Found these <span class="hot-cinnamon">new</span> terms</h2>
+    <% @headings.each_with_index do |heading,i| %> 
+    <%= field_set_tag "Heading #{i+@existing_term.length}" do %>
+        <%= fields_for "headings[#{i+@existing_term.length}]", heading do |hf| %>
+            <%= render partial: 'headings/new_panel', locals: {heading: heading, locator: @references[i], f: hf} %>
+            <%# binding.pry %>
+            <!-- other heading fields -->
+            <%# render :partial => "photo_form", :locals => {f => f} %>
+        <% end %>
+    <% end %>
+    <% end %>
+    <hr>
+
+    <h2>Deleting these <span class="hot-cinnamon">following</span> terms</h2>
+    <ul>
+    <% @to_delete.each do |l| %>
+        <li><%= l.pretty_inspect %></li>
+        <%# f.hidden_field :to_delete, {:multiple => true, :value => l.id} %>
+        <%# hidden_field_tag 'to_delete[]', {:multiple => true, :value => l.id} %>
+        <%= hidden_field_tag 'to_delete[]', l.id %>
+    <% end %>
+    </ul>
     <p>
         <input type="hidden" id="scan_id" name="scan[id]" value="<%= params[:id] %>" />
         <input type="hidden" id="scan_transcription" name="scan[transcription]" value="<%= params[:scan][:transcription] %>" />
@@ -44,11 +71,3 @@
         <%= f.submit "Process Heading(s)"%>
     </p>
 <% end %>
-<hr>
-
-<div>deleting the following</div>
-<ul>
-<% @to_delete.each do |d| %>
-    <li><%= d.pretty_inspect %></li>
-<% end %>
-</ul>

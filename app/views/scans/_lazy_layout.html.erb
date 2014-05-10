@@ -2,7 +2,7 @@
     if Scan::VIRGIN == scan.state
         path = new_transcription_path(scan_id: scan.id, aspect: params['aspect'], q: params['q'], whence: params['whence'])
     elsif Scan::COMPLETED == scan.state
-        path = transcriptions_path(id: scan.id, aspect: params['aspect'], q: params['q'], whence: params['whence'])
+        path = transcription_path(id: scan.id, aspect: params['aspect'], q: params['q'], whence: params['whence'])
     else
         path = edit_transcription_path(id: scan.id, aspect: params['aspect'], q: params['q'], whence: params['whence'])
     end

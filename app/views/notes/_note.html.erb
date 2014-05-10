@@ -34,6 +34,10 @@
     <hr>
 <div>
     <%= link_to ' delete? ', note_path(note.id, params), data: { confirm: 'are you sure?' }, :method => :delete %>
+
+    <%# link_to " #{member.email} ", edit_member_registration_path(member) %>
+
+    <%= render partial: "notes/member_edit", locals: {member: (Member.find note.member_id)} %>
 </div>
 <%
     else
@@ -46,6 +50,8 @@
 <hr>
 <div>
     <%= link_to ' delete? ', note_path(note.id, params), data: { confirm: 'are you sure?' }, :method => :delete %>
+
+    <%= render partial: "notes/member_edit", locals: {member: (Member.find note.member_id)} %>
 </div>
 <%
     end

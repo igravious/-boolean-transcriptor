@@ -1,10 +1,14 @@
-<%# form_for :heading, url: headings_path do |f| %>
+<%# form_for :heading, url: the_index_headings_path do |f| %>
   <%# binding.pry %>
   <p>
-    <%= f.label :index_term %><br>
     <% if heading.index_term.blank? %>
         <%= f.text_field :index_term %>
     <% else %>
+        <% if heading.index_term == locator.content %>
+            <%= f.label "Index term" %><br>
+        <% else %>
+            <%= f.label "Reference “#{locator.content}” for Index Term" %><br>
+        <% end %>
         <%= f.text_field :index_term, { readonly: 'readonly'} %>
     <% end %>
   </p>

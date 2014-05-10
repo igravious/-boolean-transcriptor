@@ -1422,7 +1422,6 @@ data:
         items:
         - item: 
           name: BP/1/221
-          note: (See Also BP/1/260)
           date: 1830
           to: 1852
           desc: |
@@ -1443,7 +1442,8 @@ data:
             pp: _
           - sub: 
             name: BP/1/221/3
-            date: 23 Dec 1833
+            note: (See Also BP/1/260)
+            date: 22 Feb 1834
             desc: |
               Extract from a letter by Boole to Hill. He feels this letter breaks their agreement to correspond on profound matters, and adds he hopes one day to be as profound and solemn as Hill. He has begun to study Italian and finds it quite easy, Greek was becoming very dry and dusty for him, but he wonders if he should not have mastered it before moving on to Italian. Mentions he completed the prize question in 'Ladies Diary' and promises if he wins to send Hill a diary.
             pp: _
@@ -1631,7 +1631,7 @@ data:
           desc: |
             All letters described here are taken from a letterbook of Boole' s letters to Kirk, and are given in the order they appear in the letterbook.
           pp: 1 item
-          part:
+          part: # sub-items! :( :O
           - sub: 
             name: BP/1/222/1
             date: 1845-1849
@@ -1702,7 +1702,7 @@ data:
           desc: |
             All letters described here are taken from a letterbook and are given in the order they appear in the letter book. All letters are to the Rev. E. Larken unless otherwise stated.
           pp: 1 item
-          part:
+          part: # sub-items! :( :O
           - sub: 
             name: BP/1/223/1
             date: 23 Dec 1845
@@ -1723,8 +1723,8 @@ data:
             pp: _
           - sub: 
             name: BP/1/223/4
-            date:
-            - Jan 1847
+            date: 1847
+            month: January
             desc: |
               From Boole in London to Larken sending the receipt for the twenty-two sovereigns Larken entrusted to him and telling of the people he has met, including Mr. De Vericour whom he liked, and who sends advice to Larken to send his boy to school. He also met Mr. Lantham and Mr. De Morgan who is ill, and also many young men who would make fine teachers. He is thinking of letting his school and instead taking in about 12 pupils at £50 per annum and wonders if Larken would act as a referee to him. He is not happy with his present situation 'I can hardly see how I am turning to account the little learning or talent that I have ... on the whole I am in a painfully unsettled form of mind'. He closes with a discussion on different news of the Purgatory [a poem].
             pp: _
@@ -1768,7 +1768,7 @@ data:
             name: BP/1/223/11
             date: 7 Oct 1847
             desc: |
-              Boole in Lincoln to Larken. He was induced by an old "friend" to buy two copies of George Rose's Journal, and inquires if Larken would like one. His friend has sold many to the clergy and had intended calling on Larken and the bishop but had not the time.
+              Boole in Lincoln to Larken. He was induced by an old ‘friend’ to buy two copies of George Rose's Journal, and inquires if Larken would like one. His friend has sold many to the clergy and had intended calling on Larken and the bishop but had not the time.
             pp: _
           - sub: 
             name: BP/1/223/12
@@ -2015,7 +2015,7 @@ data:
           name: BP/1/247
           date: _
           desc: |
-            Brooke to Maryann giving her general news. He opens good humourdly with a wry tale of how children are trying to steal his apples, one of which he plans to present to his next door neighbour 'The fair Widow Sutton'. He exclaims 'oh the delights of the suburbs, with an aggressive population and never a constable' . Mentions his sister-in-law is home. His thoughts then turn to religion and 'How one sometimes (thoughtfully) is inclined to envy the poor Catholic their pious ejaculations of "God rest his soul"'. He feels it must be a great comfort to know one's prayers are helping those in purgatory, and adds in his old age he finds his thoughts turning more and more to theology. He also brings up an article he read about a 150ft. long sea serpent living in a Scotch lake. He has never heard any more about it and half believes he probably dreamt the article up and adds jokingly 'who knows but he might turn up in Killarney'.
+            Brooke to Maryann giving her general news. He opens good humourdly with a wry tale of how children are trying to steal his apples, one of which he plans to present to his next door neighbour 'The fair Widow Sutton'. He exclaims 'oh the delights of the suburbs, with an aggressive population and never a constable' . Mentions his sister-in-law is home. His thoughts then turn to religion and 'How one sometimes (thoughtfully) is inclined to envy the poor Catholic their pious ejaculations of ‘God rest his soul’'. He feels it must be a great comfort to know one's prayers are helping those in purgatory, and adds in his old age he finds his thoughts turning more and more to theology. He also brings up an article he read about a 150ft. long sea serpent living in a Scotch lake. He has never heard any more about it and half believes he probably dreamt the article up and adds jokingly 'who knows but he might turn up in Killarney'.
           pp: 2
         - item: 
           name: BP/1/248
@@ -2661,7 +2661,7 @@ data:
           name: BP/1/338
           date: _
           desc: |
-            From Harry Bendorf, written in unusually large handwriting, thanking her for her letter and postcard and telling her about his feelings towards Boole's Laws of Thought .It took him four years to understand the work when 'it came clear to me when I was crossing the lines and I saw what the Old Testament meant by writing laws on people’s hearts. I thought you would like to know this .... I don't know how to say "Thank You" to you for all your kindness to me. I have felt so stupid perhaps I shall be better able to Thank You in the next forty years'.
+            From Harry Bendorf, written in unusually large handwriting, thanking her for her letter and postcard and telling her about his feelings towards Boole's Laws of Thought .It took him four years to understand the work when 'it came clear to me when I was crossing the lines and I saw what the Old Testament meant by writing laws on people’s hearts. I thought you would like to know this .... I don't know how to say ‘Thank You’ to you for all your kindness to me. I have felt so stupid perhaps I shall be better able to Thank You in the next forty years'.
           pp: 5
     - sub: III
       label: Letters of Mary Ellen Hinton

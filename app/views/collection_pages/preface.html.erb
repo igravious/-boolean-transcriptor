@@ -1,0 +1,15 @@
+<h2>The preface to the <span class="hot-cinnamon">George Boole Collection</span> by Anthony Durity</h2>
+<hr>
+<%# CONSTs, etc. %>
+<%=raw Redcarpet::Markdown.new(Redcarpet::Render::HTML.new).render(File.read("#{Rails.root}/PREFACE.md")) %>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+        <p><span>Back on to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Back on to Foreword"></span> <%= link_to 'Foreword', foreword_path(whence: params[:whence]) %> by Des MacHale</p>
+    </div>
+    <div class="col-md-4">
+        <p><span>Continue on to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Continue on to BP/1/1"></span> <%= link_to 'first item', item_view_path(fa_seq: 'BP/1/1', whence: params[:whence]) %> in the collection</p> <!-- TODO select by 1st item? -->
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>

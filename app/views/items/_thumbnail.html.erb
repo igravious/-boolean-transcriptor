@@ -1,14 +1,14 @@
 <span class="img">
 <%
     item = thumbnail
-    scans = item.scans
+    scans = item.scans.order(:minor_seq)
 %>
 <% if scans.first.nil? %>
     <!-- we have an item but no scan: BP/1/368 (3.V), BP/1/311 (1.E.II), BP/1/312 (1.E.III), BP/1/236 (1.A.IV.ii) -->
     <!-- Verify with Special Collections -->
 
     <!-- CONSTs for height, width, and margin, where? -->
-    <img src="/images/no-image.jpeg" alt="No scans for <%= item.fa_seq %>" title="<%= item.fa_seq %>">
+    <a href="<%= item_path(item.id, aspect: params['aspect'], q: params['q'], whence: params['whence']) %>" data-counter="<%= (defined? item_counter) ? item_counter : ''%>" title="<%= item.fa_seq %>" style="display: inline"><img src="/images/no-image.jpeg" alt="No scans for <%= item.fa_seq %>" title="<%= item.fa_seq %>"></a>
     <!--span class="overlay">0 scans</span-->
 <% else %>
     <% count = scans.length %>

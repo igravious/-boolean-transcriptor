@@ -1,0 +1,43 @@
+<!--
+  display items grouped by date
+
+  each item needs an extra field for the year i think
+
+  if you are using group by you need some aggregate function 
+  (like sum, or count)
+-->
+
+<%- content_for(:head) do -%>
+    <%# javascript_include_tag "lazyload.min", "data-turbolinks-track" => false # doesn't load all images in a long scrollable div %>
+    <%= javascript_include_tag "jquery.lazyload", "data-turbolinks-track" => TURBO %>
+<%- end -%>
+
+<%= render '/per_view_javascript' %>
+
+<%= render 'breadcrumb' %>
+
+<fieldset>
+    <legend>
+        <!-- translate these -->
+        # of scans per significant term
+    </legend>
+    <ol class="list-group">
+        <%
+            link_name = "no terms of significance"
+            @scans = @all_scans.where.not(id: Locator.pluck(:scan_id))
+        %>
+            <li class="list-group-item"><span class="badge"><%= link_name %></span>
+            <%= render "scans/scans_preview_container" %> 
+            </li>
+        <%
+            @all_scans.joins(:locators).group(:content).count.each do |content, count|
+                state_label = content
+                link_name = "#{state_label} ……… #{pluralize(count, 'item')}"
+                @scans = @all_scans.joins(:locators).where("content = ?", content)
+        %>
+                <li class="list-group-item"><span class="badge"><%= link_name %></span>
+                <%= render "scans/scans_preview_container" %> 
+                </li>
+        <% end %>
+    </ol>
+</fieldset>

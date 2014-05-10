@@ -1,0 +1,10 @@
+
+<%= render '/per_view_stylesheet' %>
+
+<h3>Yon leaderboard</h3>
+<ol>
+    <%# # object:    will define a variable with the same name as the partial by default %>
+    <% @ranked_members.each_with_index do |ranked_member, i| %>
+        <%= render partial: "collection_pages/member_by_rank", object: ranked_member, locals: {counter: i} %>
+    <% end %>
+</ol>

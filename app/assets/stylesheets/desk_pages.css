@@ -1,0 +1,35 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+#desk {
+    max-width: 100%;
+    width: 66%;
+    height: 320px;
+    border: 1px solid #bfbfbf;
+    padding: 1px;
+}
+
+.draggable {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+
+    width: 60px;
+    height: 60px;
+    padding: 8px;
+   
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    
+    font: 32px Arial, sans-serif;
+}
+
+.leader0 {
+    background: #FFEEEE;
+}
+
+.leader1 {
+    background: lightgray;
+}

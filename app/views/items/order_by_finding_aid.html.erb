@@ -4,6 +4,7 @@
     <%= javascript_include_tag "jquery.cookie", "data-turbolinks-track" => TURBO %>
     <!-- the following requires the preceeding - use dependency graph? -->
     <%= javascript_include_tag "jquery.simple.tree.menu", "data-turbolinks-track" => TURBO %>
+    <%# javascript_include_tag "jquery.lazyload", "data-turbolinks-track" => TURBO %>
     <%= javascript_include_tag "jquery.bxslider", "data-turbolinks-track" => TURBO %>
 
     <%= stylesheet_link_tag "jquery.simple.tree.menu", media: "all", "data-turbolinks-track" => TURBO %>
@@ -23,7 +24,7 @@
     <!-- 3.V, 1.E.III, 1.E.II, 1.A.IV.ii is tragic ... show # of items? ... white border? ... -->
 
 <%
-    @struct_count = @all_items.group(:fa_structure).count
+    @struct_group = @all_items.group(:fa_structure)
 
     def display_nodes level, struct
         level.each do |section|
@@ -31,7 +32,7 @@
             label = section["label"].to_s
             handle = sub+": "+label
             next_level = section["part"]
-            id = struct+sub
+            id = struct+sub # id of div to be filled, not item id or anything like that
             fill_id = "fill-#{id}"
 %>
         <li id="tree-<%=id%>">
@@ -41,10 +42,18 @@
             <span id='' style="display: inline;" class='desc_leaf'>
                 <b>
                     <%
-                        # count = Item.where(fa_structure: id).count # cache this to not hit db? or use index?
-                        # see above
-                        count = @struct_count[id]
-                        link_name = "#{handle} ……… #{pluralize(count, 'item')}"
+                        # see above for how struct_group is made, check out mr. fancy pants line below .reduce({}, :update [{a=>b}{c=>d}] to {a=b,c=>d}
+                        sub_group = @struct_group.map{|f| {f.fa_structure => f.sub}}.reduce({}, :update)
+                        struct_count = @struct_group.count[id]
+                        is_sub = sub_group[id]
+                        sub_prefix = ""
+                        item_prefix = ""
+                        if is_sub
+                            sub_prefix = "sub-"
+                            struct_count -= 1
+                            item_prefix = "1 item and "
+                        end
+                        link_name = "#{handle} ……… #{item_prefix+pluralize(struct_count, sub_prefix+'item')}"
                     %>
                     <%= link_to( link_name, items_path(fa_structure: id, selector_id: fill_id, aspect: params['aspect'], whence: params['whence']), remote: true, id: id, class: "ajax_trigger", style: "display: inline", onclick: "wasClicked()") %>
                 </b>

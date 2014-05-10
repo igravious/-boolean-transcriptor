@@ -6,7 +6,7 @@
 
 <!-- why a ul? -->
 <ul class="list-group" style="padding-top: 10px">
-<!-- only show these if there are items with notes (scribbles/snippets), potentially refactor out each to theirs own -->
+    <!-- only show these if there are items with notes (endnotes/snippets), potentially refactor out each to theirs own -->
 <!--
 <h4>delicious notes from items</h4>
 <hr>
@@ -40,7 +40,8 @@
             if note.scan_id
                 scan = Scan.find note.scan_id
     %>
-        <div class="well" style="margin-bottom: 0px"><%= render partial: scan, layout: "scans/scan_bxslider_layout" %>
+        <div class="well" style="margin-bottom: 0px">
+            <%= render partial: scan, layout: "scans/note_layout" %>
             <span class="label label-primary"><%= Scan::STATE_STRING[scan.state] %></span>
         </div>
         <div class="well">

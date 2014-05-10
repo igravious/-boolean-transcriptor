@@ -1,5 +1,6 @@
 class FindingAidsController < ApplicationController
 
+    # TODO CONST
     def type
         # should i be doing somethihng in config/initializers/mime_types.rb ?
         # and using respond_to ?
@@ -23,8 +24,12 @@ class FindingAidsController < ApplicationController
             #
             path = Rails.root.to_s+"/db/boole_papers_ead.xml"
             send_file(  path, :disposition => 'inline', :type => 'application/ead+xml', :x_sendfile => true)
+        when "edm"
+            path = "http://pro.europeana.eu/technical-requirements"
+            redirect_to path
         else
-            redirect_to root_path, notice: "Reckon I don't know that finding aid type."
+            # should this really be a redirect_to ?
+            redirect_to root_path, notice: "Reckon I don't speak that language."
         end
     end
 
