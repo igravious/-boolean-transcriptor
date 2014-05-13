@@ -4,6 +4,7 @@
  * deprecated for simpler overflowed div solution
  */
 var doSlider = function() {
+    // inf is broken :(
     $('.slide-wrapper').bxSlider({
         slideWidth: 100,
         infiniteLoop: false,
