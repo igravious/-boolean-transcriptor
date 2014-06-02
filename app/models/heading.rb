@@ -2,7 +2,7 @@ class Heading < ActiveRecord::Base
 
     # who, where, ~when, ~what, ~how
     # I confess I've taken the idea of activities from FromThePage
-    TYPES=['person', 'place', 'event', 'concept', 'activity']
+    TYPES=['person', 'place', 'event', 'concept', 'activity', 'animal', 'vegetable', 'mineral', 'thing']
 
     self::NO_TYPE = ""
 
