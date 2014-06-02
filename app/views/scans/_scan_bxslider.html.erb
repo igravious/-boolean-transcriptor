@@ -2,13 +2,21 @@
     <%= javascript_include_tag "jquery.bxslider", "data-turbolinks-track" => TURBO %>
  
     <%= stylesheet_link_tag "jquery.bxslider", media: "all", "data-turbolinks-track" => TURBO %>
+    <%# javascript_include_tag "jquery.lazyload", "data-turbolinks-track" => TURBO %>
 <%- end -%>
  
-<%= render '/per_view_javascript' %>
+<%=
+    # TODO fix this hack (it'd be nice if i told myself what the hack was for)
+    # if params['controller'] != 'items'
+        render '/per_view_javascript'
+    # end
+%>
+    
 
 <!-- in lieu of index route -->
 <%# params.pretty_inspect %>
 
 <div class="slide-wrapper">
     <%= render partial: "scans/scan", collection: scan_bxslider, layout: "scans/scan_bxslider_layout" %>
+    <%# render "scans/scans_preview_container" %> 
 </div>

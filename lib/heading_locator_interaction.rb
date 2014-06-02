@@ -6,6 +6,8 @@
 
 module HeadingLocatorInteraction
     # create headings just from scans?
+    # the way this works is that headings either already exist or they are created
+    # the locator is always created and linked with the now existent heading
     def create_heading index_term, type, scan
         raise "ah hell, no ways you can be blank, can you?" if index_term.blank?
         # why?
@@ -19,11 +21,16 @@ module HeadingLocatorInteraction
         end
         if scan
             scan.index_content(index_term).each do |c|
-                l = Locator.new
-                l.heading_id = h.id
-                l.scan_id = scan.id
-                l.content = c
-                l.save
+				begin
+                	l = Locator.new
+                	l.heading_id = h.id
+                	l.scan_id = scan.id
+                	l.content = c
+                	l.save
+      			# rescue SQLite3::ConstraintException => e
+      			rescue Exception => e
+					Rails.logger.info(e.message)
+				end
             end
         end
     end

@@ -29,7 +29,7 @@
                 <span class="icon-bar"></span>
             </button>
             <div class="<%= switch_on "brand" %>">
-                <a class="navbar-brand hot-cinnamon brand" href="/welcome" alt="Welcome">x²=x</a>
+                <a class="navbar-brand hot-cinnamon brand" href="<%= welcome_path %>" alt="Welcome">x²=x</a>
             </div>
         </div>
 
@@ -37,7 +37,7 @@
         <div class="collapse navbar-collapse" id="desk-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="<%= switch_on "desk" %>"><a href="<%= desk_path %>" alt="The Desk">The Desk</a></li>
-                <li class="<%= switch_on "faqs_n_guide" %>"><a href="/faqs_n_guide" alt="FAQs & Guide">FAQs &amp; Guide</a></li>
+                <li class="<%= switch_on "faqs_n_guide" %>"><a href="<%= faqs_n_guide_path %>" alt="FAQs & Guide">FAQs &amp; Guide</a></li>
                 <li class="dropdown">
                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" alt="Propaganda">Propaganda<b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -135,3 +135,6 @@
     <%# debug params %>
 </div>
 
+<script type="text/javascript">
+	$('.dropdown-toggle').dropdown();
+</script>

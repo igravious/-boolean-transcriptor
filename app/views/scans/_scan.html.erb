@@ -17,7 +17,9 @@
 %>
 
 <% if defined? lazy_load %>
-    <img class="lazy" data-original="<%= '/images/'+thumb_name %>" alt="<%= alt %>" title="<%= title %>" width="100px" height="100px">
+	<div style="width: 100px; height:100px; display: inline;">
+    <img style="display: inline;" class="lazy" data-original="<%= image_path thumb_name %>" alt="<%= alt %>" title="<%= title %>" width="100px" height="100px">
+	</div>
 <% else %>
     <%= image_tag(thumb_name, alt: alt, title: title) %>
 <% end %>

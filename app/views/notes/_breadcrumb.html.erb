@@ -1,15 +1,15 @@
 <%- content_for(:breadcrumb) do -%>
 <%
     if params['item_id']
-        # @item = Item.find params['item_id']
+        @item = Item.find params['item_id']
 %>
         <%= render 'scans/breadcrumb' %>
 <%  
     elsif params['scan_id']
-        # @scan = Scan.find params['scan_id']
-        # @item = @scan.item
+        @scan = Scan.find params['scan_id']
+        @item = @scan.item
 %>
         <%= render 'transcriptions/breadcrumb' %>
 <%  end %>
-    <li class="active"><%= "#{params['action'].capitalize}s" %></li>
+    <li class="active"><%= "#{params['action'].capitalize}#{@note.nil? ? 's' : ' '+@note.user_visible_name}" %></li>
 <%- end -%>

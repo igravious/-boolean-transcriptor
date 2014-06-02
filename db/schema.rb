@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140423185817) do
+ActiveRecord::Schema.define(version: 20140526203006) do
 
   create_table "headings", force: true do |t|
     t.string   "index_term", null: false
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20140423185817) do
     t.string   "content"
   end
 
-  add_index "locators", ["scan_id", "heading_id", "content"], name: "index_locators_on_scan_id_and_heading_id_and_content"
+  add_index "locators", ["scan_id", "heading_id", "content"], name: "index_locators_on_scan_id_and_heading_id_and_content", unique: true
 
   create_table "members", force: true do |t|
     t.string   "email",                  default: "",    null: false

@@ -5,24 +5,27 @@
 <hr>
 
 <p>
-    <%= link_to "Compose a new heading", new_heading_path %>
+    <%= link_to "Compose a new heading", new_heading_path(whence: params[:whence]) %>
 </p>
 <hr/>
 
 <h3>Index</h3>
 <%= render partial: "heading_chunk", object: @refd_headings %>
+<!--
 <h3>Orphaned Headings</h3>
-<%= render partial: "heading_chunk", object: @orphaned_headings %>
+<%# render partial: "heading_chunk", object: @orphaned_headings %>
 <h3>Index (with types)</h3>
-<%= render partial: "heading_chunk", object: @typd_headings %>
+<%# render partial: "heading_chunk", object: @typd_headings %>
 <h3>Typeless Headings</h3>
-<%= render partial: "heading_chunk", object: @typeless_headings %>
+<%# render partial: "heading_chunk", object: @typeless_headings %>
+-->
 <hr>
 <div class="row">
     <div class="col-md-4">
         <p><span>Back to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Back to the Snippets"></span> <%= link_to 'Snippets', snippet_notes_path(whence: params[:whence]) %></p>
     </div>
     <div class="col-md-4">
+        <p><span>Continue on to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Continue on to the orphaned headings"></span> <%= link_to 'Orphaned Headings', orphaned_index_headings_path(whence: params[:whence]) %></p>
     </div>
     <div class="col-md-4">
     </div>

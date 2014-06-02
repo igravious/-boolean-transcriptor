@@ -44,7 +44,7 @@
                     <li><i><span id="item_desc"></span></i>
                     <li>
                         <%# form_for :desk_pages, :url => url_for(:action => 'item_view'), :method => 'get' do |f| %>
-                            <form action="/item_view?whence=outline" method="get">
+                            <form action="<%= item_view_path(whence: 'outline') %>" method="get">
                             <button type="submit" class="btn btn-default" style="display:inline;" onclick="rewind();set_desc();set_focus();return false;"><span class="glyphicon glyphicon-fast-backward" alt="Fast Backward"></span></button>
                             <button type="submit" class="btn btn-default" style="display:inline;" onclick="rewind_1();set_desc();set_focus();return false;"><span class="glyphicon glyphicon-step-backward" alt="Step Backward"></span></button>
                             <input id="item_id" name="fa_seq" type="text" value="" alt="Item">

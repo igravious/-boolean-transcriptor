@@ -23,12 +23,12 @@ class Note < ActiveRecord::Base
     end
 
     def user_visible_name
-        what = 'thingy' # should never be thingy of course
         if type == Note::TEXT
             what = 'note'
         elsif type == Note::IMAGE
             what = 'snippet'
+        else
+			raise 'Unexpected Note Type'
         end
-        what
     end
 end

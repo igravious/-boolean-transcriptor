@@ -1,3 +1,6 @@
+
+require 'heading_locator_interaction'
+
 class Scan < ActiveRecord::Base
   has_paper_trail
 
@@ -20,7 +23,7 @@ class Scan < ActiveRecord::Base
   STATE_STRING=[nil, "Untouched", "In Progress", "Needs Review", "Locked", "Completed"]
 
   def index_content index_term
-    wikify = Creole::creolize transcription
+    wikify = Creole::creolize self.transcription
     noko = Nokogiri::HTML.fragment(wikify)
     content = []
     noko.css('a').each do |e|
@@ -33,9 +36,27 @@ class Scan < ActiveRecord::Base
 
   def self.set_to_void_if_empty
   end
+	
+  include HeadingLocatorInteraction
+  # where should this function be ideally?
+  def bulk_update(script, headings, to_delete)
+		self.transcription = script
+		save!
+		if !headings.nil?
+			headings.each do |h|
+				create_heading h[1]['index_term'], h[1]['type'], self
+			end
+		end
+		# flash[:notice] = "Oh joy of joys, index terms created"
+		if !to_delete.nil?
+			to_delete.each do |id|
+				(Locator.find id.to_i).destroy
+			end
+		end
+  end
 
   def annotate
-      0
+    1
   end
 
   def narrative

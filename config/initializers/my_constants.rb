@@ -70,8 +70,9 @@ NUMBER_OF_SCANS = 2495
 UNDONE = []             # items with no scans
 INCOMPLETE = []         # items partially scanned
 ORPHANED = []           # scans without items
-PATH_TO_SCANS = []
-PATH_TO_THUMBS = []
+PATH_TO_SCANS = ["../facsimiles/boole-facsimiles/BOOLE-MASTER-STAMPED-JPEG-1-OF-2/", "../facsimiles/boole-facsimiles/BOOLE-MASTER-STAMPED-JPEG-2-OF-2/"]
+PATH_TO_THUMBS = "../../../facsimiles/boole-facsimiles/thumbs/"
+PATH_TO_PINT_SIZE = "../../../facsimiles/boole-facsimiles/pint-size/"
 
 # ELECTRONIC_FINDING_AID
 
@@ -118,7 +119,8 @@ DIGITAL_SURROGATE = {
     incomplete: INCOMPLETE,
     orphaned: ORPHANED,
     scans_folder: PATH_TO_SCANS,
-    thumbs_folder: PATH_TO_THUMBS
+    thumbs_folder: PATH_TO_THUMBS,
+    pint_size_folder: PATH_TO_PINT_SIZE
 }
 
 ELECTRONIC_FINDING_AID = {

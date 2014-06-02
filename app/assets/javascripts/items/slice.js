@@ -71,7 +71,7 @@ var handleSimpleTreeMenu = function() {
 
         }
     } else {
-        console.log("no .items_tree or .slide-wrapper found by slice.js");
+        console.log("no .items_tree or .slide-wrapper or .preview-container found by slice.js");
     }
 
     // bind to all classes of ajax triggers, should be in dev mode only
@@ -89,8 +89,8 @@ var handleSimpleTreeMenu = function() {
     return true;
 };
 
-$(document).on('ready', handleSimpleTreeMenu);
-$(document).on('page:load', handleSimpleTreeMenu);
+$(document).bind('ready', handleSimpleTreeMenu);
+//$(document).on('page:load', handleSimpleTreeMenu);
 
 var pretendWasClicked = function(el_id) {
     // safe selector

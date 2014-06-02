@@ -1,16 +1,12 @@
 
 <%= render 'breadcrumb' %>
 
-<% if @note.type == Note::TEXT %>
-    <h4>Editing <span class="hot-cinnamon">note</span></h2>
-<% else %>
-    <h4>Editing <span class="hot-cinnamon">snippet</span></h2>
-<% end %>
+<h4>Editing <span class="hot-cinnamon"><%= @note.user_visible_name %></span></h2>
 <hr>
 <%= render partial: "form", locals: {note: @note} %>
 <hr>
 <% if @note.type == Note::TEXT %>
-    <div>View all the <%= link_to 'endnotes', endnote_notes_path(params) %></div>
+    <div>View all the <%= link_to 'endnotes', endnote_notes_path('whence'=>params[:whence]) %></div>
 <% else %>
-    <div>View all the <%= link_to 'snippets', snippet_notes_path(params) %></div>
+    <div>View all the <%= link_to 'snippets', snippet_notes_path('whence'=>params[:whence]) %></div>
 <% end %>

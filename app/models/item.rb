@@ -46,6 +46,10 @@ class Item < ActiveRecord::Base
             "Ordered by State"
         when "group_by_significant_term"
             "Significant Term Order"
+        when "display_by_number_of_scans"
+			"Order by Number of Scans"
+		when "advanced_search"
+			"Ordered by Search Criteria"
         else
             "Database Order"
         end

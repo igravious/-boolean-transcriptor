@@ -4,7 +4,7 @@
 <h2>Create a new <span class="hot-cinnamon">index</span> term for the collection</h2>
 <hr>
 
-<%= debug params %>
+<%# debug params %>
 
 <%- content_for(:head) do -%>
     <%# javascript_include_tag "jquery.dropdown", "data-turbolinks-track" => TURBO %>
@@ -13,7 +13,7 @@
 
 <!-- put this in _form ? -->
 <!-- can it figure out url: -->
-<%= form_for @heading, url: the_index_headings_path do |f| %>
+<%= form_for @heading, url: headings_path do |f| %>
     <!-- prolly can extract Heading.new from f -->
     <%= render partial: 'new_panel', locals: {heading: @heading, locator: Locator.new, f: f} %>
     <p>

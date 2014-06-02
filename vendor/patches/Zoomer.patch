@@ -1,0 +1,165 @@
+diff -rupN Zoomer.orig/jquery.fs.zoomer.css Zoomer/jquery.fs.zoomer.css
+--- Zoomer.orig/jquery.fs.zoomer.css	2014-05-14 12:01:03.618642387 +0100
++++ Zoomer/jquery.fs.zoomer.css	2014-05-26 11:49:39.701450697 +0100
+@@ -19,7 +19,7 @@
+ 		     -o-user-select: none;
+ 		        user-select: none;
+  	}
+-	.zoomer { background: #eee url(jquery.fs.zoomer-loading.gif) no-repeat center; height: 100%; overflow: hidden; position: relative; width: 100%;
++	.zoomer { url(images/jquery.fs.zoomer-loading.gif) no-repeat center; height: 100%; overflow: hidden; position: relative; width: 100%;
+ 		-webkit-transition: none;
+ 		   -moz-transition: none;
+ 		   	-ms-transition: none;
+@@ -27,7 +27,7 @@
+ 		   	 	transition: none;
+ 	}
+ 	.zoomer .zoomer-positioner { margin: 0; height: 1px; position: absolute; width: 1px; }
+-	.zoomer .zoomer-holder { box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); opacity: 0; position: relative;
++	.zoomer .zoomer-holder { opacity: 0; position: relative;
+ 		-webkit-transition: none;
+ 		   -moz-transition: none;
+ 		   	-ms-transition: none;
+@@ -61,12 +61,12 @@
+ 
+ 	/* CONTROLS - TOP, BOTTOM */
+ 	.zoomer .zoomer-controls-top,
+-	.zoomer .zoomer-controls-bottom { left: 50%; margin: 0 0 0 -35px; }
++	.zoomer .zoomer-controls-bottom { left: 50%; margin: 0 0 0 -70px; height: 40px; width: auto; }
+ 	.zoomer .zoomer-controls-top { bottom: auto; top: 10px; }
+ 	.zoomer .zoomer-controls-bottom { bottom: 10px; top: auto; }
+ 
+ 	.zoomer.zoomer-gallery .zoomer-controls-top,
+-	.zoomer.zoomer-gallery .zoomer-controls-bottom { margin: 0 0 0 -65px; }
++	.zoomer.zoomer-gallery .zoomer-controls-bottom { margin: 0 0 0 -65px; width: 131px; }
+ 
+ 	.zoomer .zoomer-controls-top span,
+ 	.zoomer .zoomer-controls-bottom span { float: left; }
+diff -rupN Zoomer.orig/jquery.fs.zoomer.js Zoomer/jquery.fs.zoomer.js
+--- Zoomer.orig/jquery.fs.zoomer.js	2014-05-14 11:57:56.763642395 +0100
++++ Zoomer/jquery.fs.zoomer.js	2014-05-26 11:49:40.262415245 +0100
+@@ -23,7 +23,7 @@
+ 	 * @param controls.next [string] <> "Custom pagination control selecter"
+ 	 * @param controls.previous [string] <> "Custom pagination control selecter"
+ 	 * @param customClass [string] <''> "Class applied to instance"
+-	 * @param enertia [number] <0.2> "Zoom smoothing (0.1 = butter, 0.9 = sandpaper)"
++	 * @param inertia [number] <0.2> "Zoom smoothing (0.1 = butter, 0.9 = sandpaper)"
+ 	 * @param increment [number] <0.01> "Zoom speed (0.01 = tortoise, 0.1 = hare)"
+ 	 * @param marginMin [] <> ""
+ 	 * @param marginMax [] <> ""
+@@ -36,15 +36,19 @@
+ 			position: "bottom",
+ 			zoomIn: null,
+ 			zoomOut: null,
++			zoomMarkup: null,
++            zoomSnap: null,
+ 			next: null,
+ 			previous: null
+ 		},
+ 		customClass: "",
+-		enertia: 0.2,
++		inertia: 0.2,
+ 		increment: 0.01,
+ 		marginMin: 30, // Min bounds
+ 		marginMax: 100, // Max bounds
+ 		retina: false,
++        markupFn: "",
++        snapFn: "",
+ 		source: null
+ 	};
+ 
+@@ -178,6 +182,8 @@
+ 					data.$zoomer.off(".zoomer");
+ 					data.controls.$zoomIn.off(".zoomer");
+ 					data.controls.$zoomOut.off(".zoomer");
++				    data.controls.$zoomMarkup.off(".zoomer");
++				    data.controls.$zoomSnap.off(".zoomer");
+ 					data.controls.$next.off(".zoomer");
+ 					data.controls.$previous.off(".zoomer");
+ 
+@@ -347,6 +353,8 @@
+ 			} else {
+ 				html = '<div class="zoomer-controls zoomer-controls-' + data.controls.position + '">';
+ 				html += '<span class="zoomer-previous">&lsaquo;</span>';
++			    html += '<span class="zoomer-zoom-markup glyphicon glyphicon-eye-open"></span>';
++			    html += '<span class="zoomer-zoom-snap glyphicon glyphicon-floppy-save"></span>';
+ 				html += '<span class="zoomer-zoom-out">-</span>';
+ 				html += '<span class="zoomer-zoom-in">+</span>';
+ 				html += '<span class="zoomer-next">&rsaquo;</span>';
+@@ -357,6 +365,8 @@
+ 				data.controls.$default = data.$zoomer.find(".zoomer-controls");
+ 				data.controls.$zoomIn = data.$zoomer.find(".zoomer-zoom-in");
+ 				data.controls.$zoomOut = data.$zoomer.find(".zoomer-zoom-out");
++			    data.controls.$zoomMarkup = data.$zoomer.find(".zoomer-zoom-markup");
++			    data.controls.$zoomSnap = data.$zoomer.find(".zoomer-zoom-snap");
+ 				data.controls.$next = data.$zoomer.find(".zoomer-next");
+ 				data.controls.$previous = data.$zoomer.find(".zoomer-previous");
+ 			}
+@@ -370,6 +380,8 @@
+ 								 .on("touchend.zoomer mouseup.zoomer", data, _clearZoom);
+ 			data.controls.$zoomOut.on("touchstart.zoomer mousedown.zoomer", data, _zoomOut)
+ 								  .on("touchend.zoomer mouseup.zoomer", data, _clearZoom);
++            data.controls.$zoomMarkup.on("click.zoomer", data, _zoomMarkup);
++            data.controls.$zoomSnap.on("click.zoomer", data, _zoomSnap);
+ 			data.controls.$next.on("click.zoomer", data, _nextImage);
+ 			data.controls.$previous.on("click.zoomer", data, _previousImage);
+ 			data.$zoomer.on("mousedown.zoomer", data, _dragStart)
+@@ -731,10 +743,10 @@
+ 			data.imageLeft   = data.targetImageLeft;
+ 			data.imageTop    = data.targetImageTop;
+ 		} else {
+-			data.imageWidth  += Math.round((data.targetImageWidth - data.imageWidth) * data.enertia);
+-			data.imageHeight += Math.round((data.targetImageHeight - data.imageHeight) * data.enertia);
+-			data.imageLeft   += Math.round((data.targetImageLeft - data.imageLeft) * data.enertia);
+-			data.imageTop    += Math.round((data.targetImageTop - data.imageTop) * data.enertia);
++			data.imageWidth  += Math.round((data.targetImageWidth - data.imageWidth) * data.inertia);
++			data.imageHeight += Math.round((data.targetImageHeight - data.imageHeight) * data.inertia);
++			data.imageLeft   += Math.round((data.targetImageLeft - data.imageLeft) * data.inertia);
++			data.imageTop    += Math.round((data.targetImageTop - data.imageTop) * data.inertia);
+ 		}
+ 
+ 		// Check bounds of current position and if big enough to drag
+@@ -779,8 +791,8 @@
+ 			data.positionerLeft = data.targetPositionerLeft;
+ 			data.positionerTop = data.targetPositionerTop;
+ 		} else {
+-			data.positionerLeft += Math.round((data.targetPositionerLeft - data.positionerLeft) * data.enertia);
+-			data.positionerTop  += Math.round((data.targetPositionerTop - data.positionerTop) * data.enertia);
++			data.positionerLeft += Math.round((data.targetPositionerLeft - data.positionerLeft) * data.inertia);
++			data.positionerTop  += Math.round((data.targetPositionerTop - data.positionerTop) * data.inertia);
+ 		}
+ 
+ 		data.oldImageWidth = data.imageWidth;
+@@ -836,6 +848,26 @@
+ 		data.action = "zoom_in";
+ 	}
+ 
++    // Markup click
++    function _zoomMarkup(e) {
++		e.preventDefault();
++		e.stopPropagation();
++		
++		var data = e.data;
++        data.markupFn(data);
++		data.action = "zoom_markup";
++    }
++	
++    // Snap click
++    function _zoomSnap(e) {
++		e.preventDefault();
++		e.stopPropagation();
++		
++		var data = e.data;
++        data.snapFn(data);
++		data.action = "zoom_snap";
++    }
++	
+ 	/**
+ 	 * @method private
+ 	 * @name _zoomOut
+@@ -1273,4 +1305,4 @@
+ 			pub.defaults.apply(this, Array.prototype.slice.call(arguments, 1));
+ 		}
+ 	};
+-})(jQuery, window);
+\ No newline at end of file
++})(jQuery, window);

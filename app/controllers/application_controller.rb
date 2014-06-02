@@ -27,7 +27,9 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     # members_locked_scans_path
-    get_location || root_path
+    # disabled for the moment until large image served not in history
+    # get_location || root_path
+    root_path
   end
 
   after_filter :set_location

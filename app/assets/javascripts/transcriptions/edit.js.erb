@@ -82,7 +82,7 @@ var save_coords = function(ratio, tiw, tih, fw, fh, nw, nh, til, tit, tpl, tpt) 
 
     var note_id = "note"+num_times;
     var request = $.ajax({
-      url: "/snap/"+img_id,
+      url: img_link,
       type: "POST",
       data: { note_id: note_id, ratio: ratio, tiw: tiw, tih: tih, fw: fw, fh: fh, nw: nw, nh: nh, til: til, tit: tit, tpl: tpl, tpt: tpt, aspect: aspect, whence: whence },
       dataType: "json"
@@ -111,10 +111,10 @@ var markup_callback = function(data) {
 
     if (markup) {
         var request = $.ajax({
-          url: "/markup",
-          type: "GET",
-          data: { transcription: $('#scan_transcription').val() },
-          dataType: "json"
+			url: markup_link,
+        	type: "GET",
+        	data: { transcription: $('#scan_transcription').val() },
+        	dataType: "json"
         });
          
         request.done(function( msg ) {

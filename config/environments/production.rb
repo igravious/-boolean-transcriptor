@@ -65,7 +65,7 @@ PetulantOctoLana::Application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = {
-        :host => 'pre-production.electropoiesis.org',
+        :host => '10.8.0.1',
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

@@ -38,9 +38,11 @@ class HeadingsController < ApplicationController
 
     def bulk_create
         # begin
+            Rails.logger.info("params in bulk_create: #{params.inspect}")
             headings = params['headings']
             # always have an id because we always come from a scan, unlike regular create
             @scan = Scan.find params['scan']['id']
+            # replace with - @scan.bulk_update(params['scan']['transcription'], params['headings'], params['to_delete'])
             @scan.transcription = params['scan']['transcription']
             @scan.save!
             if !headings.nil?
@@ -55,21 +57,21 @@ class HeadingsController < ApplicationController
                     (Locator.find id.to_i).destroy
                 end
             end
-            Rails.logger.info("to_delete in bulk_create: #{to_delete.inspect}")
         # rescue Exception
             # flash[:alert] = "Oh arse biscuits: #{dang.message}"
         # end
         # TODO flubify
         flub = {}
-        flub[:aspect] = params[:aspect] if not params[:aspect].blank?
-        flub[:whence] = params[:whence] if not params[:whence].blank?
+        flub[:aspect] = params[:aspect] unless params[:aspect].blank?
+        flub[:whence] = params[:whence] unless params[:whence].blank?
         flub[:q] = params[:q] if not params[:q].blank?
+        flash[:notice] = "The transcription (with annotation) was successfully updated"
         redirect_to edit_transcription_path(@scan, flub)
     end
 
     def index
-        @typd_headings = Heading.where('NOT type = ""', Heading::NO_TYPE).order(:index_term)
-        @typeless_headings = Heading.where('type = ""', Heading::NO_TYPE).order(:index_term)
+        # @typd_headings = Heading.where('NOT type = ""', Heading::NO_TYPE).order(:index_term)
+        # @typeless_headings = Heading.where('type = ""', Heading::NO_TYPE).order(:index_term)
         # Heading.find(Locator.pluck(:heading_id))
         # # pluck replaces
         # Locator.select(:heading_id).map { |h| h.heading_id }
@@ -81,13 +83,17 @@ class HeadingsController < ApplicationController
         # check out named_scope as well
         #
         @refd_headings = Heading.where(id: Locator.pluck(:heading_id))
-        @orphaned_headings = Heading.where.not(id: Locator.pluck(:heading_id))
+        # @orphaned_headings = Heading.where.not(id: Locator.pluck(:heading_id))
         render 'index'
     end
 
     def the_index
         index
     end
+
+	def orphaned_index
+        @orphaned_headings = Heading.where.not(id: Locator.pluck(:heading_id))
+	end
 
     def edit
         @heading = Heading.find params['id']
@@ -100,6 +106,7 @@ class HeadingsController < ApplicationController
             aspect = params['aspect']
             heading = params['heading']
             @heading = Heading.find heading_id
+			raise "Cannot (yet) modify a heading term that references rely on" if @heading.locators.length > 0
             # http://guides.rubyonrails.org/getting_started.html#updating-posts
             if @heading.update(heading.permit(:index_term, :type))
                 flash[:notice] = "Oh joy of joys, index term updated"
@@ -108,7 +115,7 @@ class HeadingsController < ApplicationController
                 raise "You know what I was trying to do? I was trying to update that index term. And I couldn't."
             end
         rescue Exception => dang
-            flash[:alert] = "Exceptional circumstances: #{dang.message}"
+            flash.now[:alert] = "Exceptional circumstances: #{dang.message}"
             render 'edit'
         end
     end
@@ -124,7 +131,7 @@ class HeadingsController < ApplicationController
             flash[:notice] = "Oh joy of joys, index term <strong>#{@heading.index_term}</strong> deleted"
             redirect_to the_index_headings_path
         rescue Exception => dang
-            flash[:alert] = "Behold my terseness - unable to delete index term: #{dang.message}"
+            flash.now[:alert] = "Behold my terseness - unable to delete index term: #{dang.message}"
             render 'edit'
         end
     end

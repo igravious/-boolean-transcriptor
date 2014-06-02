@@ -40,7 +40,7 @@ class ItemsController < ApplicationController
     end
 
     def slice
-        @all_items = Item.all
+        @all_items = Item.all_except_sub
         @all_scans = Scan.all
 
         # how do you want to slice through the items
@@ -57,6 +57,10 @@ class ItemsController < ApplicationController
             render "hard"
         when "ordered_by_transcription_state"
             state
+        when "display_by_number_of_scans"
+            number_of_scans
+		when "advanced_search"
+			advanced_search
         else # show_raw
             render "raw"
         end
@@ -74,8 +78,16 @@ class ItemsController < ApplicationController
         render "order_by_time"
     end
 
+	def advanced_search
+		render ""
+	end
+
     def state
         render "order_by_state"
+    end
+
+    def number_of_scans
+        render "order_by_number_of_scans"
     end
 
     def significant_term

@@ -4,11 +4,12 @@
     <%= javascript_include_tag "jquery.cookie", "data-turbolinks-track" => TURBO %>
     <!-- the following requires the preceeding - use dependency graph? -->
     <%= javascript_include_tag "jquery.simple.tree.menu", "data-turbolinks-track" => TURBO %>
-    <%# javascript_include_tag "jquery.lazyload", "data-turbolinks-track" => TURBO %>
-    <%= javascript_include_tag "jquery.bxslider", "data-turbolinks-track" => TURBO %>
+    <%# javascript_include_tag "jquery.bxslider", "data-turbolinks-track" => TURBO %>
+    <%= javascript_include_tag "jquery.lazyload", "data-turbolinks-track" => TURBO %>
 
     <%= stylesheet_link_tag "jquery.simple.tree.menu", media: "all", "data-turbolinks-track" => TURBO %>
-    <%= stylesheet_link_tag "jquery.bxslider", media: "all", "data-turbolinks-track" => TURBO %>
+    <%# stylesheet_link_tag "jquery.bxslider", media: "all", "data-turbolinks-track" => TURBO %>
+    <%= stylesheet_link_tag "captionss.min", media: "all", "data-turbolinks-track" => TURBO %>
 <%- end -%>
 
 <%= render '/per_view_javascript' %>

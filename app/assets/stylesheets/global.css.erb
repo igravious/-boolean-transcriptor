@@ -1,5 +1,5 @@
 /*
- * swatches, images, design
+ * swatches, graphics, design
  * inspired by the arts n crafts ethos
  * 
  * 4 principles
@@ -63,7 +63,8 @@
 
 body {
     /* William Morris, I <3 U */
-    background-image: url('/images/arts_n_crafts/sunflower.jpg');
+    /* TODO set correct path */
+    background-image: url(<%= image_path 'arts_n_crafts/sunflower.jpg' %>);
     background-repeat: repeat;
 }
 
@@ -72,7 +73,8 @@ body {
     opacity: 1.0; /* be v cool if it faded in */
     filter:alpha(opacity=100);
     /* background-color: #f9ebcc; */
-    background: url('/images/texture.jpg');
+    /* TODO set correct path */
+    background: url(<%= image_path 'texture.jpg' %>);
     margin-top: 22px;
     margin-bottom: 32px;
 }
@@ -129,9 +131,10 @@ a {
 }
 */
 
+/*
 .img .overlay {
     overflow: hidden;
-    position: absolute;
+    display: inline;
     top: 0px;
     right: 0px;
     height: 20px;
@@ -140,8 +143,9 @@ a {
     display: block;
     color: rgb(255, 255, 255);
     background-position: 10px 6px;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.3);
 }
+*/
 
 a.external {
     background-position: center right;

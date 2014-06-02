@@ -3,14 +3,19 @@
 <%= form_for(heading) do |f| %>
   <p>
     <%= f.label :index_term %><br>
-    <%= f.text_field :index_term %>
+    <% if heading.locators.length > 0 %>
+      <%= f.text_field :index_term, :disabled=>true %>
+    <% else %>
+      <%= f.text_field :index_term %>
+    <% end %>
   </p>
  
   <p>
-    <%= f.label :type %><br>
+    <%= f.hidden_field :type %>
+    <%# f.label :type %><br>
     <%# f.text_field :type, :"data-dropdown" => "#heading-dropdown" %>
     <!-- select("post", "person_id", Person.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) -->
-    <%= f.select( :type, Heading::TYPES.collect {|t| t.capitalize}, { include_blank: true } ) %>
+    <%# f.select( :type, Heading::TYPES.collect {|t| t.capitalize}, { include_blank: true } ) %>
     <%# Heading::TYPES.each do |t| %>
         <%# f.radio_button :type, "foo" %>
     <%# end %>

@@ -9,7 +9,7 @@
 %>
 <div class="heading-item">
     <p>
-    <strong><%= heading.type.capitalize %>: </strong>
+    <!--<strong><%= heading.type.capitalize %>: </strong>-->
     <%= link_to heading.index_term, edit_heading_path(heading.id, params) %>
     <br/>
     <% if locators.length > 0 then locators.each do |l| %>

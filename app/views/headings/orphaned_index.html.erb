@@ -1,0 +1,23 @@
+
+<%= render 'breadcrumb' %>
+
+<h2>Orphaned heading <span class="hot-cinnamon">terms</span> in the collection</h2>
+<hr>
+
+<p>
+    <%= link_to "Compose a new heading", new_heading_path(whence: params[:whence]) %>
+</p>
+<hr/>
+
+<h3>Index</h3>
+<%= render partial: "heading_chunk", object: @orphaned_headings %>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+        <p><span>Back to the <span><span class="glyphicon glyphicon glyphicon-link" alt="Back to the Index"></span> <%= link_to 'Index', the_index_headings_path(whence: params[:whence]) %></p>
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>

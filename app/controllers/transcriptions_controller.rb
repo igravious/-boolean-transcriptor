@@ -22,6 +22,8 @@ class TranscriptionsController < ApplicationController
         params[:scan_id] = params[:id]
         params.delete(:id)
         @item = Item.find @scan.item_id
+		# render "edit"
+		render "wysiwyg_edit"
     end
 
     def show
@@ -100,13 +102,17 @@ class TranscriptionsController < ApplicationController
                     #
 
                     # note that annotate is in params[:scan], not simply params
-                    if params[:scan][:annotate] == "1"
+                    if params[:scan][:annotate] == "0"
+                        @scan.transcription = params[:scan][:transcription]
+                        @scan.save!
+                        ok = "(Not doing annotation.) The transcription was successfully updated"
+					else
                         wikify = Creole::creolize(params[:scan][:transcription])
                         noko = Nokogiri::HTML.fragment(wikify)
                         @existing_term = []
                         @assoc_wiki = []
                         @must_create = []
-                        @refs_on_page = []
+                        refs_on_page = []
                         noko.css('a').each do |e|
                             Rails.logger.info("Oh noko.css('a').each : #{e.inspect}")
                             index_term = (URI.unescape e['href']).gsub('+',' ')
@@ -122,14 +128,15 @@ class TranscriptionsController < ApplicationController
                                 # new index term
                                 @must_create <<= e
                             end
-                            @refs_on_page <<= e
+                            refs_on_page <<= e
                         end
                         # maybe don't destroy refereces if removed from all transcriptions?
-                        @potential_delete = Locator.where('scan_id = ?', @scan.id)
+                        potential_delete = Locator.where('scan_id = ?', @scan.id)
                         @to_delete = []
-                        @potential_delete.each do |l|
+						delete_ids= []
+                        potential_delete.each do |l|
                             found = false
-                            @refs_on_page.each do |e|
+                            refs_on_page.each do |e|
                                 if l.content == e.text
                                     Rails.logger.info("#{l.content} == #{e.text}")
                                     # found it but maybe index term has changed
@@ -145,23 +152,49 @@ class TranscriptionsController < ApplicationController
                             if !found # tis been deleted!
                                 Rails.logger.info("Could not find #{l.content} on #{@scan.id} ... will delete ... #{l.inspect}")
                                 @to_delete <<= l
+								delete_ids <<= l.id
                             end
                         end
 
-                        Rails.logger.info("Oh existing_term: #{@existing_term.inspect}")
-                        Rails.logger.info("Oh assoc_wiki: #{@assoc_wiki.inspect}")
-                        Rails.logger.info("Oh must_create: #{@must_create.inspect}")
-                        Rails.logger.info("Oh to_delete: #{@to_delete.inspect}")
-                        Rails.logger.info("Oh potential_delete: #{@potential_delete.inspect}")
-                        Rails.logger.info("Oh refs_on_page: #{@refs_on_page.inspect}")
+                        Rails.logger.info("Oh @existing_term: #{@existing_term.inspect}")
+                        Rails.logger.info("Oh @assoc_wiki: #{@assoc_wiki.inspect}")
+                        Rails.logger.info("Oh @must_create: #{@must_create.inspect}")
+                        Rails.logger.info("Oh @to_delete: #{@to_delete.inspect}")
+                        Rails.logger.info("Oh delete_ids: #{delete_ids.inspect}")
+                        Rails.logger.info("Oh potential_delete: #{potential_delete.inspect}")
+                        Rails.logger.info("Oh refs_on_page: #{refs_on_page.inspect}")
                         if @must_create.length > 0 or @assoc_wiki.length > 0 or @to_delete.length > 0
-                            ok = "should create or delete some"
-                            interstitial = true
+                            # ok = "should create or delete some"
+                            # interstitial = true
+							headings = {}
+							@existing_term.each_with_index do |h,i|
+								headings["#{i}"] = {"index_term" => h.index_term, "type" => ''}	
+								# temp_l = Locator.new
+								# temp_l.scan_id = @scan.id
+								# temp_l.content = @assoc_wiki[i].text
+							end
+							# @headings = []
+							# @references = [] # known here as locators, as in descriptors/locators
+							@must_create.each_with_index do |m,i|
+								headings["#{i+@existing_term.length}"] = {"index_term" => (URI.unescape m.attr('href')).gsub('+',' '), "type" => ''}
+								# temp_h = Heading.new
+								# temp_h.index_term = m['href']
+								# you're fucking joking
+								# temp_h.index_term = (URI.unescape m.attr('href')).gsub('+',' ')
+								# temp_l = Locator.new
+								# temp_l.scan_id = @scan.id
+								# temp_l.content = m.text
+								# @headings <<= temp_h
+								# @references <<= temp_l
+							end
+                        	Rails.logger.info("Oh headings: #{headings.inspect}")
+                            @scan.bulk_update(params[:scan][:transcription], headings, delete_ids)
+                    		ok = "The transcription (as well as annotations) was successfully updated. Yay!"
+						else
+                        	@scan.transcription = params[:scan][:transcription]
+                        	@scan.save!
+                        	ok = "(Not annotation modified.) The transcription was successfully updated"
                         end
-                    else
-                        @scan.transcription = params[:scan][:transcription]
-                        @scan.save!
-                        ok = "(Not doing bulk.) The transcription was successfully updated"
                     end
                 else
                     ok = "No need to update, transcription unchanged"

@@ -1,14 +1,15 @@
 <ol class="breadcrumb" style="float: left">
     <%# binding.pry %>
     <%# debug params %>
-    <% if params['whence'] %>
+    <% if params['whence'] and !params['whence'].blank? %>
         <li><%= link_to params['whence'].capitalize, controller.send("#{params['whence']}_path") %></li>
-    <% elsif (params['controller'] == 'desk_pages' or params['controller'] == 'collection_pages') and params['action'] != 'item_view' %>
+	<% end %>
+    <% if (params['controller'] == 'desk_pages' or params['controller'] == 'collection_pages') and params['action'] != 'item_view' %>
         <li class="active"><%= params['action'].split('_').map(&:capitalize).join(' ') %></li>
     <% elsif params['controller'] =~ /devise/ %>
         <li class="active"><%= params['action'].capitalize %> Member</li>
     <% elsif params['controller'] == 'transcriptions' %>
-        <li><%= link_to 'Transcribe', browse_path %></li>
+        <li><%= link_to 'Browse (Transcribe)', browse_path %></li>
     <% elsif params['action'] != 'item_view' and params['action'] != 'endnote' and params['action'] != 'snippet' and params['action'] != 'the_index' %>
         <li><%= link_to 'Browse', browse_path %></li>
     <% end %>

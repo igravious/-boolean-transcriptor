@@ -38,12 +38,13 @@ PetulantOctoLana::Application.routes.draw do
     end
     collection do
       get 'the_index'
+      get 'orphaned_index'
     end
   end
-  Heading::TYPES.each do |t|
-    resources t.pluralize.to_sym do
-    end
-  end
+  # Heading::TYPES.each do |t|
+  #   resources t.pluralize.to_sym do
+  #   end
+  # end
 
   # index only makes sense for end-notes
   resources :notes do
@@ -78,9 +79,10 @@ PetulantOctoLana::Application.routes.draw do
   end
   # get '/by_seq' => 'items#by_seq'
 
-  get '/serve_up_image/:id' => 'images#serve'
-  match '/snap/:id' => 'images#snap', via: [:post]
-  match '/upload_image/:id' => 'images#upload', via: [:post]
+  # TODO terrible choice of names
+  get '/serve_up_image/:id' => 'images#serve', as: :serve_up_image
+  match '/snap/:id' => 'images#snap', via: [:post], as: :snap
+  match '/upload_image/:id' => 'images#upload', via: [:post], as: :upload_image
 
   get '/archival_finding_aid' => 'finding_aids#type'
 

@@ -6,10 +6,85 @@
     <%# javascript_include_tag "jquery.dropdown", "data-turbolinks-track" => TURBO %>
     <%# stylesheet_link_tag "jquery.dropdown", media: "all", "data-turbolinks-track" => TURBO %>
     <%= stylesheet_link_tag "notes", media: "all", "data-turbolinks-track" => TURBO %>
+    <%= stylesheet_link_tag "wysiwyg", media: "all", "data-turbolinks-track" => TURBO %>
+    <%= stylesheet_link_tag "font-awesome.min", media: "all", "data-turbolinks-track" => TURBO %>
 <%- end -%>
 
 <script type="text/javascript">
     var original_transcription = '<%= j @scan.transcription %>'
+    /*
+		Shout Out !!!
+		https://developer.mozilla.org/en-US/docs/Rich-Text_Editing_in_Mozilla#Executing_Commands
+	*/
+
+	// Passing a named function instead of an anonymous function.
+	function readyFn( jQuery ) {
+		var selection;
+		var text;
+		var checkForSelection = function(e){
+			
+			if (window.getSelection) {
+				selection = window.getSelection();
+			} else if (document.selection) {
+				selection = document.selection.createRange();
+			}
+			if (selection.toString() !== '') {
+				// check we've a sane selection
+				//console.log(selection);
+				//console.log(selection.toString());
+				//selection.toString() !== '' && alert('"' + selection.toString() + '" was selected at ' + e.pageX + '/' + e.pageY);
+				shifted = e.shiftKey;
+				console.log(shifted);
+				console.log("range count:"+selection.rangeCount);
+				if (!shifted && selection.rangeCount == 1) {
+					//$('#wiki').show();
+					text = new String(selection.toString());
+					var index_term = prompt("Use selected text as index term or enter another term", text);
+					console.log(index_term);
+					// check we've a sane index term
+					var wiki_text = "[["+index_term+"|"+text+"]]";
+					console.log(wiki_text);
+					var range = selection.getRangeAt(0);
+					range.deleteContents();
+					range.insertNode( document.createTextNode(wiki_text));
+				}
+				//$('#index_term').focus();
+			}
+			return true;
+		};
+
+    	// Code to run when the document is ready.
+		$('#editControls a').click(function(e) {
+			switch($(this).data('role')) {
+    		case 'bookmark-o':
+				//document.execCommand('formatBlock', false, $(this).data('role'));
+			console.log(e);
+			console.log(this);
+				checkForSelection(e);
+      			break;
+    		default:
+			console.log(e);
+			console.log(this);
+      			document.execCommand($(this).data('role'), false, null);
+      			break;
+    		}
+		});
+	}
+ 
+	$( document ).ready( readyFn );
+
+	$(function() { $('body').hide().show(); $('#editor').html($('#scan_transcription').val()); $('#editor').focus(); });
+
+	$(function() { $('#commit').click(function () { var shadow = $('#editor').html(); $('#scan_transcription').val(shadow); });
+
+	$(function() {
+		// https://stackoverflow.com/questions/3545018/selected-text-event-trigger-in-javascript
+		// $('#editor').bind('mouseup', checkForSelection);
+		// $('#editor').bind('keyup', checkForSelection);
+		// $('#wiki_submit').click(function () { $('#wiki').hide(); $('#editor').focus(); return false; });
+		// $('#index_term').click(function () { console.log(text.valueOf()); return false; });
+	});
+});
 </script>
 
 <%= render '/per_view_javascript' %>
@@ -63,25 +138,21 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div id="last-content-tab" class="tab-pane active">
-                            <div id="make-same">
-                                <%= f.text_area :transcription, size: "80x25", :autofocus=>true %>
-                                    <div id="scan_markup" style="display:none" />
-                                <script>
-                                    // fake table does not work?
-                                    // https://stackoverflow.com/questions/2997767/how-do-i-keep-two-divs-that-are-side-by-side-the-same-height
-                                    // neither does css trickery
-                                    // http://www.ejeliot.com/blog/61
-                                    // try this
-                                    // https://stackoverflow.com/questions/3275850/set-a-div-height-equal-with-of-another-div
-                                    // using this
-                                    // http://api.jquery.com/ready/
-
-                                    $(function() {
-                                        // Handler for .ready() called. Off by 6? Why, oh why?
-                                        $("#scan_markup").css({'height':((parseInt($("#scan_transcription").height())+6)+'px')});
-                                    });
-                                </script>
-                            </div>
+							<!-- http://www.barneyparker.com/world-simplest-html5-wysisyg-inline-editor/ -->
+							<div id='editControls'>
+								<!-- <em>transcribe here</em> -->
+								<div>
+									<a title='Click to Undo last operation' class='wizz' data-role='undo'          href='javascript:void(0)'><i class='fa fa-undo'></i></a>
+									<a title='Click to Redo last operation' class='wizz' data-role='redo'          href='javascript:void(0)'><i class='fa fa-repeat'></i></a>
+									<a title='Highlight text to make bold' class='wizz' data-role='bold'          href='javascript:void(0)'><i class='fa fa-bold'></i></a>
+									<a title='Highlight section to italicize' class='wizz' data-role='italic'        href='javascript:void(0)'><i class='fa fa-italic'></i></a>
+									<a title='Highlight text to underline' class='wizz' data-role='underline'     href='javascript:void(0)'><i class='fa fa-underline'></i></a>
+									<a title='Highlight section to strike through' class='wizz' data-role='strikeThrough' href='javascript:void(0)'><i class='fa fa-strikethrough'></i></a>
+									<a title='Highlight text to make index reference' class='wizz' data-role='bookmark-o'    href='javascript:void(0)'><i class='fa fa-bookmark-o'></i></a>
+								</div>
+							</div>
+							<div autofocus="autofocus" id='editor' contenteditable></div>
+							<%= f.hidden_field :transcription %>
                         </div>
                     </div>
                 </div>
@@ -90,7 +161,7 @@
                     <%
                         if @scan.state == Scan::VIRGIN or @scan.state == Scan::BEING_EDITED
                     %>
-                            <%= f.submit "Update the transcription", :onclick => "need_to_confirm=false;" %>
+                            <%= f.submit "Update the transcription", :onclick => "need_to_confirm=false;", :id => "commit" %>
                             <%# f.label "Process semantic annotation on update" %>
                             <%# f.check_box "annotate" %>
 							<%= f.hidden_field "annotate" %>
@@ -133,6 +204,7 @@
                     %>
                 </div>
             <% end %>
+			<form id='wiki' style='display: none'><input type='text' id='index_term'><input type='submit' id='wiki_submit'></form>
         </div>
     </div>
 

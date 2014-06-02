@@ -20,6 +20,8 @@
         params.delete(:tpt)
         params[:scan_id] = save_id
     end
+    params.delete(:whence) if params[:whence].blank?
+    params.delete(:aspect) if params[:aspect].blank?
 %>
 <%
     if note.type == Note::TEXT
@@ -28,8 +30,9 @@
         end
 %>
 <p>
-    <strong>Title:</strong>
-    <%= link_to (note.bytes.blank? ? '(empty)' : note.bytes), edit_note_path(note.id, params) %>
+    <strong>Text:</strong>
+	<pre><%= note.bytes %></pre>
+    <%= link_to (note.bytes.blank? ? '(empty)' : 'edit note'), edit_note_path(note.id, params) %>
 </p>
     <hr>
 <div>

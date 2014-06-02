@@ -25,7 +25,7 @@
     <%
         @all_scans.group(:state).count.each do |state, count|
         state_label = state ? Scan::STATE_STRING[state] : "unknown state"
-        link_name = "#{state_label} ……… #{pluralize(count, 'item')}"
+        link_name = "#{state_label} ……… #{pluralize(count, 'scan')}"
         @scans = @all_scans.where("state #{(state ? '=' : 'is')} ?", state)
     %>
         <li class="list-group-item"><span class="badge"><%= link_name %></span>

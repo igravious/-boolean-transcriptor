@@ -11,6 +11,7 @@
 // about supported directives.
 //
 // you can disable min.map in chrome
+
 //= require jquery.min
 //= require jquery_ujs
 // require turbolinks

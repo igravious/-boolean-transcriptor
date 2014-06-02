@@ -25,9 +25,9 @@ PetulantOctoLana::Application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  config.assets.debug = true
+  config.assets.debug = false
 
   # For Devise 
   # Step 2: http://guides.railsgirls.com/devise/
-  config.action_mailer.default_url_options = { :host => 'localhost:3301' }
+  config.action_mailer.default_url_options = { :host => 'http://dh.ucc.ie/boole' }
 end

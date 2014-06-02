@@ -1,0 +1,29 @@
+#editControls {
+  text-align:center;
+  padding:5px;
+  margin:5px;
+}
+
+#editor {
+resize:vertical;
+overflow:auto;
+border:0px solid silver;
+/*border-radius:5px;*/
+/*box-shadow: inset 0 0 10px silver;*/
+min-height:100px;
+padding:1em;
+}
+
+a.wizz:link {text-decoration:none;}
+a.wizz:visited {text-decoration:none;}
+a.wizz:hover {text-decoration:none;}
+a.wizz:active {text-decoration:none;}
+a.wizz{
+  color:black;
+  padding:5px;
+  border:1px dashed silver;
+  border-radius:5px;
+  width:1em;
+}
+
+[contenteditable]:focus { outline: 0px solid transparent; }

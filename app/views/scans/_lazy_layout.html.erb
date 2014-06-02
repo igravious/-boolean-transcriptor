@@ -7,6 +7,6 @@
         path = edit_transcription_path(id: scan.id, aspect: params['aspect'], q: params['q'], whence: params['whence'])
     end
 %>
-<a href="<%= path %>" rel="tooltip" data-original-title="<%= scan.stringified %>">
+<a href="<%= path %>" rel="tooltip" data-original-title="<%= scan.stringified %>" style="display: inline;">
     <%= yield %>
 </a>

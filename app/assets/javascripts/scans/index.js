@@ -12,6 +12,6 @@ var slide_it = function() {
     return true;
 };
 
-$(document).on('ready', slide_it);
-$(document).on('page:load', slide_it);
+//$(document).on('ready', slide_it);
+$(document).bind('page:load', slide_it);
 

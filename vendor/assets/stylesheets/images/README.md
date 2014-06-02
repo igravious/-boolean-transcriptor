@@ -1,1 +1,1 @@
-* TODO: these should be symlinked :(
+* TODO: these should _all_ be symlinked :(

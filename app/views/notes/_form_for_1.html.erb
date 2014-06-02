@@ -1,8 +1,8 @@
 <p>
   <%= f.label :bytes, 'Note text' %><br>
-  <%= f.text_field :bytes %>
+  <%= f.text_area :bytes %>
 </p>
 <p>
   <%= f.submit %>
-  <%= render partial: "notes/member_edit", locals: {member: (Member.find note.member_id)} %>
+  <%= render partial: "notes/member_edit", locals: {member: (Member.find note.member_id)} unless params[:action] == 'new' %>
 </p>

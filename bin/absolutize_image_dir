@@ -2,7 +2,8 @@
 
 begin
 
-    SCANS=["../../mediawiki-transcription-desk/boole/BOOLE-MASTER-STAMPED-JPEG-1-OF-2", "../../mediawiki-transcription-desk/boole/BOOLE-MASTER-STAMPED-JPEG-2-OF-2"]
+    #SCANS=["../../mediawiki-transcription-desk/boole/BOOLE-MASTER-STAMPED-JPEG-1-OF-2", "../../mediawiki-transcription-desk/boole/BOOLE-MASTER-STAMPED-JPEG-2-OF-2"]
+    SCANS=GB_COLLECTION[:digital_surrogate][:scans_folder]
 
     SCANS.each do |dir|
         # p dir

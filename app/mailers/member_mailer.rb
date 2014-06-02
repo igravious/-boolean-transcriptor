@@ -1,5 +1,5 @@
 class MemberMailer < ActionMailer::Base
-  default from: "a.durity@umail.ucc.ie"
+  default from: "DAH Server <a.durity@umail.ucc.ie>"
 
   # TODO CONST
   def accept_reject_story(member, scan, story, accept_reject)

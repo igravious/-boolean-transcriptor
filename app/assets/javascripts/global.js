@@ -47,9 +47,10 @@ var unescapeHTML = function(unsafe) {
 // https://stackoverflow.com/questions/8909557/how-to-overwrite-a-builtin-method-of-javascript-native-objects
 
 var base = console.log;
+/*
 console.log = function() {
     // base.apply(this, {"should only be enabled in dev mode"});
     return base.apply(this, arguments);
 };
-
+*/
 // https://stackoverflow.com/questions/9338439/how-to-chain-functions-without-using-prototype

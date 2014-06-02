@@ -1,7 +1,5 @@
 <!--
-  display items grouped by date
-
-  each item needs an extra field for the year i think
+  display items grouped by number of scans
 
   if you are using group by you need some aggregate function 
   (like sum, or count)
@@ -21,21 +19,29 @@
 <fieldset>
     <legend>
         <!-- translate these -->
-        # of items per year ascending
+        Ordered by number of scans per item
     </legend>
     <ol class="list-group">
     <%
-        @all_items.group(:year).count.each do |year, count|
-        year_label = year ? year.to_s : "undated"
-        year_param = year ? year.to_s : ''
-        id = year_label
-        fill_id = "fill-#{id}"
-        link_name = "#{year_label} ……… #{pluralize(count, 'item')}"
-        @items = @all_items.where("year #{(year ? '=' : 'is')} ?", year)
-    %>
+    	link_name = "without scans!"
+        @items = Item.all_except_sub.where('not exists (select null from scans where scans.item_id = items.id)')
+	%>
         <li class="list-group-item"><span class="badge"><%= link_name %></span>
         <%= render "items_slider_shim" %> 
         </li>
-    <% end %>
+	<%	
+		require 'monkey_patch_hash'
+        @all_scans.group(:item_id).count.safe_invert.sort.each do |count, ary_of_id|
+            #state_label = state ? Scan::STATE_STRING[state] : "unknown state"
+            link_name = "#{pluralize(count, 'scan')}"
+            #@scans = @all_scans.where("item_id = ?", item_id)
+            @items = Item.find(ary_of_id)
+    %>
+            <li class="list-group-item"><span class="badge"><%= link_name %></span>
+            <%= render "items_slider_shim" %> 
+            </li>
+    <%
+        end
+    %>
     </ol>
 </fieldset>

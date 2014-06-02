@@ -17,11 +17,12 @@
     "tests"
   ],
   "dependencies": {
-     "bootstrap": "*",
-     "jquery.lazyload": "*",
-     "Zoomer": "*",
-     "easeljs": "*",
-     "jqueryui": "*",
-     "jquery.colorpicker": "*"
+    "bootstrap": "*",
+    "jquery.lazyload": "*",
+    "Zoomer": "3.0.8",
+    "easeljs": "*",
+    "jqueryui": "*",
+    "jquery.colorpicker": "*",
+    "captionss": "~1.1.0"
   }
 }

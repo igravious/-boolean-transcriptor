@@ -6,7 +6,7 @@
                     col1 = heading_chunk[0,heading_chunk.length/2]
                     col2 = heading_chunk[heading_chunk.length/2,heading_chunk.length]
 
-                    col1.each do |heading|
+                    col2.each do |heading|
                 %>
                 <%= render partial: heading, layout: "headings/heading_group_layout" %>
                 <%
@@ -17,7 +17,7 @@
         <div class="col-md-6" style="border-right:1px">
             <ul class="list-group" style="padding-top: 10px">
                 <%
-                    col2.each do |heading|
+                    col1.each do |heading|
                 %>
                 <%= render partial: heading, layout: "headings/heading_group_layout" %>
                 <%
