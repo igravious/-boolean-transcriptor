@@ -1,13 +1,15 @@
 namespace :prep do
-  desc "prep the transcriptor collection"
+  desc "prep the reading room collection"
   task symlinks: :environment do
     # TODO get these from collection constants (and eventually db in generic version)
     #      config/initializers/my_constants.rb
     LINK_TO = [ GB_COLLECTION[:digital_surrogate][:pint_size_folder], GB_COLLECTION[:digital_surrogate][:thumbs_folder] ]
     # LINK_TO = ["../../../../mediawiki-transcription-desk/boole/pint-size", "../../../../mediawiki-transcription-desk/boole/thumbs"]
     d = Dir.getwd
-    Dir.chdir "public/images"
+    Dir.chdir "public/assets/images"
+    # Dir.chdir "public/images"
     LINK_TO.each do |file|
+      file = "../../../#{file}"
       File.stat(file)
       File.symlink(file, (File.basename file))
     end

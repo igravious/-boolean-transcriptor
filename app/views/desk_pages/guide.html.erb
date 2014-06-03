@@ -1,0 +1,4 @@
+<h2>The guide to the <span class="hot-cinnamon">Open Reading Room</span> by Anthony Durity</h2>
+<hr>
+<%# CONSTs, etc. %>
+<%=raw Redcarpet::Markdown.new(Redcarpet::Render::HTML.new).render(File.read("#{Rails.root}/GUIDE.md")) %>

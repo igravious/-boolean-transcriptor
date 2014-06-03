@@ -71,8 +71,8 @@ UNDONE = []             # items with no scans
 INCOMPLETE = []         # items partially scanned
 ORPHANED = []           # scans without items
 PATH_TO_SCANS = ["../facsimiles/boole-facsimiles/BOOLE-MASTER-STAMPED-JPEG-1-OF-2/", "../facsimiles/boole-facsimiles/BOOLE-MASTER-STAMPED-JPEG-2-OF-2/"]
-PATH_TO_THUMBS = "../../../facsimiles/boole-facsimiles/thumbs/"
-PATH_TO_PINT_SIZE = "../../../facsimiles/boole-facsimiles/pint-size/"
+PATH_TO_THUMBS = "../facsimiles/boole-facsimiles/thumbs/"
+PATH_TO_PINT_SIZE = "../facsimiles/boole-facsimiles/pint-size/"
 
 # ELECTRONIC_FINDING_AID
 

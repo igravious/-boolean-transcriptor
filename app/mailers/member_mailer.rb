@@ -4,7 +4,7 @@ class MemberMailer < ActionMailer::Base
   # TODO CONST
   def accept_reject_story(member, scan, story, accept_reject)
     @member = member
-    @url  = 'http://boolean-transcriptor.electropoiesis.org'
+    @url  = 'http://dh.ucc.ie/boole/'
     @scan = scan
     @item = Item.find @scan.item_id
     @story = story

@@ -5,6 +5,9 @@ class DeskPagesController < ApplicationController
     def browse
     end
 
+	def faqs_n_guide
+	end
+
     def locked_by_member
         @all_scans = Scan.all
         @member_scans = @all_scans.keep_if { |s| current_member.id == s.versions.last.whodunnit.to_i }

@@ -102,7 +102,7 @@ PetulantOctoLana::Application.routes.draw do
   # https://stackoverflow.com/questions/646951/singular-or-plural-controller-and-helper-names-in-rails
   #
   # up top (#manage_scans defined above)
-  ['desk', 'leaderboard', 'faqs_n_guide'].each { |x| get '/'+x => 'desk_pages#'+x }
+  ['desk', 'leaderboard', 'faqs_n_guide', 'faqs', 'guide'].each { |x| get '/'+x => 'desk_pages#'+x }
   # down below
   ['legal', 'cite', 'inspiration', 'develop', 'shout_out', 'secretions'].each { |x| get '/'+x => 'desk_pages#'+x }
   # book analogy related

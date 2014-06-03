@@ -31,6 +31,6 @@ module PetulantOctoLana
     # for each vendor stylesheet used
     config.assets.precompile += ['jquery.bxslider.css', 'jquery.simple.tree.menu.css', 'jquery.fs.zoomer.css', 'jquery.colorpicker.css', 'jquery-ui.min.css']
     # and their images, a bit shotgun
-    config.assets.precompile += %w[*.png *.jpg *.jpeg *.gif]
+    config.assets.precompile += %w[*.png *.jpg *.jpeg *.gif *.woff *.ttf *.svg]
   end
 end
