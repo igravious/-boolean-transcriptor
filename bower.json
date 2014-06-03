@@ -17,12 +17,14 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "*",
-    "jquery.lazyload": "*",
     "Zoomer": "3.0.8",
+    "bootstrap": "*",
+    "bxslider-4": "*",
+    "captionss": "~1.1.0",
     "easeljs": "*",
-    "jqueryui": "*",
+    "font-awesome": "*",
     "jquery.colorpicker": "*",
-    "captionss": "~1.1.0"
+    "jquery.lazyload": "*",
+    "jqueryui": "*"
   }
 }

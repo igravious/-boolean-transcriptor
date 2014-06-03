@@ -30,3 +30,7 @@ public/images/pint-size
 public/images/thumbs
 # Ignore public assets
 public/assets
+# Heck, ignore images altogether
+public/images
+# And fonts for that matter
+public/fonts

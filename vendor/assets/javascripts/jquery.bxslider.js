@@ -1,1 +1,0 @@
-jquery.bxslider-4.1.1.js
