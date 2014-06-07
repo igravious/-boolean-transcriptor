@@ -3,7 +3,13 @@ PetulantOctoLana::Application.routes.draw do
   root 'collection_pages#welcome' # just for now, while there's just one collection
 
   devise_for :members
-  get 'members/locked_scans' => 'desk_pages#locked_by_member'
+  # has to be kinda verby?
+  get 'member/locked_scans' => 'desk_pages#locked_by_member'
+  get 'member/completed_scans' => 'desk_pages#completed_by_member'
+  get 'member/scans' => 'desk_pages#scans_by_member'
+  get 'member/notes' => 'desk_pages#notes_by_member'
+  get 'member/endnote_notes' => 'desk_pages#endnotes_by_member'
+  get 'member/snippet_notes' => 'desk_pages#snippets_by_member'
 
   Rails.env.development? and get 'qwux' => 'qwux#new'
 
@@ -23,9 +29,6 @@ PetulantOctoLana::Application.routes.draw do
   #   resources :products
 
   resources :transcriptions do
-    # member do
-    #   get :index_term
-    # end
   end
   get '/markup' => 'transcriptions#markup'
   # http://leto.electropoiesis.org:3301/transcriptions/2703/health
@@ -50,8 +53,8 @@ PetulantOctoLana::Application.routes.draw do
   resources :notes do
     # has to be kinda verby?
     collection do
-      get 'endnote'
-      get 'snippet'
+      get 'endnotes', as: :endnote
+      get 'snippets', as: :snippet
     end
   end
 
@@ -102,7 +105,7 @@ PetulantOctoLana::Application.routes.draw do
   # https://stackoverflow.com/questions/646951/singular-or-plural-controller-and-helper-names-in-rails
   #
   # up top (#manage_scans defined above)
-  ['desk', 'leaderboard', 'faqs_n_guide', 'faqs', 'guide'].each { |x| get '/'+x => 'desk_pages#'+x }
+  ['desk', 'completed', 'leaderboard', 'faqs_n_guide', 'faqs', 'guide'].each { |x| get '/'+x => 'desk_pages#'+x }
   # down below
   ['legal', 'cite', 'inspiration', 'develop', 'shout_out', 'secretions'].each { |x| get '/'+x => 'desk_pages#'+x }
   # book analogy related

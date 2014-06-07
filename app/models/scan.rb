@@ -37,22 +37,30 @@ class Scan < ActiveRecord::Base
   def self.set_to_void_if_empty
   end
 	
+  def self.total_possible
+    Scan.all
+  end
+
+  def self.total_accepted
+    Scan.where(state: Scan::COMPLETED)
+  end
+
   include HeadingLocatorInteraction
   # where should this function be ideally?
   def bulk_update(script, headings, to_delete)
-		self.transcription = script
-		save!
-		if !headings.nil?
-			headings.each do |h|
-				create_heading h[1]['index_term'], h[1]['type'], self
-			end
+	self.transcription = script
+	save!
+	if !headings.nil?
+		headings.each do |h|
+			create_heading h[1]['index_term'], h[1]['type'], self
 		end
-		# flash[:notice] = "Oh joy of joys, index terms created"
-		if !to_delete.nil?
-			to_delete.each do |id|
-				(Locator.find id.to_i).destroy
-			end
+	end
+	# flash[:notice] = "Oh joy of joys, index terms created"
+	if !to_delete.nil?
+		to_delete.each do |id|
+			(Locator.find id.to_i).destroy
 		end
+	end
   end
 
   def annotate
@@ -61,5 +69,17 @@ class Scan < ActiveRecord::Base
 
   def narrative
       ""
+  end
+
+  def snippets?
+	Note.where(scan_id: self.id, type: 2).length > 0
+  end
+
+  def endnotes?
+    Note.where(scan_id: self.id, type: 1).length > 0
+  end
+
+  def references?
+    Locator.where(scan_id: self.id).length > 0
   end
 end

@@ -16,22 +16,47 @@ class Item < ActiveRecord::Base
     end
 
     def prev
-         a,b,c=fa_seq.split('/')
-         test_seq = "#{a}/#{b}/#{(c.to_i)-1}"
-         Item.find_by_fa_seq!(test_seq)
-         return test_seq
+        a,b,c=fa_seq.split('/')
+        test_seq = "#{a}/#{b}/#{(c.to_i)-1}"
+        Item.find_by_fa_seq!(test_seq)
+        return test_seq
     rescue
-         return false
+        return nil
     end
 
     def next
-         a,b,c=fa_seq.split('/')
-         test_seq = "#{a}/#{b}/#{(c.to_i)+1}"
-         Item.find_by_fa_seq!(test_seq)
-         return test_seq
+        a,b,c=fa_seq.split('/')
+        test_seq = "#{a}/#{b}/#{(c.to_i)+1}"
+        Item.find_by_fa_seq!(test_seq)
+        return test_seq
     rescue
-         return false
+        return nil
     end
+
+    def initial
+		i = self
+		while i.prev do i = Item.find_by_fa_seq(i.prev) end
+		i.fa_seq
+	end
+
+	def final
+		i = self
+		while i.next do i = Item.find_by_fa_seq(i.next) end
+		i.fa_seq	
+	end	
+    
+    def completed
+		s = self.scans
+		s.length > 0 and s.length == s.where(state: Scan::COMPLETED).length
+	end
+
+	def self.total_possible
+		Item.all_except_sub.keep_if { |i| i.scans.length > 0 }
+	end
+
+	def self.total_accepted
+		Item.all_except_sub.keep_if { |i| i.completed }
+	end
 
     # class method
     # Item.aspect

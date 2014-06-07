@@ -6,7 +6,8 @@ var slide_it = function() {
     } catch(oops) {
         // let the member know somehow
         console.log('oopsie in scans/index.js unfortunately');
-        console.log(oops+oops.message);
+        console.log(oops.message+" from "+oops.stack);
+		Bugsnag.notifyException(oops, "Unexpected Error");
     }
 
     return true;

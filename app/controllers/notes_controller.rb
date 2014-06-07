@@ -8,12 +8,12 @@ class NotesController < ApplicationController
     end
 
     # only type == TEXT
-    def endnote
+    def endnotes
         @all_notes = Note.where('type = ?', Note::TEXT)
     end
 
     # only type == IMAGE
-    def snippet
+    def snippets
         @all_notes = Note.where('type = ?', Note::IMAGE)
     end
 

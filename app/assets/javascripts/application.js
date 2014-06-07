@@ -10,7 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-// you can disable min.map in chrome
+// you can disable min.map in chrome - see config/application.rb for the rest
 
 //= require jquery.min
 //= require jquery_ujs

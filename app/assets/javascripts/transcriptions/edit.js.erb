@@ -1,3 +1,5 @@
+<% require 'url_generator' %>
+
 // included by transcriptions#show or something like that
 
 var zoomer_enable = function() {
@@ -5,13 +7,14 @@ var zoomer_enable = function() {
     try {
         // extra paranoid mode
         if ($('.viewer').length ) $(".viewer").zoomer({
-            snapFn: snap_callback,
-            markupFn: markup_callback
+            refLink: ref_link,
+            snapFn: snap_callback
         });
     } catch(oops) {
         // communicate to the member somehow
         console.log('oopsie in transcriptionis/edit.js unfortunately');
-        console.log(oops+oops.message);
+        console.log(oops.message+" from "+oops.stack);
+		Bugsnag.notifyException(oops, "Unexpected Error");
     }
 
     return true;
@@ -34,7 +37,8 @@ var zoom_it = function() {
     } catch(oops) {
         // communicate to the member somehow
         console.log('oopsie in transcriptionis/edit.js unfortunately');
-        console.log(oops+oops.message);
+        console.log(oops.message+" from "+oops.stack);
+		Bugsnag.notifyException(oops, "Unexpected Error");
     }
 
     return true;
@@ -82,24 +86,28 @@ var save_coords = function(ratio, tiw, tih, fw, fh, nw, nh, til, tit, tpl, tpt) 
 
     var note_id = "note"+num_times;
     var request = $.ajax({
-      url: img_link,
-      type: "POST",
-      data: { note_id: note_id, ratio: ratio, tiw: tiw, tih: tih, fw: fw, fh: fh, nw: nw, nh: nh, til: til, tit: tit, tpl: tpl, tpt: tpt, aspect: aspect, whence: whence },
-      dataType: "json"
+    	url: img_link,
+    	type: "POST",
+    	data: { note_id: note_id, ratio: ratio, tiw: tiw, tih: tih, fw: fw, fh: fh, nw: nw, nh: nh, til: til, tit: tit, tpl: tpl, tpt: tpt, aspect: aspect, whence: whence },
+    	dataType: "json"
     });
      
     request.done(function( reply ) {
-      console.log('the reply from afar on creating new image');
-      console.log( reply );
-      if (reply.note_id != null) {
-        $( reply.note_msg ).insertAfter( "#insert_after_me" );
-      } else {
-        alert("I am afraid not: " + reply.note_msg);
-      }
+    	console.log('the reply from afar on creating new image');
+    	console.log( reply );
+    	if (reply.note_id != null) {
+        	$( reply.note_msg ).insertAfter( "#insert_after_me" );
+    	} else {
+        	alert("I am afraid not: " + reply.note_msg);
+    	}
     });
      
     request.fail(function( jqXHR, textStatus ) {
-      alert( "That did not go so good: " + textStatus );
+		// should be jqXHR.resposeText ?
+		console.log("That did not go so well: " + textStatus);
+		console.log("That did not go so well: " + jqXHR.responseText);
+    	alert( "That did not go so well: " + textStatus );
+		Bugsnag.notify("Ajax Error", jqXHR.responseText);
     });
     num_times += 1;
 }
@@ -126,7 +134,11 @@ var markup_callback = function(data) {
         });
          
         request.fail(function( jqXHR, textStatus ) {
-          alert( "Request failed: " + textStatus );
+			// should be jqXHR.resposeText ?
+			console.log("That did not go so well: " + textStatus);
+			console.log("That did not go so well: " + jqXHR.responseText);
+    		alert( "That did not go so well: " + textStatus );
+			Bugsnag.notify("Ajax Error", jqXHR.responseText);
         });
     } else {
         $('#scan_markup').hide();

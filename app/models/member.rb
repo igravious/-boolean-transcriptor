@@ -13,6 +13,16 @@ class Member < ActiveRecord::Base
     admin == true
   end
 
+  def bless
+    self.admin = true
+    self.save!
+  end 
+
+  def unbless
+    self.admin = false
+    self.save!
+  end 
+
   def matches_whodunnit? model
     id == model.versions.last.whodunnit.to_i
   end

@@ -1,4 +1,4 @@
-## The guide to the <span class="hot-cinnamon">Open Reading Room</span> by Anthony Durity
+## The Guide to the <span class="hot-cinnamon">Open Reading Room</span>
 
 - - -
 
@@ -53,18 +53,25 @@ Complete and partial arrangements.
 +	colophon strip
 	--------------
 
-	The colophon is a strip of links that 
+	First let it be pointed out that there is no agreed upon term that fully captures the diversity of material that these links cover. Colophon seems to be a term that can be expanded to capture this diversity. These links do have common characteristics. They deal with the site or project. (The project brought the site into being and there is an ongoing project to maintain the site.) This project has received support in more ways than one. There has been material support. There is the software and theoretical ecosystem out of which the project has grown. There has been individual and collegial support both academic and private. The site exists in a socio-legal setting and this is detailed here too. In order then we have [legalese](legal), [cite this page](cite), [inspiration](inspiration), [code](code), [shout out](acknowledgments), and finally what-may-seem-oddly-named-but-will-become-clear-over-time [secretions of a digital organism](secretions).
 
 +	colophon strip details
 	----------------------
 
+	In order then we have [legalese](legal), [cite this page](cite), [inspiration](inspiration), [code](code), [shout out](acknowledgments), and finally what-may-seem-oddly-named-but-will-become-clear-over-time [secretions of a digital organism](secretions).
+
 +	institutional branding
 	----------------------
+
+	This is basically [UCC's logo](http://dh.ucc.ie/boole/images/ucc-website-logo-transparent.gif).
 
 +	signature
 	---------
 
-	Handcrafted with care by [Electropoiesis Laboratories](http://leto.electropoiesis.org/propaganda/ecce-homo/)
+	This is the signature. (As you can see.)
+	<div style="font-family: 'Cedarville Cursive', cursive; font-color: #081A31; opacity: 0.5;">Handcrafted with care by [Electropoiesis Laboratories](http://leto.electropoiesis.org/propaganda/ecce-homo/)</div>
+
+- - -
 
 +	the rest (for now)
 

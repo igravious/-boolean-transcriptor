@@ -1,10 +1,12 @@
 <div class="row">
     <div class="col-md-6">
         <li class="leader<%= counter%2 %>">
-            <div>
+			<%=raw "<span>☃☃☃</span>" if member_signed_in? and current_member == member_by_rank %>
+            <span>
                 <em><%= "#{member_by_rank.nick}" %></em>
                 <strong style="float: right"><%= "#{member_by_rank.scans_accepted}" %></strong>
-            </div>
+            </span>
+			<%=raw "<span>☃☃☃</span>" if member_signed_in? and current_member == member_by_rank %>
         </li>
     </div>
     <div class="col-md-6"></div>

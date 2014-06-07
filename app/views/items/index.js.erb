@@ -35,6 +35,7 @@ try {
     console.log("5: about to doLazy()");
     doLazy();
 } catch(oops) {
-    console.log("caught exception in index.js");
-    console.log(oops+oops.message);
+    console.log("caught exception in app/views/items/index.js.erb");
+    console.log(oops.message+" from "+oops.stack);
+	Bugsnag.notifyException(oops, "Unexpected Error");
 }

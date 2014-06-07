@@ -57,6 +57,9 @@ gem "rmagick"
 # For snippity-snip of 
 gem "nokogiri"
 
+# For pain-free debugging (I hope)
+gem "bugsnag"
+
 ###
 # 
 # nb: we do not support mediawiki, textile, github flavored markdown, ...

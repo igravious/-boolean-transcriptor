@@ -1,0 +1,36 @@
+
+<%- content_for(:head) do -%>
+    <%= stylesheet_link_tag "notes", media: "all", "data-turbolinks-track" => TURBO %>
+<%- end -%>
+
+<%= render '/per_view_stylesheet' %>
+
+<%# render 'breadcrumb' %>
+
+<!-- hmm, identical to app/views/search/index.html.erb -->
+
+<h3>
+    <i>notes & snippets:</i> <%= "#{pluralize(@member_notes.length, 'match')}" %>
+</h3>
+
+    <hr> <!-- puffin stuff -->
+
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="list-group" style="padding-top: 10px">
+                <li id="insert_after_me" class="list-group-item">
+                    <%= (@member_snippets.length > 0) ? (link_to 'Snippets', snippet_notes_path(aspect: params['aspect'], q: params['q'], whence: params['whence'])) : 'Snippets' %> go here.
+                </li>
+                <%= render partial: @member_snippets, layout: "notes/note_group_layout" %>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group" style="padding-top: 10px">
+                <li id="insert_after_me" class="list-group-item">
+                	<%= (@member_endnotes.length > 0) ? (link_to 'Endnotes', endnote_notes_path(aspect: params['aspect'], q: params['q'], whence: params['whence'])) : 'Endnotes' %> go here.
+                </li>
+                <%= render partial: @member_endnotes, layout: "notes/note_group_layout" %>
+            </ul>
+        </div>
+    </div>
+

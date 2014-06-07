@@ -48,7 +48,8 @@ var handleSimpleTreeMenu = function() {
             });
         } catch(oops) {
             console.log("why on earth is simple tree menu not loaded? ")
-            console.log(oops+oops.message);
+            console.log(oops.message+" from "+oops.stack);
+			Bugsnag.notifyException(oops, "Unexpected Error");
         }
     // if there's any kind of slider (of Thumbnail Scans of an Item
     // or Thumbnail Items of an Item Group/Collection ) on the page wrapped
@@ -58,7 +59,8 @@ var handleSimpleTreeMenu = function() {
         } catch(oops) {
             // let the member know somehow
             console.log('oopsie in doSlider() in items/slice.js unfortunately');
-            console.log(oops+oops.message);
+            console.log(oops.message+" from "+oops.stack);
+			Bugsnag.notifyException(oops, "Unexpected Error");
 
         }
     } else if ($('.preview-container').length ) {
@@ -67,7 +69,8 @@ var handleSimpleTreeMenu = function() {
         } catch(oops) {
             // let the member know somehow
             console.log('oopsie in doLazy() in items/slice.js unfortunately');
-            console.log(oops+oops.message);
+            console.log(oops.message+" from "+oops.stack);
+			Bugsnag.notifyException(oops, "Unexpected Error");
 
         }
     } else {
@@ -77,13 +80,14 @@ var handleSimpleTreeMenu = function() {
     // bind to all classes of ajax triggers, should be in dev mode only
     $(".ajax_trigger").bind("ajax:success", function(evt, data, status, xhr){
         console.log('.ajax_trigger success'); //console.log(data);      
-        console.log(xhr);      
+        console.log(xhr.responseText);      
         console.log(evt);      
     }).bind("ajax:error", function(evt, data, status, xhr){
         console.log(data);      
-        console.log(xhr);      
+        console.log(xhr.responseText);      
         console.log(evt);      
-        alert("Something tragic happened");
+        alert("Something tragic happened - "+xhr.responseText);
+		Bugsnag.notify("Ajax Error, xhr.responseText);
     });
 
     return true;

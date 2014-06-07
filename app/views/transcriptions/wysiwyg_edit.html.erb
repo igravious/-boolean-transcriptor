@@ -102,6 +102,7 @@
 %>
 <script type="text/javascript">
 	var markup_link = "<%= markup_path %>";
+	var ref_link = "<%= @scan.references? ? the_index_headings_path(aspect: params['aspect'], q: params['q'], whence: params['whence']) : '' %>";
     var img_link = "<%= snap_path @scan.id %>";
     var aspect = "<%= params['aspect'] %>";
     var whence = "<%= params['whence'] %>";
@@ -218,7 +219,7 @@
         <div class="col-md-6">
             <ul class="list-group" style="padding-top: 10px">
                 <li id="insert_after_me" class="list-group-item">
-                    Snippets go here
+                    <%= @scan.snippets? ? (link_to 'Snippets', snippet_notes_path(aspect: params['aspect'], q: params['q'], whence: params['whence'])) : 'Snippets' %> go here.
                 </li>
                 <%= render partial: @scan.notes.where('type = ?', Note::IMAGE), layout: "notes/note_group_layout" %>
             </ul>
@@ -226,7 +227,8 @@
         <div class="col-md-6">
             <ul class="list-group" style="padding-top: 10px">
                 <li id="insert_after_me" class="list-group-item">
-                Compose a new <%= link_to "note", new_note_path(scan_id: @scan.id, aspect: params['aspect'], q: params['q'], whence: params['whence']) %>
+                	<%= @scan.endnotes? ? (link_to 'Endnotes', endnote_notes_path(aspect: params['aspect'], q: params['q'], whence: params['whence'])) : 'Endnotes' %> go here.
+					Compose a new <%= link_to 'one', new_note_path(scan_id: @scan.id, aspect: params['aspect'], q: params['q'], whence: params['whence']) %>
                 </li>
                 <%= render partial: @scan.notes.where('type = ?', Note::TEXT), layout: "notes/note_group_layout" %>
             </ul>

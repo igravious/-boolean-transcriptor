@@ -1,0 +1,21 @@
+<%= render '/per_view_stylesheet' %>
+
+<%# render 'breadcrumb' %>
+
+<!-- hmm, identical to app/views/search/index.html.erb -->
+
+<h3>
+    <i>scans:</i> <%= "#{pluralize(@member_scans.length, 'match')}" %>
+</h3>
+<hr>
+<ul>
+<% @member_scans.each do |scan| %>
+    <li>
+        <div class="well" style="margin-bottom: 0px"><%= render partial: scan, layout: "scans/scan_bxslider_layout" %></div>
+        <div class="well">
+            <%=raw scan.transcription %>
+            <span class="label label-primary"><%= Scan::STATE_STRING[scan.state] %></span>
+        </div>
+    </li>
+<% end %>
+</ul>

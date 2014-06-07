@@ -37,21 +37,45 @@
         <div class="collapse navbar-collapse" id="desk-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="<%= switch_on "desk" %>"><a href="<%= desk_path %>" alt="The Desk">The Desk</a></li>
+                <li class="dropdown">
+					<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" alt="Rating & Ranking">Rating & Ranking<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:void(0)"><i>personal</i></a></li>
+						<li><%= link_to "Transcription Progress", member_scans_path %></li>
+						<li><%= link_to "Note-taking", member_notes_path %></li>
+						<li class="divider"></li>
+						<li><a href="javascript:void(0)"><i>crowd</i></a></li>
+						<li><%= link_to "Leaderboard", leaderboard_path %></li>
+						<li><%= link_to "Transcriptions Completed - #{@total_tx_accepted}/#{@total_tx_possible} #{((@total_tx_accepted.to_f/@total_tx_possible.to_f)*100).round}%", completed_path %></li>
+						<li><%= link_to "Items Completed - #{@total_items_accepted}/#{@total_items_possible} #{((@total_items_accepted.to_f/@total_items_possible.to_f)*100).round}%", completed_path %></li>
+						<li class="divider"></li>
+						<form method="get" action"" class="navbar-form navbar-left" role="lookup">
+							<div class="form-group">
+								<% if params['m'] %>
+									<input name="m" type="text" class="form-control" value="<%= params['m'] %>" alt="Lookup">
+								<% else %>
+									<input name="m" type="text" class="form-control" placeholder="Lookup member" alt="Lookup">
+								<% end %>
+							</div>
+							<button onclick="return false;" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" alt="Go do it…"></span> Go do it…</button>
+						</form>
+					</ul>
+                </li>
                 <li class="<%= switch_on "faqs_n_guide" %>"><a href="<%= faqs_n_guide_path %>" alt="FAQs & Guide">FAQs &amp; Guide</a></li>
                 <li class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" alt="Propaganda">Propaganda<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="http://leto.electropoiesis.org/propaganda/entering-the-digital-humanities/">The Blog</a></li>
-                    <li><a href="javascript:void(0)">In The Press</a></li>
-                    <li><a href="javascript:void(0)">Share This Site / Spread The Love</a></li>
-                    <li><a href="javascript:void(0)">Advertising And Promotion</a></li>
-                    <li><a href="javascript:void(0)">Merchandise</a></li>
-                    <!-- <li><a href="http://uccshop.ie/leisurewear/t-shirts/ucc-boole-is-coole-t-shirt.html">UCC Boole is Coole T-Shirt</a></li> -->
-                    <li class="divider"></li>
-                    <li><a href="javascript:void(0)">Obey</a></li>
-                    <li class="divider"></li>
-                    <li><a href="javascript:void(0)">The Forum</a></li>
-                </ul>
+					<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" alt="Propaganda">Propaganda<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="http://leto.electropoiesis.org/propaganda/entering-the-digital-humanities/">The Blog</a></li>
+						<li><a href="javascript:void(0)">In The Press</a></li>
+						<li><a href="javascript:void(0)">Share This Site / Spread The Love</a></li>
+						<li><a href="javascript:void(0)">Advertising And Promotion</a></li>
+						<li><a href="javascript:void(0)">Merchandise</a></li>
+						<!-- <li><a href="http://uccshop.ie/leisurewear/t-shirts/ucc-boole-is-coole-t-shirt.html">UCC Boole is Coole T-Shirt</a></li> -->
+						<li class="divider"></li>
+						<li><a href="javascript:void(0)">Obey</a></li>
+						<li class="divider"></li>
+						<li><a href="javascript:void(0)">The Forum</a></li>
+					</ul>
                 </li>
             </ul>
             <form method="get" action="<%= search_path %>" class="navbar-form navbar-left" role="search">
@@ -96,9 +120,8 @@
             <% begin %>
                 <% if member_signed_in? %>
                     Logged in as <strong><%= current_member.email %></strong>;
-                    <%= link_to 'Edit profile', edit_member_registration_path %>,
-                    <%= link_to "Sign out", destroy_member_session_path, method: :delete %> or
-                    <%= link_to "Manage scans", members_locked_scans_path %>
+                    <%= link_to 'Edit profile', edit_member_registration_path %> or
+                    <%= link_to "Sign out", destroy_member_session_path, method: :delete %>
                 <% else %>
                     <%= link_to "Sign up", new_member_registration_path %> <small>(if you like)</small> or
                     <%= link_to "Sign in", new_member_session_path %> <small>(if you have signed up)</small>

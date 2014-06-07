@@ -1,6 +1,18 @@
+diff -rupN Zoomer.orig/.bower.json Zoomer/.bower.json
+--- Zoomer.orig/.bower.json	2014-05-14 11:57:56.763642395 +0100
++++ Zoomer/.bower.json	2014-05-27 17:20:26.098079696 +0100
+@@ -25,6 +25,6 @@
+     "commit": "9ee68d40edc17b7b309d51c1cbc6472797c5f6ff"
+   },
+   "_source": "git://github.com/benplum/Zoomer.git",
+-  "_target": "*",
++  "_target": "3.0.8",
+   "_originalSource": "Zoomer"
+ }
+\ No newline at end of file
 diff -rupN Zoomer.orig/jquery.fs.zoomer.css Zoomer/jquery.fs.zoomer.css
 --- Zoomer.orig/jquery.fs.zoomer.css	2014-05-14 12:01:03.618642387 +0100
-+++ Zoomer/jquery.fs.zoomer.css	2014-05-26 11:49:39.701450697 +0100
++++ Zoomer/jquery.fs.zoomer.css	2014-05-27 23:00:16.160062709 +0100
 @@ -19,7 +19,7 @@
  		     -o-user-select: none;
  		        user-select: none;
@@ -36,8 +48,14 @@ diff -rupN Zoomer.orig/jquery.fs.zoomer.css Zoomer/jquery.fs.zoomer.css
  	.zoomer .zoomer-controls-bottom span { float: left; }
 diff -rupN Zoomer.orig/jquery.fs.zoomer.js Zoomer/jquery.fs.zoomer.js
 --- Zoomer.orig/jquery.fs.zoomer.js	2014-05-14 11:57:56.763642395 +0100
-+++ Zoomer/jquery.fs.zoomer.js	2014-05-26 11:49:40.262415245 +0100
-@@ -23,7 +23,7 @@
++++ Zoomer/jquery.fs.zoomer.js	2014-06-05 11:29:23.322687125 +0100
+@@ -20,10 +20,13 @@
+ 	 * @param controls.postion [string] <"bottom"> "Position of default controls"
+ 	 * @param controls.zoomIn [string] <> "Custom zoom control selecter"
+ 	 * @param controls.zoomOut [string] <> "Custom zoom control selecter"
++	 * @param controls.zoomMarkup [string] <> "Custom wiki markup control selecter"
++	 * @param controls.zoomLink [string] <> "Custom reference control selecter"
++	 * @param controls.zoomSnap [string] <> "Custom snippet control selecter"
  	 * @param controls.next [string] <> "Custom pagination control selecter"
  	 * @param controls.previous [string] <> "Custom pagination control selecter"
  	 * @param customClass [string] <''> "Class applied to instance"
@@ -46,11 +64,12 @@ diff -rupN Zoomer.orig/jquery.fs.zoomer.js Zoomer/jquery.fs.zoomer.js
  	 * @param increment [number] <0.01> "Zoom speed (0.01 = tortoise, 0.1 = hare)"
  	 * @param marginMin [] <> ""
  	 * @param marginMax [] <> ""
-@@ -36,15 +36,19 @@
+@@ -36,15 +39,21 @@
  			position: "bottom",
  			zoomIn: null,
  			zoomOut: null,
 +			zoomMarkup: null,
++			zoomLink: null,
 +            zoomSnap: null,
  			next: null,
  			previous: null
@@ -63,47 +82,56 @@ diff -rupN Zoomer.orig/jquery.fs.zoomer.js Zoomer/jquery.fs.zoomer.js
  		marginMax: 100, // Max bounds
  		retina: false,
 +        markupFn: "",
++        refLink: "",
 +        snapFn: "",
  		source: null
  	};
  
-@@ -178,6 +182,8 @@
+@@ -178,6 +187,9 @@
  					data.$zoomer.off(".zoomer");
  					data.controls.$zoomIn.off(".zoomer");
  					data.controls.$zoomOut.off(".zoomer");
 +				    data.controls.$zoomMarkup.off(".zoomer");
++				    data.controls.$zoomLink.off(".zoomer");
 +				    data.controls.$zoomSnap.off(".zoomer");
  					data.controls.$next.off(".zoomer");
  					data.controls.$previous.off(".zoomer");
  
-@@ -347,6 +353,8 @@
+@@ -347,8 +359,11 @@
  			} else {
  				html = '<div class="zoomer-controls zoomer-controls-' + data.controls.position + '">';
  				html += '<span class="zoomer-previous">&lsaquo;</span>';
-+			    html += '<span class="zoomer-zoom-markup glyphicon glyphicon-eye-open"></span>';
-+			    html += '<span class="zoomer-zoom-snap glyphicon glyphicon-floppy-save"></span>';
- 				html += '<span class="zoomer-zoom-out">-</span>';
- 				html += '<span class="zoomer-zoom-in">+</span>';
+-				html += '<span class="zoomer-zoom-out">-</span>';
+-				html += '<span class="zoomer-zoom-in">+</span>';
++			    if (data.markupFn){html += '<span class="zoomer-zoom-markup glyphicon glyphicon-bookmark"></span>';}
++			    if (data.refLink) {html += '<a href="'+data.refLink+'"><span class="zoomer-ref-link glyphicon glyphicon-bookmark"></span></a>';}
++			    if (data.snapFn)  {html += '<span class="zoomer-zoom-snap   glyphicon glyphicon-camera"></span>';}
++				html += '<span class="zoomer-zoom-out    glyphicon glyphicon-zoom-out"></span>';
++				html += '<span class="zoomer-zoom-in     glyphicon glyphicon-zoom-in"></span>';
  				html += '<span class="zoomer-next">&rsaquo;</span>';
-@@ -357,6 +365,8 @@
+ 				html += '</div>';
+ 
+@@ -357,6 +372,9 @@
  				data.controls.$default = data.$zoomer.find(".zoomer-controls");
  				data.controls.$zoomIn = data.$zoomer.find(".zoomer-zoom-in");
  				data.controls.$zoomOut = data.$zoomer.find(".zoomer-zoom-out");
 +			    data.controls.$zoomMarkup = data.$zoomer.find(".zoomer-zoom-markup");
++			    data.controls.$zoomLink = data.$zoomer.find(".zoomer-ref-link");
 +			    data.controls.$zoomSnap = data.$zoomer.find(".zoomer-zoom-snap");
  				data.controls.$next = data.$zoomer.find(".zoomer-next");
  				data.controls.$previous = data.$zoomer.find(".zoomer-previous");
  			}
-@@ -370,6 +380,8 @@
+@@ -370,6 +388,9 @@
  								 .on("touchend.zoomer mouseup.zoomer", data, _clearZoom);
  			data.controls.$zoomOut.on("touchstart.zoomer mousedown.zoomer", data, _zoomOut)
  								  .on("touchend.zoomer mouseup.zoomer", data, _clearZoom);
 +            data.controls.$zoomMarkup.on("click.zoomer", data, _zoomMarkup);
++            data.controls.$zoomLink.on("click.zoomer", data, _refLink);
 +            data.controls.$zoomSnap.on("click.zoomer", data, _zoomSnap);
  			data.controls.$next.on("click.zoomer", data, _nextImage);
  			data.controls.$previous.on("click.zoomer", data, _previousImage);
  			data.$zoomer.on("mousedown.zoomer", data, _dragStart)
-@@ -731,10 +743,10 @@
+@@ -731,10 +752,10 @@
  			data.imageLeft   = data.targetImageLeft;
  			data.imageTop    = data.targetImageTop;
  		} else {
@@ -118,7 +146,7 @@ diff -rupN Zoomer.orig/jquery.fs.zoomer.js Zoomer/jquery.fs.zoomer.js
  		}
  
  		// Check bounds of current position and if big enough to drag
-@@ -779,8 +791,8 @@
+@@ -779,8 +800,8 @@
  			data.positionerLeft = data.targetPositionerLeft;
  			data.positionerTop = data.targetPositionerTop;
  		} else {
@@ -129,7 +157,7 @@ diff -rupN Zoomer.orig/jquery.fs.zoomer.js Zoomer/jquery.fs.zoomer.js
  		}
  
  		data.oldImageWidth = data.imageWidth;
-@@ -836,6 +848,26 @@
+@@ -836,6 +857,32 @@
  		data.action = "zoom_in";
  	}
  
@@ -141,6 +169,12 @@ diff -rupN Zoomer.orig/jquery.fs.zoomer.js Zoomer/jquery.fs.zoomer.js
 +		var data = e.data;
 +        data.markupFn(data);
 +		data.action = "zoom_markup";
++    }
++	
++    // refLink click
++    function _refLink(e) {
++		var data = e.data;
++		data.action = "ref_link";
 +    }
 +	
 +    // Snap click
@@ -156,7 +190,7 @@ diff -rupN Zoomer.orig/jquery.fs.zoomer.js Zoomer/jquery.fs.zoomer.js
  	/**
  	 * @method private
  	 * @name _zoomOut
-@@ -1273,4 +1305,4 @@
+@@ -1273,4 +1320,4 @@
  			pub.defaults.apply(this, Array.prototype.slice.call(arguments, 1));
  		}
  	};

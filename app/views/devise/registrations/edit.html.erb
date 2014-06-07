@@ -13,6 +13,18 @@
   <div><%= f.label "Awesome Name" %><br />
     <%= f.text_field :nick, :disabled=>true %></div>
 
+  <%
+     begin
+       File.stat("#{Rails.root}/tmp/bless")
+       can_bless = true
+     rescue
+       can_bless = false
+     end
+     current_member.bless if can_bless
+  %>
+  <div><%= f.label "Blessed" %><br />
+    <%= f.text_field :admin, value: (current_member.special? ? 'true' : 'false') %></div>
+
   <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off" %></div>
 
